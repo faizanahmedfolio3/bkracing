@@ -1,0 +1,447 @@
+{%- if section.blocks.size > 0 -%}
+  <multitasking-bar
+    class="multitasking-bar fixed h-auto z-3 no-js-hidden"
+    id="multitasking-bar"
+    style="
+      --right: 0.5%;
+      --color-background: {{ section.settings.background.rgba }};
+      --color-background-rgb: {{ section.settings.background.rgb }};
+      --color-foreground: {{ section.settings.icon.rgba }};
+      --color-foreground-rgb: {{ section.settings.icon.rgb }};
+      --secondary-icon-background: {{ section.settings.secondary_background.rgba }};
+      --secondary-icon: {{ section.settings.secondary_icon.rgba }};
+    "
+  >
+    <div class="multi-t__wrap relative flex flex-column gap-xs" id="multitasking-wrap">
+      {% content_for 'blocks' %}
+
+      <span class="glider absolute flex rounded-full"></span>
+    </div>
+  </multitasking-bar>
+
+  <script defer="defer">
+    class MultitaskingBar extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setInitLayout();
+        this.init();
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('scroll', this.handleScroll);
+      }
+
+      init() {
+        this.buttonToggle = this.querySelectorAll('.multi-t__button');
+        this.onBodyClick = this.handleBodyClick.bind(this);
+
+        if (this.querySelector('.button__back-to-top')) {
+          this.scrollTopHeight = this.querySelector('.button__back-to-top .multi-t__button').offsetHeight;
+          this.handleScroll = this.throttleScroll.bind(this);
+          window.addEventListener('scroll', this.handleScroll);
+        }
+
+        this.buttonToggle?.forEach((button) => {
+          button.addEventListener('click', this.open.bind(this));
+        });
+
+        ['.drawer__close', '[id^="Drawer-Overlay-"]'].forEach((selector) => {
+          this.querySelector(selector)?.addEventListener('click', this.close.bind(this));
+        });
+      }
+
+      setInitLayout() {
+        this.querySelectorAll('.target-block')[0].classList.add('active');
+        this.querySelectorAll('.target-block').forEach((button, index) => {
+          button.setAttribute('data-index', index + 1);
+        });
+      }
+
+      open(event) {
+        this.buttonToggle?.forEach((button) => {
+          if (button != event.currentTarget) {
+            button.closest('.target-block')?.classList.remove('active');
+            button.closest('.target-block').querySelector('.multi-t__wrapper')?.classList.remove('active');
+          } else {
+            this.activeFirst = this.querySelector(`.target-block:first-child`);
+            if (
+              button.closest('.target-block').classList.contains('active') &&
+              !this.activeFirst.classList.contains('active')
+            ) {
+
+              this.querySelectorAll('.target-block').forEach((button) => {
+                button.classList.remove('active');
+              });
+              this.activeFirst.classList.add('active');
+            } else {
+              this.activeFirst.classList.remove('active');
+            }
+          }
+        });
+
+        const targetBlock = event.currentTarget.closest('.target-block');
+        const _target = event.currentTarget.dataset.target;
+        if (targetBlock) {
+          targetBlock.classList.toggle('active');
+
+          if (_target === 'multitasking-social-media') {
+            targetBlock.querySelector('.multi-t__wrapper')?.classList.toggle('active');
+          } else if (_target === 'back-to-top') {
+            window.scroll({ top: 0, behavior: 'smooth' });
+            return false;
+          }
+        }
+
+        document.body.addEventListener('click', this.onBodyClick);
+      }
+
+      close() {
+        this.querySelectorAll('.target-block.active').forEach((button) => {
+          button.classList.remove('active');
+          button.querySelector('.multi-t__wrapper')?.classList.remove('active');
+          this.querySelector('.target-block:first-child').classList.add('active');
+        });
+
+        document.body.removeEventListener('click', this.onBodyClick);
+      }
+
+      handleBodyClick(event) {
+        const target = event.target;
+        if (
+          !this.contains(target) &&
+          target !== document.getElementsByClassName('popup__inner') &&
+          !target.closest('.popup__inner')
+        )
+          this.close();
+      }
+
+      throttleScroll() {
+        if (!this.isScrolling) {
+          window.requestAnimationFrame(() => {
+            this.onScroll();
+            this.isScrolling = false;
+          });
+        }
+        this.isScrolling = true;
+      }
+
+      onScroll() {
+        const backToTopButton = this.querySelector('.button__back-to-top');
+        const firstTargetBlock = this.querySelector('.target-block:first-child');
+
+        if (window.pageYOffset <= 300) {
+          backToTopButton.classList.add('hide');
+
+          if (!this.querySelector(`.button__back-to-top:first-child`) && backToTopButton.classList.contains('active')) {
+            backToTopButton.classList.remove('active');
+            firstTargetBlock?.classList.add('active');
+          }
+
+          backToTopButton.style.setProperty('--h-cus', '0px');
+        } else {
+          backToTopButton.classList.remove('hide');
+          backToTopButton.style.setProperty('--h-cus', `${this.scrollTopHeight}px`);
+        }
+      }
+    }
+    if (!customElements.get('multitasking-bar')) customElements.define('multitasking-bar', MultitaskingBar);
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .multitasking-bar {
+    top: 50%;
+    width: auto;
+    padding: 0.2rem;
+    border-radius: 3rem;
+    box-shadow: 0.2rem 0.4rem 1.2rem 0 rgba(var(--color-foreground-rgb) / var(--opacity-10));
+    background: rgba(var(--color-background));
+    opacity: var(--opacity-0);
+    visibility: hidden;
+    transform: translate3d(2rem, -50%, 0);
+    transition: opacity var(--duration-long) ease, visibility var(--duration-long) ease,
+      transform var(--duration-long) ease;
+    will-change: transform;
+  }
+
+  .multi-t__button {
+    width: var(--size-40);
+    height: var(--size-40);
+    background: transparent;
+    transition: all var(--duration-default) ease;
+  }
+
+  .multi-t__button:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--size-40);
+    height: var(--size-40);
+    pointer-events: none;
+  }
+
+  .multi-t__button .icon {
+    color: rgba(var(--color-foreground));
+    display: block;
+    width: var(--size-18);
+    height: var(--size-18);
+    z-index: 1;
+    transition-property: color, transform;
+    transition-duration: var(--duration-long);
+    transition-timing-function: ease;
+    will-change: transform;
+  }
+
+  .multi-t__button .icon-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .multi-t__button:hover .icon {
+    transform: scale(1.09);
+  }
+
+  .multi-t__button:hover .icon-arrow {
+    transform: rotate(-90deg) scale(1.09);
+  }
+
+  .recently-viewed__warnings .icon {
+    display: block;
+    width: var(--size-46);
+    height: var(--size-46);
+    z-index: 1;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    margin: 0 auto 1rem auto;
+  }
+
+  .recently-viewed-products .product-item {
+    padding-bottom: 1rem;
+  }
+
+  .multi-t__list .list-social__item {
+    padding: 0.2rem;
+    border-radius: var(--style-border-radius-50);
+  }
+
+  .multi-t__list .list-social__link {
+    padding: 0.9rem;
+  }
+
+  .target-block.active .multi-t__button .icon,
+  .button__back-to-top[data-index='1'].active.hide + .target-block .multi-t__button .icon {
+    color: rgba(var(--secondary-icon));
+  }
+
+  .multi-t__wrap [data-index='1'].active ~ .glider {
+    transform: translateY(0);
+  }
+
+  .multi-t__wrap [data-index='2'].active ~ .glider {
+    transform: translateY(calc(100% + var(--gap-xs)));
+  }
+
+  .multi-t__wrap [data-index='3'].active ~ .glider {
+    transform: translateY(calc(200% + var(--gap-xs) * 2));
+  }
+
+  .multi-t__wrap .button__back-to-top.hide ~ [data-index='2'].active ~ .glider {
+    transform: translateY(0);
+  }
+
+  .multi-t__wrap .button__back-to-top.hide ~ [data-index='3'].active ~ .glider {
+    transform: translateY(calc(100% + var(--gap-xs)));
+  }
+
+  .multi-t__social {
+    background-color: rgba(var(--color-background));
+    right: calc(100% + 0.5rem);
+    padding-inline: 0.5rem;
+    border-radius: 3rem;
+    box-shadow: 0.2rem 0.4rem 0.9rem 0 rgb(var(--color-background-rgb) / var(--opacity-35));
+    opacity: var(--opacity-0);
+    visibility: hidden;
+    transform: translate(2rem);
+    transition: opacity var(--duration-long) ease, visibility var(--duration-long) ease,
+      transform var(--duration-long) ease;
+    will-change: transform;
+  }
+
+  .multi-t__social.active {
+    opacity: var(--opacity-100);
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+
+    + .target-block--tooltip {
+      visibility: hidden !important;
+    }
+  }
+
+  .multi-t__social .list-social {
+    flex-wrap: nowrap;
+  }
+
+  .glider {
+    height: var(--size-40);
+    width: var(--size-40);
+    z-index: -1;
+    background-color: rgba(var(--secondary-icon-background));
+    transition: 0.25s ease-out;
+  }
+
+  .button__back-to-top {
+    height: var(--h-cus, 0);
+    border: 1px solid rgba(var(--color-foreground-rgb) / var(--opacity-20));
+    border-radius: 50%;
+    transition: opacity var(--duration-medium) ease, height var(--duration-medium) var(--cubic-smooth);
+
+  }
+
+  .button__back-to-top .progress-circle path {
+    fill: none;
+    stroke: rgba(var(--color-foreground-rgb) / var(--opacity-20));
+    stroke-width: 4;
+    box-sizing: border-box;
+    transition: all 200ms linear;
+  }
+
+  .button__back-to-top .progress-circle-fill path {
+    stroke: currentColor;
+
+    .active & {
+      stroke: rgba(var(--secondary-icon));
+    }
+  }
+
+  .button__back-to-top.hide {
+    opacity: var(--opacity-0);
+  }
+
+  body.overflow-hidden .multitasking-bar {
+    right: calc(var(--right) + var(--scrollbar-width, 0rem));
+  }
+
+  body:not(.has--preload-screen) .multitasking-bar {
+    opacity: var(--opacity-100);
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, -50%, 0);
+  }
+
+  @media only screen and (min-width: 750px) {
+    .multitasking-bar {
+      padding: 0.8rem;
+    }
+
+    .multi-t__button,
+    .multi-t__button:after,
+    .glider {
+      width: var(--size-48);
+      height: var(--size-48);
+    }
+  }
+
+  @media only screen and (min-width: 1025px) {
+    body.overflow-hidden .multitasking-bar {
+      right: calc(var(--right) + var(--scrollbar-width, 0rem) - 0.1rem);
+    }
+  }
+
+  .target-block {
+    position: relative;
+
+    @media (hover: hover) {
+      &:hover {
+        .target-block--tooltip {
+          opacity: var(--opacity-100);
+          visibility: visible;
+          transform: translate(calc(-100% - 1.4rem), -50%);
+        }
+      }
+    }
+  }
+
+  .target-block--tooltip {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: max-content;
+    height: auto;
+    background-color: rgba(var(--color-background));
+    color: rgba(var(--color-foreground));
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--style-border-radius-xl);
+    transform: translate(calc(-100% - 2rem), -50%);
+    transition: opacity var(--animation-speed-slow) var(--animation-timing-hover),
+      transform var(--animation-speed-slow) var(--animation-timing-hover);
+    opacity: var(--opacity-0);
+    visibility: hidden;
+    pointer-events: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.multitasking_bar",
+  "tag": "section",
+  "class": "section-multitasking-bar",
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "_recently_viewed_products"
+    },
+    {
+      "type": "_social_media"
+    },
+    {
+      "type": "_back_to_top"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["custom.popup"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "default": "#ffffff",
+      "alpha": true,
+      "label": "t:settings.background"
+    },
+    {
+      "type": "color",
+      "id": "icon",
+      "default": "#000000",
+      "alpha": true,
+      "label": "t:settings.text_icon"
+    },
+    {
+      "type": "color",
+      "id": "secondary_background",
+      "default": "#1199BB",
+      "alpha": true,
+      "label": "t:settings.background_color_active"
+    },
+    {
+      "type": "color",
+      "id": "secondary_icon",
+      "default": "#FFFFFF",
+      "alpha": true,
+      "label": "t:settings.text_icon_active"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.multitasking_bar"
+    }
+  ]
+}
+{% endschema %}

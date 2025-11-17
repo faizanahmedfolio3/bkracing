@@ -1,0 +1,34 @@
+<side-drawer id="Global-Drawer" class="drawer drawer__container fixed top-0 right-0 w-screen h-full z-9 flex justify-end no-js-hidden" data-drawer-direction="right">
+    <div id="Drawer-Overlay-Global" class="drawer__overlay fixed inset-0 cursor-pointer"></div>
+    <div
+      class="drawer__inner color-{{ section.settings.color_scheme }} cus-scrollbar"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Global Sidebar"
+      tabindex="-1"
+      data-drawer-content
+    >
+    <div
+      class="drawer__header flex justify-between items-center relative"
+      style="--gap-x: 1rem;--p: var(--padding-xs) 0;"
+    >
+      <h2 class="drawer__heading break m-0 h5">
+        <span class="tab-title-text"></span>
+      </h2>
+      <button
+        class="drawer__close block t-button bor-none rounded-full cursor-pointer"
+        type="button"
+        onclick="this.closest('side-drawer').close()"
+        aria-label="Close Global Sidebar"
+      >
+        <span class="svg-wrapper">
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </span>
+      </button>
+    </div>
+      
+      <div 
+      class="drawer__wrapper relative h-full cus-scrollbar motion-reduce" style="--p: 1.5rem 0 0;">
+      </div>
+    </div>
+</side-drawer>

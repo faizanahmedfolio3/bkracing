@@ -1,0 +1,122 @@
+{% comment %}
+  Renders a group with content and a button.
+
+  Accepts:
+
+  @param {object} settings - Settings for 'spacing-style' and 'size-style' snippets in the contact form.
+  @param {string} text - HTML for the text content (rendered via content_for block)
+  @param {string} button - HTML for the button content (rendered via content_for block)
+{% endcomment %}
+
+<collapsible-text-component
+  class="
+    spacing-style size-style collapsible-text
+    {% if settings.inherit_color_scheme == false %}color-scheme-custom{% endif %}
+  "
+  style="
+    {% render 'spacing-style', settings: settings %}
+    {% render 'size-style', settings: settings %}
+    {% if settings.inherit_color_scheme == false %}
+      {% render 'color-scheme-style', settings: settings %}
+    {% endif %}
+    --preview-height: {{ settings.preview_height | divided_by: 10.0 }}rem;
+    --text-align: {{ settings.text_content_alignment }};
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="collapsible-text-content collapsed" data-content-height="{{ settings.preview_height }}">
+    {{ children }}
+  </div>
+  <div class="collapsible-text-button-wrapper flex">
+    {{ button }}
+  </div>
+</collapsible-text-component>
+
+{% javascript %}
+  class CollapsibleTextComponent extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.content = this.querySelector('.collapsible-text-content');
+      this.button = this.querySelector('.collapsible-text-button-wrapper');
+      this.buttonText = this.button.querySelector('button');
+      
+      if (!this.button || !this.content) return;
+
+      this.showText = this.buttonText.getAttribute('data-show-text');
+      this.hideText = this.buttonText.getAttribute('data-hide-text');
+      this.isExpanded = false;
+
+      this.checkIfButtonNeeded();
+      this.setupEventListeners();
+    }
+
+    checkIfButtonNeeded() {
+      const contentHeight = this.content.scrollHeight;
+      const previewHeight = this.content.getAttribute('data-content-height');
+      
+      if (contentHeight <= previewHeight) {
+        this.button.style.display = 'none';
+        this.content.classList.remove('collapsed');
+      }
+    }
+
+    setupEventListeners() {
+      this.button.addEventListener('click', () => {
+        this.toggleContent();
+      });
+    }
+
+    toggleContent() {
+      this.isExpanded = !this.isExpanded;
+      
+      if (this.isExpanded) {
+        this.content.classList.remove('collapsed');
+        this.content.classList.add('expanded');
+        this.buttonText.textContent = this.hideText;
+        this.button.setAttribute('aria-expanded', 'true');
+      } else {
+        this.content.classList.remove('expanded');
+        this.content.classList.add('collapsed');
+        this.buttonText.textContent = this.showText;
+        this.button.setAttribute('aria-expanded', 'false');
+      }
+    }
+  }
+  if (!customElements.get('collapsible-text-component')) customElements.define('collapsible-text-component', CollapsibleTextComponent);
+{% endjavascript %}
+
+{% stylesheet %}
+  .collapsible-text-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+  .collapsible-text-content.collapsed {
+    max-height: var(--preview-height);
+    position: relative;
+  }
+
+  .collapsible-text-content.collapsed:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--color-background));
+    pointer-events: none;
+  }
+
+  .collapsible-text-content.expanded {
+    max-height: none;
+  }
+
+  .collapsible-text * {
+    text-align: var(--horizontal-alignment, center);
+    justify-content: var(--horizontal-alignment, center);
+    align-items: var(--vertical-alignment, center);
+  }
+{% endstylesheet %}

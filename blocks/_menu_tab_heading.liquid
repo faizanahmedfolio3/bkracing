@@ -1,0 +1,54 @@
+{%- liquid
+  assign stts = block.settings
+-%}
+
+{%- capture class -%}
+  mobile--multi-tab-button link link--text cursor-pointer tabs-component-panel-trigger
+{%- endcapture -%}
+
+<a
+  href="#"
+  class="{{ class }}"
+  role="button"
+  aria-label="{{ stts.title }}"
+  data-tab-heading
+  data-tab-heading-target="{{ stts.title }}"
+>
+  <span>{{ stts.title }}</span>
+</a>
+
+{%- stylesheet -%}
+  a.mobile--multi-tab-button {
+    padding: var(--padding-sm) var(--padding-xl);
+    min-height: var(--minimum-touch-target);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.active,
+    &:first-child:not(:has(~ .mobile--multi-tab-button.active)){
+      background-color: var(--color-foreground);
+      color: var(--color-background);
+    }
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "t:names.menu_tab_heading",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:settings.title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.menu_tab_heading",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,4 @@
+.quick-view-modal__content {
+    padding: 1rem 1.5rem;
+    width: min(100% - 3rem, 120rem);
+}

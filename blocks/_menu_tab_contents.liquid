@@ -1,0 +1,52 @@
+{%- capture children -%}
+  {%- content_for 'blocks' -%}
+{%- endcapture -%}
+
+<nav class="site-nav-mobile menu-drawer__navigation">
+  {{- children -}}
+</nav>
+
+{% stylesheet %}
+  .site-nav-mobile--list-divider .menu-drawer__inner-submenu .menu-drawer__menu > li:has(.menu-drawer__menu-grid) {
+    padding-block-end: var(--padding-lg);
+  }
+
+  .site-nav-mobile--list-divider .menu-drawer__inner-submenu .menu-drawer__menu > li,
+  .site-nav-mobile--list-divider > li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-nav-mobile--list {
+    height: 100%;
+  }
+
+  .site-nav-mobile--list:not(.active) {
+    display: none;
+  }
+
+  .site-nav-mobile .menu-drawer__submenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: var(--color-background);
+    width: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.contents",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_menu-tab-list"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.contents"
+    }
+  ]
+}
+{% endschema %}

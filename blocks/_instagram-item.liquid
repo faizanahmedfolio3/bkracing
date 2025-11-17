@@ -1,0 +1,1885 @@
+{% liquid
+  assign ratio = 1
+  assign image = block.settings.background_image
+
+  case block.settings.image_ratio
+    when 'landscape'
+      assign ratio = '16 / 9'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'adapt'
+      assign ratio = image.aspect_ratio
+  endcase
+
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+
+  assign image_height = image.height
+  assign image_width = image.width
+
+  assign video_classes = 'video-block video-block--' | append: block.settings.video_position
+  assign background_media = block.settings.background_media
+  assign background_video = block.settings.video
+  assign background_image_position = block.settings.background_image_position
+%}
+
+{% capture class %}
+  image-block image-block--{{ block.id }} image-block--height-{{ block.settings.height }} spacing-style size-style border-style{% if block.settings.hover_zoomIn == true %} image-zoomIn{% endif %}{% if block.settings.hide_on_mobile %} max-sm:hidden{% endif %}
+{% endcapture %}
+
+{% capture style %}
+  --ratio: {{ ratio }};
+  {% render 'size-style', settings: block.settings %}
+  {% render 'spacing-style', settings: block.settings %}
+  {% render 'border-override', settings: block.settings %}
+{% endcapture %}
+
+{% liquid
+  assign media_width_desktop = '100vw'
+  assign media_width_mobile = '100vw'
+  assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+  assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+
+  assign element = 'div'
+  if block.settings.animation_type == 'fancybox'
+    assign element = 'a'
+  elsif block.settings.animation_type == 'parallax'
+    assign element = 'parallax-image'
+  elsif block.settings.animation_type == 'reveal_on_scroll'
+    assign element = 'animate-image'
+  endif
+
+  assign alt = image.alt | default: 'Instagram Image'
+%}
+
+{% capture class_img %}
+  image-block__image{% if block.settings.animation_type == 'reveal_on_scroll' %} animate-image__image{% endif %}{% if block.settings.animation_type == 'parallax' %} image-parallax--target{% endif %}
+{% endcapture %}
+
+{% capture attributes_fancybox %}
+  href="{{ image | image_url: width: 1200 }}"
+  data-fancybox="{{ section.id }}-instagram-gallery"
+  data-caption="{{ image.alt | default: 'Instagram Image' }}"
+  data-fancybox-width="{{ image_width | default: 1200 }}"
+  data-fancybox-height="{{ image_height | default: 800 }}"
+{% endcapture %}
+
+{% capture attributes_fancybox_video %}
+  href="{{ background_video.sources.first.url }}"
+  data-fancybox="{{ section.id }}-instagram-gallery"
+  data-type="video"
+  data-caption="{{ background_video.alt | default: 'Instagram Video' }}"
+{% endcapture %}
+
+{% capture attributes_parllax %}
+  data-parallax="true"
+  data-speed="{{ block.settings.parallax_speed }}"
+{% endcapture %}
+
+{% capture attributes %}
+  {{ block.shopify_attributes }}
+  {% if block.settings.animation_type == 'fancybox' %}
+    {% if background_media == 'image' and image != blank %}
+      {{ attributes_fancybox }}
+    {% elsif background_media == 'video' and background_video != blank %}
+      {{ attributes_fancybox_video }}
+    {% endif %}
+  {% endif %}
+  {% if block.settings.animation_type == 'parallax' %}
+    {{ attributes_parllax }}
+  {% endif %}
+{% endcapture %}
+
+{% capture icon %}
+  {% render 'icon-or-image',
+    icon: block.settings.icon,
+    icon_custom: block.settings.icon_custom,
+    svg_upload: block.settings.svg_upload,
+    image_upload: block.settings.image_upload,
+    attributes: block.shopify_attributes
+  %}
+{% endcapture %}
+
+<div
+  class="instagram-item relative {% if background_media == 'background_color' %} instagram-item--bg-color{% endif %}"
+  {% if background_video != blank %}
+    data-video-enabled="true"
+  {% endif %}
+  {% if block.settings.enable_typing_content %}
+    data-typing-content="true"
+  {% endif %}
+  style="
+    --icon-button-bg-color: {{ block.settings.icon_button_bg_color }};
+    --icon-button-color: {{ block.settings.icon_button_color }};
+    --icon-button-size: {{ block.settings.icon_button_size }}px;
+    --icon-button-position-right: {{ block.settings.icon_button_position_right }}px;
+    --icon-button-position-bottom: {{ block.settings.icon_button_position_bottom }}px;
+    --icon-button-position-left: {{ block.settings.icon_button_position_left }}px;
+    --background-color: {{ block.settings.background_color }}; --ratioBg: {{ ratio }}
+  "
+>
+  <div class="instagram-item__image overflow-hidden relative">
+    <{{ element }}
+      class="{{ class }}"
+      style="{{ style }}"
+      {{ attributes }}
+    >
+      {% if background_media == 'image' %}
+        {%- if image != blank -%}
+          {%- render 'image',
+            image: image,
+            class: class_img,
+            height: image.height,
+            sizes: sizes,
+            widths: widths
+            alt: alt
+          -%}
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'image-block__image placeholder-svg' }}
+        {%- endif -%}
+
+        {% if block.settings.hover_plus_icon == true %}
+          <span class="icon_plus"></span>
+        {% endif %}
+
+        {% if block.settings.animation_type == 'fancybox' %}
+          {% if block.settings.icon_link != blank and block.settings.icon != 'none' %}
+            <a href="{{ block.settings.icon_link }}" class="text-inherit"
+              {% if block.settings.icon_open_in_new_tab %}
+                target="_blank" rel="noopener"
+              {% endif %}
+            >
+              <span class="icon_media icon_media--circle{% if block.settings.icon_button_position == 'left' %} position-left{% endif %}">
+                <div class="svg-wrapper">
+                  {{ icon }}
+                </div>
+              </span>
+            </a>
+          {% else %}
+            {% if block.settings.icon != 'none' %}
+              <span class="icon_media icon_media--circle{% if block.settings.icon_button_position == 'left' %} position-left{% endif %}">
+                <div class="svg-wrapper">
+                  {{ icon }}
+                </div>
+              </span>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% else %}
+        {%- if background_video != blank -%}
+          <video-background-component
+            class="{{ video_classes }} video-background-component--clickable"
+            style="{% if ratio %}--ratio: {{ ratio }};{% endif %}"
+            data-video-id="{{ background_video.id }}"
+            data-video-url="{{ background_video.sources.first.url }}"
+            data-video-alt="{{ background_video.alt | default: 'Instagram Video' }}"
+          >
+            <video
+              playsinline
+              muted
+              loop
+              class="video-block"
+              preload="none"
+            >
+            {%- for sourceElement in background_video.sources -%}
+              {% if sourceElement.url contains 'mp4' %}
+                <source
+                  src="{{ sourceElement.url }}"
+                  type="{{ sourceElement.mime_type }}"
+                >
+              {% endif %}
+            {%- endfor -%}
+            </video>
+
+            <button
+              class="video-play-button button button-unstyled"
+              aria-label="Play video"
+              type="button"
+            >
+              <span class="video-play-icon">
+                <span class="visually-hidden">Play video</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </span>
+            </button>
+
+            <button
+              class="video-pause-button button button-unstyled"
+              aria-label="Pause video"
+              type="button"
+            >
+              <span class="video-pause-icon">
+                <span class="visually-hidden">Pause video</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              </span>
+            </button>
+
+            <div class="video-controls-overlay">
+              <div class="video-progress-container">
+                <div class="video-progress-bar">
+                  <div class="video-progress-filled"></div>
+                  <div class="video-progress-handle"></div>
+                </div>
+              </div>
+
+              <div class="video-controls-bottom">
+                <div class="video-volume-control">
+                  <button class="video-volume-button" type="button" aria-label="Toggle volume">
+                    <svg class="volume-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                  </button>
+                  <div class="video-volume-slider">
+                    <input type="range" class="volume-range" min="0" max="1" step="0.1" value="0">
+                  </div>
+                </div>
+
+                <div class="video-time-display">
+                  <span class="current-time">0:00</span>
+                  <span class="time-separator">/</span>
+                  <span class="total-time">0:00</span>
+                </div>
+              </div>
+            </div>
+
+            <span class="icon_media">
+              <div class="svg-wrapper">
+                {{ icon }}
+              </div>
+            </span>
+
+          </video-background-component>
+        {%- else -%}
+          <div class="{{ video_classes }}" style="{% if ratio %}--ratio: {{ ratio }};{% endif %}">
+            {%- assign placeholder_name = placeholder | default: 'hero-apparel-2' -%}
+            {%- if placeholder_name == blank -%}
+              {%- assign placeholder_name = 'hero-apparel-2' -%}
+            {%- endif -%}
+            {{ placeholder_name | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      {% endif %}
+    </{{ element }}>
+  </div>
+  {% if block.settings.center_button == true %}
+    <div class="absolute-c-c hover-content-block">
+      {% render 'button', link: block.settings.center_button_link, label: block.settings.center_button_text %}
+    </div>
+  {% endif %}
+  {% if block.settings.toggle_overlay %}
+    <div class="hover-content-block">
+      {% render 'overlay', settings: block.settings, layer: '0' %}
+    </div>
+  {% endif %}
+  <div class="instagram-item__content">
+    {%- content_for 'blocks' -%}
+  </div>
+</div>
+
+{% if image != blank and block.settings.icon_link != blank and block.settings.animation_type == 'fancybox' %}
+  <script>
+    (function(){
+      const iconMedia = document.querySelector('.instagram-item__image .icon_media');
+
+      iconMedia.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    })();
+  </script>
+{% endif %}
+
+{% if block.settings.enable_typing_content %}
+  <script>
+    (function(){
+      // Add CSS for cursor blinking animation
+      if (!document.querySelector('#typing-cursor-styles')) {
+        const style = document.createElement('style');
+        style.id = 'typing-cursor-styles';
+        style.textContent = `
+          @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+          }
+          .typing-cursor {
+            color: inherit;
+            font-weight: bold;
+          }
+          .typing-complete {
+            /* Add any completion styles here */
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // Intersection Observer for triggering typing effect
+      const observerOptions = {
+        threshold: 0.3, // Trigger when 30% of the element is visible
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before element comes into view
+      };
+
+      const typingObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const item = entry.target;
+            if (item.hasAttribute('data-typing-content') && !item.classList.contains('typing-active')) {
+              startTypingEffect(item);
+            }
+          }
+        });
+      }, observerOptions);
+
+      // Function to start typing effect
+      function startTypingEffect(item) {
+        item.classList.add('typing-active');
+        const content = item.querySelector('.instagram-item__content');
+        const textBlocks = content.querySelectorAll('.text-block');
+
+        // Collect all text elements in order for sequential typing
+        const allTextElements = [];
+        textBlocks.forEach((textBlock, blockIndex) => {
+          const allTexts = textBlock.querySelectorAll('p');
+          allTexts.forEach((textElement, textIndex) => {
+            allTextElements.push({
+              element: textElement,
+              blockIndex: blockIndex,
+              textIndex: textIndex
+            });
+          });
+        });
+
+        // Store original text content for infinite loop
+        const originalTexts = allTextElements.map(textData => textData.element.textContent);
+
+        // Hide all text elements before starting typing
+        allTextElements.forEach((textData) => {
+          textData.element.style.opacity = '0';
+          textData.element.style.visibility = 'hidden';
+        });
+
+        // Type text sequentially from first to last
+        let currentTextIndex = 0;
+
+        function typeNextText() {
+          if (currentTextIndex >= allTextElements.length) {
+            // All text has been typed, start reverse typing effect
+            setTimeout(() => {
+              reverseTypeAllTexts();
+            }, 2000); // 2 second pause before starting reverse effect
+            return;
+          }
+
+          const textData = allTextElements[currentTextIndex];
+          const textElement = textData.element;
+          const originalText = originalTexts[currentTextIndex];
+
+          // Show the text element and clear the text, then add cursor
+          textElement.style.opacity = '1';
+          textElement.style.visibility = 'visible';
+          textElement.textContent = '';
+          const cursor = document.createElement('span');
+          cursor.className = 'typing-cursor';
+          cursor.textContent = '_';
+          cursor.style.animation = 'blink 1s infinite';
+          textElement.appendChild(cursor);
+
+          // Type the text character by character
+          let charIndex = 0;
+          const typeInterval = setInterval(() => {
+            if (charIndex < originalText.length) {
+              const charSpan = document.createElement('span');
+              charSpan.textContent = originalText[charIndex];
+              textElement.insertBefore(charSpan, cursor);
+              charIndex++;
+            } else {
+              clearInterval(typeInterval);
+              // Remove cursor after typing is complete
+              setTimeout(() => {
+                cursor.remove();
+                // Move to next text after a short delay
+                setTimeout(() => {
+                  currentTextIndex++;
+                  typeNextText();
+                }, 500);
+              }, 300);
+            }
+          }, 80); // Faster typing speed
+        }
+
+        function reverseTypeAllTexts() {
+          // Start reverse typing from the last text element
+          let currentReverseIndex = allTextElements.length - 1;
+
+          function reverseTypeNextText() {
+            if (currentReverseIndex < 0) {
+              // All text has been reversed, start over
+              setTimeout(() => {
+                currentTextIndex = 0;
+                typeNextText();
+              }, 1000); // 1 second pause before restarting
+              return;
+            }
+
+            const textData = allTextElements[currentReverseIndex];
+            const textElement = textData.element;
+            const currentText = textElement.textContent;
+
+            if (currentText.length === 0) {
+              // Text is already empty, move to previous
+              currentReverseIndex--;
+              reverseTypeNextText();
+              return;
+            }
+
+            // Remove last character
+            textElement.textContent = currentText.slice(0, -1);
+
+            // If text is now empty, hide the element
+            if (textElement.textContent.length === 0) {
+              textElement.style.opacity = '0';
+              textElement.style.visibility = 'hidden';
+            }
+
+            // Continue removing characters
+            setTimeout(() => {
+              reverseTypeNextText();
+            }, 50); // Faster reverse typing speed
+          }
+
+          // Start reverse typing
+          reverseTypeNextText();
+        }
+
+        function clearAllTexts() {
+          // Clear all text elements completely
+          allTextElements.forEach((textData) => {
+            textData.element.textContent = '';
+          });
+        }
+
+        function resetTexts() {
+          // Reset all text elements to their original state and hide them
+          allTextElements.forEach((textData, index) => {
+            textData.element.textContent = originalTexts[index];
+            textData.element.style.opacity = '0';
+            textData.element.style.visibility = 'hidden';
+          });
+        }
+
+        // Start the infinite typing loop
+        if (allTextElements.length > 0) {
+          typeNextText();
+        }
+      }
+
+      // Observe all Instagram items with typing content enabled
+      const instagramItems = document.querySelectorAll('.instagram-item[data-typing-content="true"]');
+      instagramItems.forEach(item => {
+        typingObserver.observe(item);
+      });
+
+      // Cleanup function (optional)
+      function cleanup() {
+        typingObserver.disconnect();
+      }
+    })();
+  </script>
+{% endif %}
+
+{% if background_video != blank %}
+  <script>
+    let is_load_js = false;
+    (function(){
+      document.addEventListener('DOMContentLoaded', function() {
+        ['keydown', 'mousemove', 'touchstart'].forEach((event) => {
+          document.addEventListener(event, () => {
+            if (is_load_js) return;
+            is_load_js = true;
+            const videoComponents = document.querySelectorAll('.video-background-component--clickable');
+
+            videoComponents.forEach(function(videoComponent) {
+              const video = videoComponent.querySelector('video');
+              const playButton = videoComponent.querySelector('.video-play-button');
+              const pauseButton = videoComponent.querySelector('.video-pause-button');
+              const progressBar = videoComponent.querySelector('.video-progress-bar');
+              const progressFilled = videoComponent.querySelector('.video-progress-filled');
+              const progressHandle = videoComponent.querySelector('.video-progress-handle');
+              const volumeButton = videoComponent.querySelector('.video-volume-button');
+              const volumeRange = videoComponent.querySelector('.volume-range');
+              const currentTimeEl = videoComponent.querySelector('.current-time');
+              const totalTimeEl = videoComponent.querySelector('.total-time');
+
+              if (!video || !playButton || !pauseButton) return;
+
+              videoComponent.style.cursor = 'pointer';
+
+              playButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Play the video
+                video.play().then(function() {
+                  videoComponent.classList.add('video-playing');
+                }).catch(function(error) {
+                  console.error('Error playing video:', error);
+                });
+              });
+
+              // Pause button click handler
+              pauseButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Pause the video
+                video.pause();
+
+                // Show play button and remove playing class
+                videoComponent.classList.remove('video-playing');
+              });
+
+              // Video ended handler
+              video.addEventListener('ended', function() {
+                // Show play button and remove playing class
+                videoComponent.classList.remove('video-playing');
+              });
+
+              videoComponent.addEventListener('mouseenter', function() {
+                if (!videoComponent.classList.contains('video-playing')) {
+                  this.style.opacity = '0.95';
+                  this.style.transition = 'opacity 0.3s ease';
+                }
+              });
+
+              videoComponent.addEventListener('mouseleave', function() {
+                this.style.opacity = '1';
+              });
+
+              // Volume Control Functionality
+              if (volumeRange) {
+                volumeRange.addEventListener('input', function() {
+                  video.volume = this.value;
+                  video.muted = this.value == 0;
+                });
+              }
+
+              if (volumeButton) {
+                volumeButton.addEventListener('click', function() {
+                  if (video.muted) {
+                    video.muted = false;
+                    volumeRange.value = video.volume;
+                  } else {
+                    video.muted = true;
+                    volumeRange.value = 0;
+                  }
+                });
+              }
+
+              // Progress Bar Functionality
+              if (progressBar && progressFilled && progressHandle) {
+                // Update progress bar
+                video.addEventListener('timeupdate', function() {
+                  const progress = (video.currentTime / video.duration) * 100;
+                  progressFilled.style.width = progress + '%';
+                  progressHandle.style.left = progress + '%';
+
+                  // Update time display
+                  if (currentTimeEl) {
+                    currentTimeEl.textContent = formatTime(video.currentTime);
+                  }
+                });
+
+                // Set total time
+                video.addEventListener('loadedmetadata', function() {
+                  if (totalTimeEl) {
+                    totalTimeEl.textContent = formatTime(video.duration);
+                  }
+                });
+
+                // Click on progress bar to seek
+                progressBar.addEventListener('click', function(e) {
+                  const rect = progressBar.getBoundingClientRect();
+                  const clickX = e.clientX - rect.left;
+                  const percentage = clickX / rect.width;
+                  video.currentTime = percentage * video.duration;
+                });
+
+                // Drag progress handle
+                let isDragging = false;
+                progressHandle.addEventListener('mousedown', function(e) {
+                  isDragging = true;
+                  e.preventDefault();
+                });
+
+                // document.addEventListener('mousemove', function(e) {
+                //   if (isDragging && progressBar) {
+                //     const rect = progressBar.getBoundingClientRect();
+                //     const clickX = e.clientX - rect.left;
+                //     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+                //     video.currentTime = percentage * video.duration;
+                //   }
+                // });
+
+                document.addEventListener('mousemove', theme.utils.rafThrottle((e) => {
+                  if (isDragging && progressBar) {
+                    const rect = progressBar.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+                    video.currentTime = percentage * video.duration;
+                  }
+                }));
+
+                document.addEventListener('mouseup', function() {
+                  isDragging = false;
+                });
+              }
+
+              // Format time helper function
+              function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+                return minutes + ':' + (remainingSeconds < 10 ? '0' : '') + remainingSeconds;
+              }
+            });
+          });
+        });
+      });
+    })();
+  </script>
+{% endif %}
+
+{%- stylesheet -%}
+  .image-block--height-fill .video-block {
+    height: 100%;
+  }
+
+  .image-block--height-fill .video-block img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-block--height-fill .video-block video {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-block {
+    object-fit: var(--object-fit, cover);
+    aspect-ratio: var(--ratio);
+  }
+
+  .icon_media {
+    display: flex;
+    fill: currentcolor;
+    flex-shrink: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    right: var(--icon-button-position-right);
+    bottom: var(--icon-button-position-bottom);
+  }
+  .icon_media.position-left {
+    right: unset;
+    left: var(--icon-button-position-left);
+  }
+
+  .icon_media.icon_media--circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--icon-button-bg-color);
+    color: var(--icon-button-color);
+    border-radius: var(--style-border-radius-50);
+    width: var(--icon-button-size);
+    height: var(--icon-button-size);
+  }
+
+  .icon_plus {
+    font-size: 0px;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    overflow: hidden;
+    transform: translate(-50%, -50%) scale(.8) rotate(-45deg);
+    transition: opacity .1s ease, transform .3s ease;
+  }
+
+  .icon_plus:before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 2px;
+    height: 100%;
+  }
+
+  .icon_plus:after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 100%;
+    height: 2px;
+  }
+
+  .instagram-item__image:hover .icon_plus {
+    opacity: 1;
+    overflow: visible;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+  }
+
+  .image-zoomIn img {
+    transition: transform .64s ease;
+  }
+
+  .instagram-item__image:hover .image-zoomIn img {
+    transform: scale(1.05);
+    transition: transform .64s ease;
+  }
+
+  .instagram-item--bg-color {
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    aspect-ratio: var(--ratioBg);
+  }
+
+  /* Video play/pause button styles */
+  .video-play-button,
+  .video-pause-button {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .video-pause-button {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .video-playing:hover .video-pause-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .video-playing .video-play-button {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* Video Controls Overlay */
+  .video-controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 5;
+  }
+
+  .video-playing:hover .video-controls-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Progress Bar */
+  .video-progress-container {
+    margin-bottom: 15px;
+  }
+
+  .video-progress-bar {
+    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .video-progress-filled {
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s ease;
+  }
+
+  .video-progress-handle {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-progress-bar:hover .video-progress-handle {
+    opacity: 1;
+  }
+
+  /* Bottom Controls */
+  .video-controls-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  /* Volume Control */
+  .video-volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .video-volume-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  .video-volume-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .video-volume-slider {
+    width: 80px;
+  }
+
+  .volume-range {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .volume-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .volume-range::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Time Display */
+  .video-time-display {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    font-size: var(--font-size--sm);
+    font-weight: 500;
+  }
+
+  .time-separator {
+    opacity: 0.7;
+  }
+{%- endstylesheet -%}
+
+{% schema %}
+{
+  "name": "t:names.instagram_item",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.media"
+    },
+    {
+      "type": "select",
+      "id": "background_media",
+      "label": "t:settings.background_media",
+      "options": [
+        {
+          "value": "image",
+          "label": "t:options.image"
+        },
+        {
+          "value": "video",
+          "label": "t:options.video"
+        },
+        {
+          "value": "background_color",
+          "label": "t:settings.background_color"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:settings.video",
+      "visible_if": "{{ block.settings.background_media == 'video' }}"
+    },
+    {
+      "type": "select",
+      "id": "video_position",
+      "label": "t:settings.video_position",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "contain",
+          "label": "t:options.contain"
+        }
+      ],
+      "default": "cover",
+      "visible_if": "{{ block.settings.background_media == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:settings.image",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "background_image_position",
+      "label": "t:settings.image_position",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "fit",
+          "label": "t:options.fit"
+        }
+      ],
+      "default": "cover",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link",
+      "visible_if": "{{ block.settings.animation_type == 'fancybox' }}"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#00312d",
+      "visible_if": "{{ block.settings.background_media == 'background_color' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "t:settings.hide_on_mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "label": "t:settings.enable_typing_content",
+      "id": "enable_typing_content",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:options.adapt_to_image"
+        },
+        {
+          "value": "portrait",
+          "label": "t:options.portrait"
+        },
+        {
+          "value": "square",
+          "label": "t:options.square"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:settings.image_ratio"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:settings.width_desktop",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:settings.custom_percent",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_tablet",
+      "label": "t:settings.width_tablet",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_tablet",
+      "label": "t:settings.custom_percent",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_tablet == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:settings.width_mobile",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:settings.custom_percent",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "fit",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        }
+      ],
+      "default": "fit",
+      "visible_if": "{{ block.settings.image_ratio == 'adapt' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.border"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.icon"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "security",
+          "label": "t:options.security"
+        },
+        {
+          "value": "alert",
+          "label": "t:options.alert"
+        },
+        {
+          "value": "shopping-bag",
+          "label": "t:options.shopping_bag"
+        },
+        {
+          "value": "cart",
+          "label": "t:options.cart"
+        },
+        {
+          "value": "apple",
+          "label": "t:options.apple"
+        },
+        {
+          "value": "arrow",
+          "label": "t:options.arrow"
+        },
+        {
+          "value": "banana",
+          "label": "t:options.banana"
+        },
+        {
+          "value": "bottle",
+          "label": "t:options.bottle"
+        },
+        {
+          "value": "box",
+          "label": "t:options.box"
+        },
+        {
+          "value": "carrot",
+          "label": "t:options.carrot"
+        },
+        {
+          "value": "circle",
+          "label": "t:options.circle"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "t:options.chat_bubble"
+        },
+        {
+          "value": "check_mark",
+          "label": "t:options.check_mark"
+        },
+        {
+          "value": "clipboard",
+          "label": "t:options.clipboard"
+        },
+        {
+          "value": "dairy",
+          "label": "t:options.dairy"
+        },
+        {
+          "value": "dairy_free",
+          "label": "t:options.dairy_free"
+        },
+        {
+          "value": "dryer",
+          "label": "t:options.dryer"
+        },
+        {
+          "value": "eye",
+          "label": "t:options.eye"
+        },
+        {
+          "value": "facebook",
+          "label": "t:options.facebook"
+        },
+        {
+          "value": "fire",
+          "label": "t:options.fire"
+        },
+        {
+          "value": "gluten_free",
+          "label": "t:options.gluten_free"
+        },
+        {
+          "value": "heart",
+          "label": "t:options.heart"
+        },
+        {
+          "value": "instagram",
+          "label": "t:options.instagram"
+        },
+        {
+          "value": "iron",
+          "label": "t:options.iron"
+        },
+        {
+          "value": "leaf",
+          "label": "t:options.leaf"
+        },
+        {
+          "value": "leather",
+          "label": "t:options.leather"
+        },
+        {
+          "value": "lightning_bolt",
+          "label": "t:options.lightning_bolt"
+        },
+        {
+          "value": "lipstick",
+          "label": "t:options.lipstick"
+        },
+        {
+          "value": "lock",
+          "label": "t:options.lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:options.map_pin"
+        },
+        {
+          "value": "nut_free",
+          "label": "t:options.nut_free"
+        },
+        {
+          "value": "pants",
+          "label": "t:options.pants"
+        },
+        {
+          "value": "paw_print",
+          "label": "t:options.paw_print"
+        },
+        {
+          "value": "pepper",
+          "label": "t:options.pepper"
+        },
+        {
+          "value": "perfume",
+          "label": "t:options.perfume"
+        },
+        {
+          "value": "pinterest",
+          "label": "t:options.pinterest"
+        },
+        {
+          "value": "plane",
+          "label": "t:options.plane"
+        },
+        {
+          "value": "plant",
+          "label": "t:options.plant"
+        },
+        {
+          "value": "price_tag",
+          "label": "t:options.price_tag"
+        },
+        {
+          "value": "question_mark",
+          "label": "t:options.question_mark"
+        },
+        {
+          "value": "recycle",
+          "label": "t:options.recycle"
+        },
+        {
+          "value": "return",
+          "label": "t:options.return"
+        },
+        {
+          "value": "ruler",
+          "label": "t:options.ruler"
+        },
+        {
+          "value": "serving_dish",
+          "label": "t:options.serving_dish"
+        },
+        {
+          "value": "shirt",
+          "label": "t:options.shirt"
+        },
+        {
+          "value": "shoe",
+          "label": "t:options.shoe"
+        },
+        {
+          "value": "silhouette",
+          "label": "t:options.silhouette"
+        },
+        {
+          "value": "snapchat",
+          "label": "t:options.snapchat"
+        },
+        {
+          "value": "snowflake",
+          "label": "t:options.snowflake"
+        },
+        {
+          "value": "star",
+          "label": "t:options.star"
+        },
+        {
+          "value": "stopwatch",
+          "label": "t:options.stopwatch"
+        },
+        {
+          "value": "tiktok",
+          "label": "t:options.tiktok"
+        },
+        {
+          "value": "truck",
+          "label": "t:options.truck"
+        },
+        {
+          "value": "tumblr",
+          "label": "t:options.tumblr"
+        },
+        {
+          "value": "twitter",
+          "label": "t:options.twitter"
+        },
+        {
+          "value": "vimeo",
+          "label": "t:options.vimeo"
+        },
+        {
+          "value": "washing",
+          "label": "t:options.washing"
+        }
+      ],
+      "default": "shopping-bag",
+      "visible_if": "{{ block.settings.icon_custom == 'none' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_custom",
+      "label": "t:settings.custom_icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "svg",
+          "label": "SVG"
+        },
+        {
+          "value": "image",
+          "label": "t:options.image"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "liquid",
+      "id": "svg_upload",
+      "label": "t:settings.svg_icon",
+      "info": "t:info.svg_icon_info",
+      "visible_if": "{{ block.settings.icon_custom == 'svg' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_upload",
+      "label": "t:settings.image_icon",
+      "visible_if": "{{ block.settings.icon_custom == 'image' }}"
+    },
+    {
+      "type": "url",
+      "id": "icon_link",
+      "label": "t:settings.link",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "icon_open_in_new_tab",
+      "label": "t:settings.open_new_tab",
+      "default": false,
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "icon_button_bg_color",
+      "label": "t:settings.background",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "icon_button_color",
+      "label": "t:settings.color",
+      "default": "#232323",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_button_size",
+      "label": "t:settings.size",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_button_position",
+      "label": "t:settings.position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "right",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_button_position_right",
+      "label": "t:settings.position_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ block.settings.icon != 'none' and block.settings.icon_button_position == 'right' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_button_position_left",
+      "label": "t:settings.position_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ block.settings.icon != 'none' and block.settings.icon_button_position == 'left' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_button_position_bottom",
+      "label": "t:settings.position_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.hover",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:settings.hover_zoom",
+      "id": "hover_zoomIn",
+      "default": true,
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:settings.hover_plus_icon",
+      "id": "hover_plus_icon",
+      "default": true,
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_overlay",
+      "label": "t:settings.hover_overlay",
+      "default": true,
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:settings.overlay_color",
+      "alpha": true,
+      "default": "#0000004D",
+      "visible_if": "{{ block.settings.toggle_overlay and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "t:settings.overlay_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        },
+        {
+          "value": "gradient",
+          "label": "t:options.gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.toggle_overlay and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "t:settings.gradient_direction",
+      "options": [
+        {
+          "value": "to top",
+          "label": "t:options.up"
+        },
+        {
+          "value": "to bottom",
+          "label": "t:options.down"
+        }
+      ],
+      "default": "to top",
+      "visible_if": "{{ block.settings.toggle_overlay and block.settings.overlay_style == 'gradient' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:settings.center_button",
+      "id": "center_button",
+      "default": false,
+      "info": "t:info.center_button_info",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "text",
+      "id": "center_button_text",
+      "label": "t:settings.button_label",
+      "default": "Shop now",
+      "visible_if": "{{ block.settings.center_button == true and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "url",
+      "id": "center_button_link",
+      "label": "t:settings.button_link",
+      "visible_if": "{{ block.settings.center_button == true and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "style_class",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "button",
+          "label": "t:options.primary"
+        },
+        {
+          "value": "button-secondary",
+          "label": "t:options.secondary"
+        },
+        {
+          "value": "link",
+          "label": "t:options.link"
+        }
+      ],
+      "default": "button",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "button_type_size_link",
+      "label": "t:settings.size",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "1.0rem",
+          "label": "10px"
+        },
+        {
+          "value": "1.2rem",
+          "label": "12px"
+        },
+        {
+          "value": "1.4rem",
+          "label": "14px"
+        },
+        {
+          "value": "1.6rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.8rem",
+          "label": "18px"
+        },
+        {
+          "value": "2.0rem",
+          "label": "20px"
+        },
+        {
+          "value": "2.2rem",
+          "label": "22px"
+        },
+        {
+          "value": "2.4rem",
+          "label": "24px"
+        },
+        {
+          "value": "2.6rem",
+          "label": "26px"
+        },
+        {
+          "value": "2.8rem",
+          "label": "28px"
+        }
+      ],
+      "default": "1.2rem",
+      "visible_if": "{{ block.settings.style_class == 'link' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight_link",
+      "label": "t:settings.button_text_weight",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        }
+      ],
+      "default": "default",
+      "visible_if": "{{ block.settings.style_class == 'link' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.default"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:options.uppercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "t:options.capitalize"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.style_class == 'link' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_underline",
+      "label": "t:options.underline",
+      "default": false,
+      "visible_if": "{{ block.settings.style_class == 'link' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.animations",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "animation_type",
+      "label": "t:settings.animation_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "parallax",
+          "label": "t:settings.parallax"
+        },
+        {
+          "value": "reveal_on_scroll",
+          "label": "Reveal on scroll"
+        }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "parallax_speed",
+      "label": "t:settings.parallax_speed",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "default": 0.5,
+      "visible_if": "{{ block.settings.animation_type == 'parallax' and block.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "label": "t:settings.spacing_top"
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "label": "t:settings.spacing_right"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "label": "t:settings.spacing_bottom"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "label": "t:settings.spacing_left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_divider"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "_content-hover"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.instagram_item"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+{% stylesheet %}
+  .spacer {
+    height: var(--spacerHeight);
+    width: var(--spacerWidth);
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    .spacer {
+      height: calc(var(--spacerHeight) * 0.75);
+      width: calc(var(--spacerWidth) * 0.75);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .spacer {
+      height: calc(var(--spacerHeight) * 0.5);
+      width: calc(var(--spacerWidth) * 0.5);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .spacer {
+      height: calc(var(--spacerHeight) * 0.25);
+      width: calc(var(--spacerWidth) * 0.25);
+    }
+  }
+{% endstylesheet %}
+
+<span class="spacer" style="--spacerHeight: {{ block.settings.spacer_height |  append: 'px'}}; --spacerWidth: {{ block.settings.spacer_width |  append: 'px'}}"></span>
+
+{% schema %}
+{
+  "name": "t:names.spacer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "spacer_height",
+      "label": "t:settings.vertical",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "spacer_width",
+      "label": "t:settings.horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.spacer",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

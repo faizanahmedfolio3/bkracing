@@ -1,0 +1,223 @@
+{%- doc -%}
+  This block is used to display the accelerated checkout button.
+  Intended for product-form.liquid block.
+
+  @param {string} can_add_to_cart - Whether the product can be added to the cart
+  @param form_obj - The form object
+
+  @example
+  {% content_for 'block', type: 'accelerated-checkout', id: 'accelerated-checkout', can_add_to_cart: can_add_to_cart, form_obj: form %}
+{%- enddoc -%}
+
+{% liquid
+  assign product = closest.product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% capture agree_condition %}
+  {%- if block.settings.agree_condition and block.settings.agree_condition_text != blank -%}
+    {%- capture agree_condition_popup_text -%}
+      {% if block.settings.agree_condition_popup_text != blank %}
+        <side-drawer-opener
+          class="popup agree-condition-popup-modal__opener--keep"
+          {{ block.shopify_attributes }}
+          data-side-drawer="#PopupModal-{{ block.id }}"
+        >
+          <button
+            id="PopupModalButton-{{ block.id }}"
+            class="button button-unstyled popup__button"
+            type="button"
+          >
+            {{ block.settings.agree_condition_popup_text }}
+          </button>
+        </side-drawer-opener>
+        {% if block.settings.agree_condition_popup_page != blank %}
+          <side-drawer
+            class="popup__content product-popup-modal__drawer--keep drawer fixed top-0 left-0 z-10 w-screen h-full flex justify-center no-js-hidden"
+            element-s-popup
+            id="PopupModal-{{ block.id }}"
+          >
+            <div id="Drawer-Overlay-{{ block.id }}" class="drawer__overlay fixed inset-0 cursor-pointer"></div>
+            <div
+              class="popup__inner color-{{ settings.popover_color_scheme }} w-full h-auto absolute-c-c flex flex-column global-settings-popup"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Agree condition"
+              tabindex="-1"
+              style="--modal-max-width: 72rem;"
+            >
+              <button
+                onclick="this.closest('side-drawer').close()"
+                class="drawer__close block t-button bor-none rounded-full cursor-pointer absolute"
+                type="button"
+                aria-label="{{ 'accessibility.close_dialog' | t }}"
+                style="--top: 0.5rem; --right: 0.5rem;"
+              >
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </button>
+              <div class="w-full h-full overflow-auto cus-scrollbar" style="--p: 2rem 1rem;">
+                <div class="drawer__header relative center"
+                  style="--p: 1.5rem 0; --mb: 2.5rem;"
+                >
+                  <h5 class="drawer__heading break m-0">
+                    {{ block.settings.agree_condition_popup_text }}
+                  </h5>
+                </div>
+                <div class="agree-condition-popup-modal__content-info m-auto">
+                  {{ block.settings.agree_condition_popup_page.content }}
+                </div>
+              </div>
+            </div>
+          </side-drawer>
+        {% endif %}
+      {% endif %}
+    {%- endcapture -%}
+
+    <div class="spacing-style newsletter-form__checkbox"
+      style="--padding-block-start: {{ block.settings.condition-padding-block-start }}px; --padding-block-end:{{- block.settings.condition-padding-block-end -}}px;--padding-inline-start: 0px;--padding-inline-end: 0px;"
+    >
+      {% assign checkbox_id = block.id | prepend: 'agree_condition-' %}
+      {% assign agree_condition_text = block.settings.agree_condition_text | replace: '[popup_text]', agree_condition_popup_text %}
+      {% render 'checkbox', class: 'agree-condition-checkbox', label_content: agree_condition_text, id: checkbox_id, name: checkbox_id, required: true %}
+    </div>
+  {%- endif -%}
+{% endcapture %}
+
+<div
+  class="accelerated-checkout-block checkout--{{ block.settings.style_class }}"
+  ref="acceleratedCheckoutButtonContainer"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-shopify-visual-preview
+  {% endif %}
+  {% unless can_add_to_cart %}
+    hidden
+  {% endunless %}
+>
+  {% if product != blank and form_obj != blank %}
+    {{ agree_condition }}
+    {{ form_obj | payment_button }}
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .accelerated-checkout-block[data-shopify-visual-preview] {
+    width: 300px;
+  }
+
+  more-payment-options-link {
+    font-size: smaller;
+  }
+
+  more-payment-options-link a {
+    --button-color: var(--color-primary);
+  }
+
+  more-payment-options-link a:hover {
+    --button-color: var(--color-primary-hover);
+  }
+
+  .shopify-payment-button__more-options[aria-hidden='true'] {
+    display: none;
+  }
+
+  /* Checkout Button */
+  .accelerated-checkout-block.checkout--button-secondary button.shopify-payment-button__button--unbranded {
+    --button-color: var(--color-primary);
+    --button-background-color: transparent;
+    --button-border-color: var(--color-primary);
+    --button-border-width: 1px;
+    --button-border-radius: 0;
+    --button-padding-block-start: 10px;
+    --button-padding-block-end: 10px;
+  }
+
+  .accelerated-checkout-block.checkout--button-secondary button.shopify-payment-button__button--unbranded:hover {
+    --shadow-horizontal-offset: 0;
+    --shadow-vertical-offset: 0;
+    --button-color: var(--color-secondary-button-hover-text);
+    --button-background-color: var(--color-secondary-button-hover-background);
+    --button-border-color: var(--color-secondary-button-hover-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.accelerated_checkout",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "agree_condition",
+      "label": "t:settings.enable_conditions",
+      "default": true,
+      "info": "t:info.terms_conditions_info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "agree_condition_text",
+      "label": "t:settings.condition_text",
+      "default": "I agree with the [popup_text]",
+      "info": "You can use [popup_text] in the text. Example: I agree with the [popup_text] text.",
+      "visible_if": "{{ block.settings.agree_condition == true }}"
+    },
+    {
+      "type": "text",
+      "id": "agree_condition_popup_text",
+      "label": "Popup text",
+      "default": "terms and conditions",
+      "visible_if": "{{ block.settings.agree_condition == true }}"
+    },
+    {
+      "type": "page",
+      "id": "agree_condition_popup_page",
+      "label": "Popup content",
+      "info": "Select the page that contains the popup content. The popup content will be displayed in a popup when the user clicks the popup text."
+    },
+    {
+      "type": "range",
+      "id": "condition-padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ block.settings.agree_condition == true }}"
+    },
+    {
+      "type": "range",
+      "id": "condition-padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ block.settings.agree_condition == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.button"
+    },
+    {
+      "type": "select",
+      "id": "style_class",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "button",
+          "label": "t:options.primary"
+        },
+        {
+          "value": "button-secondary",
+          "label": "t:options.secondary"
+        }
+      ],
+      "default": "button-secondary"
+    }
+  ]
+}
+{% endschema %}

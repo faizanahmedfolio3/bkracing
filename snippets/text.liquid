@@ -1,0 +1,721 @@
+{%- doc -%}
+  Intended for use in a block similar to the text block.
+
+  @param {string} [class] - custom class to define in addition to text-block classes
+  @param {string} [fallback_text] - fallback text if settings.text does not exist
+  @param {string} [width] - width of the text block
+  @param {string} [width_tablet] - width of the text block on tablet
+  @param {string} [width_mobile] - width of the text block on mobile
+  @param {object} block - block object
+  @param {boolean} [is_heading] - if true, the text block is a heading
+{%- enddoc -%}
+
+{% liquid
+  assign bl_stts = block.settings
+  assign type_preset = type_preset | default: bl_stts.type_preset
+  assign plain_text = fallback_text | default: bl_stts.text | strip_newlines | strip_html | strip
+  assign inherit_text_alignment = bl_stts.inherit_text_alignment
+  assign inherit_text_alignment_tablet = bl_stts.inherit_text_alignment_tablet
+  assign inherit_text_alignment_mobile = bl_stts.inherit_text_alignment_mobile
+  if inherit_text_alignment == false
+    if bl_stts.justify_alignment == true
+      assign alignment = 'justify'
+    else
+      assign alignment = bl_stts.alignment
+    endif
+    assign text_align = ' --text-align: ' | append: alignment | append: ';'
+  elsif inherit_text_alignment == blank
+    assign alignment = bl_stts.alignment
+    assign text_align = ' --text-align: ' | append: alignment | append: ';'
+  endif
+  if inherit_text_alignment_tablet == false
+    if bl_stts.justify_alignment_tablet == true
+      assign alignment_tablet = 'justify'
+    else
+      assign alignment_tablet = bl_stts.alignment_tablet
+    endif
+    assign text_align_tablet = ' --text-align-tablet: ' | append: alignment_tablet | append: ';'
+  endif
+  if inherit_text_alignment_mobile == false
+    if bl_stts.justify_alignment_mobile == true
+      assign alignment_mobile = 'justify'
+    else
+      assign alignment_mobile = bl_stts.alignment_mobile
+    endif
+    assign text_align_mobile = ' --text-align-mobile: ' | append: alignment_mobile | append: ';'
+  endif
+  assign text_width = width | default: bl_stts.width
+  assign text_width_tablet = width_tablet | default: bl_stts.width_tablet
+  assign text_width_mobile = width_mobile | default: bl_stts.width_mobile
+  assign is_card_heading = is_card_heading | default: bl_stts.is_card_heading
+
+  if text == blank
+    assign text = fallback_text | default: bl_stts.text
+  endif
+
+  if bl_stts.font_size contains 'heading-lg' or bl_stts.font_size contains 'heading-xl'
+    assign type = 'display'
+  elsif bl_stts.font_size contains 'heading'
+    assign type = 'heading'
+  else
+    assign type = 'body'
+  endif
+  if type_preset == 'rte' or type_preset == 'paragraph'
+    assign is_rte = true
+  endif
+
+  assign border = bl_stts.border
+  if border == 'solid' and text_width == '100%' and class_heading == 'section-header'
+    assign has_heading_border = true
+    assign heading_border_classes = 'heading-border--solid relative justify-center'
+  elsif bl_stts.enable_border == true
+    assign has_border = true
+  elsif bl_stts.enable_border_bottom == true
+    assign enable_border_bottom = true
+  endif
+
+  assign highlight_text = bl_stts.highlight_text
+  assign highlight_content = bl_stts.highlight_text_content | split: ','
+  if bl_stts.highlight_text_type == 'underline'
+    assign highlight_color = bl_stts.highlight_underline_color
+    assign highlight_text_type = 'underline'
+  else
+    assign highlight_color = bl_stts.highlight_text_color
+    assign highlight_text_type = 'text'
+  endif
+
+  if highlight_content != blank and highlight_text == true
+    for highlight in highlight_content
+      assign style_underline = ''
+      if highlight_text_type == 'underline'
+        assign style_underline = ' --underline-height: ' | append: bl_stts.underline_height | append: '%; --underline-offset: ' | append: bl_stts.underline_offset | append: '%;'
+      endif
+      assign highlight_text_code = highlight | prepend: '<highlight-text class="highlight_text--content highlight_text--[highlight_text_type]" style="--color: [highlight_color];[style_underline]">' | append: '</highlight-text>' | replace: '[highlight_color]', highlight_color | replace: '[highlight_text_type]', highlight_text_type | replace: '[style_underline]', style_underline
+      assign text = text | replace: highlight, highlight_text_code
+    endfor
+  endif
+
+  assign spacing_text = bl_stts.spacing_text
+  assign spacing_content = bl_stts.spacing_text_content | split: ','
+  assign spacing_left = bl_stts.spacing_text_left
+  assign spacing_right = bl_stts.spacing_text_right
+
+  if spacing_content != blank and spacing_text == true
+    for spacing in spacing_content
+      assign spacing_text_code = spacing | prepend: '<span class="spacing_text--content" style="margin-left: [spacing_left]ch; margin-right: [spacing_right]ch;">' | append: '</span>' | replace: '[spacing_left]', spacing_left | replace: '[spacing_right]', spacing_right
+      assign text = text | replace: spacing, spacing_text_code
+    endfor
+  endif
+
+  assign stroke_text = bl_stts.stroke_text
+  assign stroke_content = bl_stts.stroke_text_content | split: ','
+  if stroke_content != blank and stroke_text == true
+    for stroke in stroke_content
+      assign stroke_text_code = stroke | prepend: '<stroke-text class="stoke_text--content">' | append: '</stroke-text>'
+      assign text = text | replace: stroke, stroke_text_code
+    endfor
+  endif
+
+  capture text_block_classes
+    if text_width == '100%'
+      echo ' text-block--full-width '
+    endif
+    if text_width_tablet == '100%'
+      echo ' text-block--full-width-tablet '
+    endif
+    if text_width_mobile == '100%'
+      echo ' text-block--full-width-mobile '
+    endif
+    if text_width == 'custom' or text_width == '100%'
+      echo ' text-block--align-' | append: alignment
+    endif
+    if text_width_tablet == 'custom' or text_width_tablet == '100%'
+      echo ' text-block--align-tablet-' | append: alignment_tablet
+    endif
+    if text_width_mobile == 'custom' or text_width_mobile == '100%'
+      echo ' text-block--align-mobile-' | append: alignment_mobile
+    endif
+    if text_width == 'custom' or text_width_tablet == 'custom' or text_width_mobile == 'custom'
+      echo ' text-block--custom-width'
+    endif
+    if type_preset == 'custom'
+      echo ' custom-typography '
+      if bl_stts.font_size != ''
+        echo ' custom-font-size '
+      endif
+      if bl_stts.color != ''
+        echo ' custom-color '
+      endif
+    endif
+    if bl_stts.background
+      echo ' text-block--background '
+    endif
+    if is_rte
+      echo ' rte '
+    endif
+  endcapture
+%}
+
+{% if bl_stts.typing_text %}
+  {% assign class = class | append: ' typing-text' %}
+  {%- capture text -%}
+    <span class="typing-text__content">{{ bl_stts.primary_text }}</span>
+  {%- endcapture -%}
+{% endif %}
+
+{% capture attributes %}
+  class="
+    size-style spacing-style text-block max-w-full flex
+    text-block--{{ block.id }}
+    {% if class == 'card--block-details' %}flex-row{% else %}flex-column{% endif %}
+    {{ type_preset }} {{ class }} {{ text_block_classes }}
+    {% if has_heading_border %} {{ heading_border_classes }}{% endif %}
+    {% if enable_border_bottom %} border-style text-border-style-bottom{% endif %}
+    {% if has_border %} border-style{% endif %}
+    {% if is_card_title_custom_width %} card-title-custom-width{% endif %}
+  "
+  style="
+    {% render 'size-style', settings: bl_stts %}
+    {% render 'spacing-padding', settings: bl_stts %}
+    {% render 'typography-style', settings: bl_stts %}
+    {% comment %} --width: {{ text_width }}; {% endcomment %}
+    {%- if text_width == "100%" or text_width == "custom" %}{{ text_align }}{%- endif -%}
+    {%- if text_width_tablet == "100%" or text_width_tablet == "custom" -%}{{ text_align_tablet }}{%- endif -%}
+    {%- if text_width_mobile == "100%" or text_width_mobile == "custom" -%}{{ text_align_mobile }}{%- endif -%}
+    {%- if bl_stts.background -%}
+      --text-background-color: {{ bl_stts.background_color | default: 'rgb(255 255 255 / var(--opacity-100))' }};
+      --text-corner-radius: {{ bl_stts.border_radius }}px;
+      --text-padding: max(var(--padding-2xs), calc((var(--text-corner-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+    {%- endif -%}
+    {%- if has_heading_border or enable_border_bottom or has_border -%}
+      {%- render 'border-override', settings: bl_stts -%}
+    {%- endif -%}
+  "
+  {% if bl_stts.typing_text %}data-texts='["{{ bl_stts.primary_text }}", "{{ bl_stts.secondary_text }}", "{{ bl_stts.third_text }}"]'{% endif %}
+
+  {{ block.shopify_attributes }}
+{% endcapture %}
+{% liquid
+  # {{ attributes }} must be on the immediate HTML parent of the text to preserve
+  # the click-to-edit connection in the theme editor. Any break between the text,
+  # including if-statements, will break the connection.
+
+  assign element = 'div'
+  if is_rte
+    assign element = 'rte-formatter'
+  endif
+
+  if bl_stts.text_effect == 'blur' or bl_stts.text_effect == 'reveal'
+    assign text_element = 'text-animation'
+  endif
+
+  if bl_stts.heading_effect == 'slide-up'
+    assign text_element = 'split-words'
+  endif
+
+  assign text_class = 'inline-block relative z-1 w-auto max-w-full'
+%}
+{% if text_element %}
+  <{{ text_element }}
+    {{ attributes }}
+    {% if bl_stts.heading_only == false %}
+      data-text-effect="{{ bl_stts.text_effect }}"
+      data-animation-repeat="{{ bl_stts.animation_repeat }}"
+    {%- else -%}
+        data-animate-type="{{ bl_stts.heading_effect }}"
+    {% endif %}
+  >
+{% endif %}
+{% if fallback_text != blank and plain_text == blank %}
+  <div {{ attributes }}>
+    {%- if has_heading_border or is_card_heading -%}
+      <div class="text{% if has_heading_border %} {{ text_class }}{% endif %}">
+    {%- endif -%}
+    {{ fallback_text }}
+    {%- if has_heading_border or is_card_heading -%}
+      </div>
+    {%- endif -%}
+  </div>
+{% elsif plain_text != blank %}
+  <{{ element }} {{ attributes }}>
+    {%- if has_heading_border or is_card_heading or text_element -%}
+      <div
+        class="
+          {% if has_heading_border or is_card_heading %}text {{ text_class }}{% endif %}
+          {% if text_element %} text-animation-line{% endif %}
+        "
+      >
+    {%- endif -%}
+
+    {% if is_card_heading or type_block == 'product' %}
+      <span class="link--hover-underline">
+    {% endif %}
+
+    {% if bl_stts.collapse_text %}
+      <collapsible-text class="is-collapsed">
+        <div class="collection-description-text" data-content-full>
+          {{ text }}
+        </div>
+        <div class="collection-description-preview" data-content-preview>
+          {{ text | truncatewords: 100 }}
+        </div>
+        <button data-collapse-button-more type="button" class="link link--underline">{{ 'actions.show_more' | t }}</button>
+        <button data-collapse-button-less type="button" class="link link--underline">{{ 'actions.show_less' | t }}</button>
+      </collapsible-text>
+    {%- else -%}
+      {{ text }}
+    {% endif %}
+
+    {% if is_card_heading or type_block == 'product' %}
+      </span>
+    {% endif %}
+
+    {%- if has_heading_border or is_card_heading or text_element -%}
+      </div>
+    {%- endif -%}
+  </{{ element }}>
+{% endif %}
+{% if text_element %}
+  </{{ text_element }}>
+{% endif %}
+
+{% stylesheet %}
+  :root {
+    --text-align-default: left;
+  }
+
+  [style*='--horizontal-alignment: center'] .text-block {
+    --text-align-default: center;
+  }
+
+  [style*='--horizontal-alignment: flex-end'] .text-block {
+    --text-align-default: right;
+  }
+
+  [style*='--horizontal-alignment: flex-start'] > .text-block {
+    --text-align-default: left;
+  }
+
+  [style*='--horizontal-alignment: center'] > .text-block {
+    --text-align-default: center;
+  }
+
+  [style*='--horizontal-alignment: flex-end'] > .text-block {
+    --text-align-default: right;
+  }
+
+  @media screen and (max-width: 749px) {
+    [style*='--horizontal-alignment-mobile: center'] .text-block {
+      --text-align-default: center;
+    }
+
+    [style*='--horizontal-alignment-mobile: flex-end'] .text-block {
+      --text-align-default: right;
+    }
+
+    [style*='--horizontal-alignment-mobile: flex-start'] > .text-block {
+      --text-align-default: left;
+    }
+
+    [style*='--horizontal-alignment-mobile: center'] > .text-block {
+      --text-align-default: center;
+    }
+
+    [style*='--horizontal-alignment-mobile: flex-end'] > .text-block {
+      --text-align-default: right;
+    }
+  }
+
+  .highlight_text--content.highlight_text--text {
+    color: var(--color);
+  }
+  .highlight_text--content.highlight_text--underline {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+
+    &.highlight_text--active:after {
+      transform: scaleX(1);
+    }
+  }
+  .highlight_text--content.highlight_text--underline:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: calc(var(--underline-offset, 0.2em) * -1);
+    left: 0;
+    width: 100%;
+    height: max(1px, var(--underline-height,0.18em));
+    background: var(--color);
+    z-index: -1;
+    transition: transform var(--animation-slowest-smooth);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .text-border-style-bottom {
+    --border-style: solid;
+    position: relative;
+    border: none;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--width-custom, 100%);
+      height: var(--border-width);
+      background: var(--border-color);
+    }
+  }
+
+  .heading-border--solid {
+    .text {
+      width: auto;
+    }
+
+    &.text-block--align-left-mobile {
+      --padding-inline: 0 1rem;
+    }
+    &.text-block--align-right-mobile {
+      --padding-inline: 1rem 0;
+    }
+    &.text-block--align-center-mobile {
+      --padding-inline: 1rem;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: calc(50% - var(--border-width));
+      left: 0;
+      width: 100%;
+      height: var(--border-width);
+      background: var(--border-color);
+    }
+
+    .text {
+      padding-inline: var(--padding-inline);
+      background: var(--color-background);
+
+      @media screen and (min-width: 1025px) {
+        min-width: 42rem;
+      }
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+      &.text-block--align-left-tablet {
+        --padding-inline: 0 1.5rem;
+      }
+      &.text-block--align-right-tablet {
+        --padding-inline: 1.5rem 0;
+      }
+      &.text-block--align-center-tablet {
+        --padding-inline: 1.5rem;
+      }
+    }
+
+    @media screen and (min-width: 1025px) {
+      &.text-block--align-left {
+        --padding-inline: 0 2rem;
+      }
+      &.text-block--align-right {
+        --padding-inline: 2rem 0;
+      }
+      &.text-block--align-center {
+        --padding-inline: 2rem;
+      }
+    }
+  }
+
+  .text-block {
+    align-items: var(--horizontal-alignment);
+
+    &.size-style {
+      height: auto;
+    }
+  }
+
+  .text-block > * {
+    width: inherit;
+    text-align: var(--text-align-mobile, var(--text-align-default));
+    text-wrap: var(--text-wrap);
+
+    @media screen and (min-width: 750px) and (max-width: 1024px) {
+      text-align: var(--text-align-tablet, var(--text-align-default));
+    }
+
+    @media screen and (min-width: 1025px) {
+      text-align: var(--text-align, var(--text-align-default));
+    }
+  }
+
+  .text-block.text-block--custom-width  > * {
+    width: 100%;
+  }
+
+  .text-block:not(.text-block--full-width-mobile).rte,
+  .text-block:not(.text-block--full-width-mobile).paragraph {
+    /* Safari doesn't support pretty, so fallback to balance */
+    text-wrap: balance;
+    text-wrap: pretty;
+  }
+
+  .text-block:not(.text-block--full-width-mobile):is(.h1, .h2, .h3, .h4, .h5, .h6) {
+    text-wrap: balance;
+  }
+
+  /* Hide underline unless text is using paragraph styles. */
+  .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) a {
+    text-decoration-color: transparent;
+  }
+
+  .text-block h1,
+  .text-block.h1 > * {
+    margin-block: var(--font-h1--spacing);
+  }
+
+  .text-block h2,
+  .text-block.h2 > * {
+    margin-block: var(--font-h2--spacing);
+  }
+
+  .text-block h3,
+  .text-block.h3 > * {
+    margin-block: var(--font-h3--spacing);
+  }
+
+  .text-block h4,
+  .text-block.h4 > * {
+    margin-block: var(--font-h4--spacing);
+  }
+
+  .text-block h5,
+  .text-block.h5 > * {
+    margin-block: var(--font-h5--spacing);
+  }
+
+  .text-block h6,
+  .text-block.h6 > * {
+    margin-block: var(--font-h6--spacing);
+  }
+
+  .text-block p,
+  .text-block.p > * {
+    margin-block: var(--font-paragraph--spacing);
+  }
+
+  .text-block .text > *:first-child,
+  .text-block > *:first-child {
+    margin-block-start: 0;
+  }
+
+  .text-block .text > *:last-child,
+  .text-block > *:last-child {
+    margin-block-end: 0;
+  }
+
+  .text-block--align-left-mobile,
+  .text-block--align-left-mobile > * {
+    margin-inline-end: auto;
+  }
+
+  .text-block--align-center-mobile,
+  .text-block--align-center-mobile > * {
+    margin-inline: auto;
+  }
+
+  .text-block--align-right-mobile,
+  .text-block--align-right-mobile > * {
+    margin-inline-start: auto;
+  }
+
+  .text-block--background {
+    background-color: var(--text-background-color);
+    /* border-radius: var(--text-corner-radius); */
+
+    /* To avoid text being cropped when using a border radius we add a minimum padding. */
+    padding-block-start: max(var(--text-padding), var(--padding-block-start, 0));
+    padding-block-end: max(var(--text-padding), var(--padding-block-end, 0));
+    padding-inline-start: max(var(--text-padding), var(--padding-inline-start, 0));
+    padding-inline-end: max(var(--text-padding), var(--padding-inline-end, 0));
+  }
+
+  .custom-color,
+  .custom-color > :is(h1, h2, h3, h4, h5, h6, p, *),
+  .text-block a {
+    color: var(--color);
+  }
+
+  .text-block a {
+    text-underline-offset: 0.3rem;
+  }
+
+  .stoke_text--content {
+    --fill-color: var(--color-foreground);
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px var(--fill-color);
+    background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
+    color: transparent;
+    background-clip: text;
+    transition: background-size var(--animation-slowest-smooth);
+
+    /* &:hover {
+        background-size: 100%;
+      } */
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 1024px) {
+    .text-block:not(.text-block--full-width-tablet).rte,
+    .text-block:not(.text-block--full-width-tablet).paragraph {
+      /* Safari doesn't support pretty, so fallback to balance */
+      text-wrap: balance;
+      text-wrap: pretty;
+    }
+
+    .text-block:not(.text-block--full-width-tablet):is(.h1, .h2, .h3, .h4, .h5, .h6) {
+      text-wrap: balance;
+    }
+
+    .text-block--align-left-tablet,
+    .text-block--align-left-tablet > * {
+      margin-inline-end: auto;
+    }
+
+    .text-block--align-center-tablet,
+    .text-block--align-center-tablet > * {
+      margin-inline: auto;
+    }
+
+    .text-block--align-right-tablet,
+    .text-block--align-right-tablet > * {
+      margin-inline-start: auto;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .text-block:not(.text-block--full-width).rte,
+    .text-block:not(.text-block--full-width).paragraph {
+      /* Safari doesn't support pretty, so fallback to balance */
+      text-wrap: balance;
+      text-wrap: pretty;
+    }
+
+    .text-block:not(.text-block--full-width):is(.h1, .h2, .h3, .h4, .h5, .h6) {
+      text-wrap: balance;
+    }
+
+    .text-block--align-left,
+    .text-block--align-left > * {
+      margin-inline-end: auto;
+    }
+
+    .text-block--align-center,
+    .text-block--align-center > * {
+      margin-inline: auto;
+    }
+
+    .text-block--align-right,
+    .text-block--align-right > * {
+      margin-inline-start: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Blur effect */
+    [data-text-effect='blur'] {
+      filter: blur(20px);
+      opacity: 0.5;
+      scale: 1.05;
+      transition: filter 1.6s var(--animation-timing-fade-in), opacity 1.3s var(--animation-timing-fade-in),
+        scale 1.6s var(--animation-timing-fade-in);
+    }
+
+    .text-animation-visible[data-text-effect='blur'] {
+      filter: blur(0);
+      opacity: 1;
+      scale: 1;
+    }
+
+    /* Reveal effect */
+    [data-text-effect='reveal'],
+    [data-text-effect='reveal'] .text-animation-line {
+      overflow: hidden;
+    }
+
+    [data-text-effect='reveal'] .text-animation-line * {
+      transform: translateY(100%);
+    }
+
+    .text-animation-visible[data-text-effect='reveal'],
+    .text-animation-visible[data-text-effect='reveal'] .text-animation-line {
+      overflow: visible;
+      transition: overflow 0s linear 0.75s;
+    }
+
+    .text-animation-visible[data-text-effect='reveal'] .text-animation-line * {
+      transition: transform 0.5s var(--animation-timing-fade-in) 0.05s;
+      transform: translateY(0);
+    }
+
+    /* Text animations */
+    split-words:not(:has(animated-element)) {
+      opacity: var(--opacity-0);
+    }
+
+    split-words .word {
+      overflow: hidden;
+      line-height: 1;
+      margin: -.1em -.05em;
+      padding: .1em .05em;
+    }
+
+    split-words[data-animate-type='slide-up'] animated-element {
+      transform: translateY(95%);
+      opacity: 0;
+    }
+  }
+
+  collapsible-text {
+    position: relative;
+
+    [data-collapse-button-more],
+    [data-collapse-button-less] {
+      display: none;
+    }
+
+    &.is-collapsed {
+      [data-collapse-button-more] {
+        display: block;
+      }
+      [data-collapse-button-less] {
+        display: none;
+      }
+    }
+    &.is-expanded {
+      [data-collapse-button-more] {
+        display: none;
+      }
+      [data-collapse-button-less] {
+        display: block;
+      }
+    }
+  }
+
+  .collection-description-preview {
+    overflow: hidden;
+  }
+
+  .collection-description-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    visibility: hidden;
+  }
+{% endstylesheet %}

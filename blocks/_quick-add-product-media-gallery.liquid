@@ -1,0 +1,71 @@
+
+{%- liquid
+  assign pos_image = section.settings.desktop_media_position
+-%}
+{%- capture html_media -%}
+  <div class="media media--adapt" style="--media-adapt-ratio: {{ closest.product.media[0].aspect_ratio }}">
+    {%- render 'image', image: closest.product.media[0] -%}
+  </div>
+{%- endcapture -%}
+
+{%- if pos_image == 'left' -%}
+  {{ html_media }}
+{%- endif -%}
+
+<div class="product-quick-add__media0">
+  {%- content_for 'blocks' -%}
+</div>
+
+{%- if pos_image == 'right' -%}
+  {{ html_media }}
+{%- endif -%}
+{% stylesheet %}
+  .product-quick-add__media {
+    --layout-template: 10rem 1fr;
+    display: grid;
+    grid-template-columns: var(--layout-template);
+    gap: 2.4rem;
+
+    &.product-information__media--right {
+      --layout-template: 1fr 10rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.media",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "spacer"
+    },
+    {
+      "type": "price"
+    },
+    {
+      "type": "review"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "t:names.media",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

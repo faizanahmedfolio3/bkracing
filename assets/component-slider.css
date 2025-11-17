@@ -1,0 +1,58 @@
+swiper-component {
+  display: block;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .swiper-component-mobile .swiper-wrapper.md\:block {
+    display: block;
+  }
+  .swiper-component-mobile .swiper-wrapper.md\:grid {
+    display: grid;
+  }
+}
+
+.swiper-initialized .swiper-slide {
+  max-width: 100%;
+}
+
+.swiper:not(.swiper-vertical):not(:has(.swiper-actions--bottom_right)):has(.swiper-pagination:not(.swiper-pagination-pos--inside):not(.swiper-pagination-lock)) {
+  padding-bottom: 4rem;
+}
+
+.main-product-information .swiper:not(.swiper-vertical):not(:has(.swiper-actions--bottom_right)):has(.swiper-pagination:not(.swiper-pagination-pos--inside):not(.swiper-pagination-lock)) {
+  padding-bottom: 1rem;
+}
+
+.main-product-information swiper-component[data-thumbnail-direction="vertical"] .swiper:not(:has(.swiper-actions--bottom_right)):has(.swiper-pagination:not(.swiper-pagination-pos--inside):not(.swiper-pagination-lock)) {
+  padding-bottom: 0;
+}
+
+.swiper:has(.swiper-pagination) .swiper-btns-wrap {
+  top: calc(50% - 2rem);
+}
+
+.swiper-button::after {
+  display: none;
+}
+
+.swiper-button-next .icon {
+  &.icon-caret {
+    transform: rotate(-90deg);
+  }
+}
+
+.swiper-button-prev .icon {
+  &.icon-caret {
+    transform: rotate(90deg);
+  }
+
+  &.icon-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.swiper-pagination-progressbar {
+  top: unset !important;
+  bottom: 0;
+}

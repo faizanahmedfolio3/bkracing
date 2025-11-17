@@ -1,0 +1,205 @@
+{% liquid
+  assign coupon_code = block.settings.coupon_code
+  assign input_bg = block.settings.input_bg
+  assign input_text_color = block.settings.input_text_color
+  assign input_border_color = block.settings.input_border_color
+  assign icon_color = block.settings.icon_color
+  assign icon_bg = block.settings.icon_bg
+
+  assign pl = block.settings.padding_left
+  assign pr = block.settings.padding_right
+  assign pt = block.settings.padding_top
+  assign pb = block.settings.padding_bottom
+%}
+
+{% capture attr %}
+  style="
+  --input-bg: {{ input_bg }}; --input-text-color: {{ input_text_color }}; --input-border-color: {{ input_border_color }}; --icon-color: {{ icon_color }}; --icon-bg: {{ icon_bg }};
+  {% if pl != 0 %}--pl:{{ pl }}px;{% endif %}
+  {% if pt != 0 %}--pt:{{ pt }}px;{% endif %}
+  {% if pb != 0 %}--pb:{{ pb }}px;{% endif %}
+  {% if pr != 0 %}--pr:{{ pr }}px;{% endif %}
+  "
+{% endcapture %}
+
+<div class="coupon-code-block relative" data-text="{{ coupon_code }}" {{ attr }}>
+  <span class="coupon-code-text relative">
+    <span class="coupon-code-default">{{ coupon_code }}</span>
+    <span class="coupon-code-copied">Copied!</span>
+  </span>
+  <button class="coupon-code-icon">
+    <span class="svg-wrapper">
+        {{- 'icon-copy.svg' | inline_asset_content -}}
+    </span>
+    </button>
+</div>
+
+{% stylesheet %}
+  .shopify-block:has(.coupon-code-block) {
+    width: 100%;
+  }
+
+  .coupon-code-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg);
+    padding: var(--pt) var(--pr) var(--pb) var(--pl);
+    font-weight: bold;
+    width: 100%;
+    cursor: default;
+    transition: all 0.3s ease;
+  }
+
+  .coupon-code-block .coupon-code-text {
+    color: var(--input-text-color);
+  }
+
+  .coupon-code-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    background-color: var(--icon-bg);
+    color: var(--icon-color);
+  }
+  .coupon-code-default {
+    transition: all .500s;
+  }
+
+  .coupon-code-copied {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(1em);
+    color: var(--input-text-color);
+    transition: all .500s;
+  }
+  .coupon-code-block.copied .coupon-code-default {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+  .coupon-code-block.copied .coupon-code-copied {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+{% endstylesheet %}
+
+{% javascript %}
+    document.querySelectorAll(".coupon-code-block .coupon-code-icon").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+        const parent = btn.closest(".coupon-code-block");
+        const text = parent.getAttribute("data-text");
+
+        parent.classList.add("copied");
+        setTimeout(() => {
+            parent.classList.remove("copied");
+        }, 1500);
+        });
+    });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:names.promotion_coupon_code",
+  "blocks": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "t:settings.coupon_code",
+      "default": "CODEWHERE"
+    },
+    {
+      "type": "header",
+      "content": "t:content.input"
+    },
+    {
+      "type": "color",
+      "id": "input_bg",
+      "label": "t:settings.background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "t:settings.color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "t:settings.border_color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:settings.icon_color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg",
+      "label": "t:settings.icon_background",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.promotion_coupon_code",
+      "category": "t:categories.custom"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,199 @@
+{%- liquid
+  assign sec_stts = section.settings
+
+  assign menu_tab = blocks | where: 'type', 'menu_tab'
+  if menu_tab.size > 0
+    assign has_menu_tab = true
+  else
+    assign has_menu_tab = false
+  endif
+
+  assign use_inverse_logo = false
+
+  if sec_stts.enable_transparent_header_home and template.name == 'index' and sec_stts.home_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  elsif sec_stts.enable_transparent_header_product and template.name == 'product' and sec_stts.product_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  elsif sec_stts.enable_transparent_header_collection and template.name == 'collection' and sec_stts.collection_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  endif
+
+  assign logo_block_style = '--header-logo-spacing-left: ' | append: sec_stts.logo_spacing_left | append: 'px; --header-logo-spacing-right: ' | append: sec_stts.logo_spacing_right | append: 'px;'
+
+  if use_inverse_logo
+    if settings.logo_inverse != blank
+      assign inverse_logo = settings.logo_inverse
+    else
+      assign inverse_logo = settings.logo
+    endif
+  endif
+
+  if sec_stts.logo_width == blank
+    assign logo_width = settings.logo_width
+    assign logo_width_mobile = settings.logo_width_mobile
+    assign logo_height = logo_width | divided_by: settings.logo.aspect_ratio | ceil
+    assign logo_height_mobile = logo_width_mobile | divided_by: settings.logo.aspect_ratio | ceil
+  else
+    assign logo_width = sec_stts.logo_width
+    assign logo_width_mobile = sec_stts.logo_width_mobile
+    assign logo_height = sec_stts.logo_width | divided_by: settings.logo.aspect_ratio | ceil
+    assign logo_height_mobile = sec_stts.logo_width_mobile | divided_by: settings.logo.aspect_ratio | ceil
+  endif
+
+  assign logo_style = '--header-logo-image-width: ' | append: logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: logo_height | append: 'px; --header-logo-image-height-mobile: ' | append: logo_height_mobile | append: 'px; --aspect-ratio: ' | append: settings.logo.aspect_ratio | append: ';'
+
+  assign inverse_logo_height = sec_stts.logo_width | divided_by: inverse_logo.aspect_ratio | ceil
+  assign inverse_logo_height_mobile = sec_stts.logo_width_mobile | divided_by: inverse_logo.aspect_ratio | ceil
+  assign inverse_logo_style = '--header-logo-image-width: ' | append: sec_stts.logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: sec_stts.logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: inverse_logo_height | append: 'px; --header-logo-image-height-mobile: ' | append: inverse_logo_height_mobile | append: 'px; --aspect-ratio: ' | append: inverse_logo.aspect_ratio | append: ';'
+-%}
+<div
+  class="
+    header-block header-logo grid__item block {{ class }}
+  "
+  {% unless preload_screen %}
+    data-main-logo
+  {% endunless %}
+  style="{{ logo_block_style }}"
+>
+  {% unless preload_screen %}
+    {%- if request.page_type == 'index'-%}
+      <h1 class="header__heading">
+    {%- endif -%}
+  {% endunless %}
+  <a href="{{ routes.root_url }}" class="header__heading-link inline-block link link--text focus-inset{% if has_menu_tab %} header-menu--tab{% endif %}" data-logo-page aria-label="{{ shop.name }}" rel="preload" as="image">
+    <div class="header__heading-logo-wrapper w-full inline-block relative" style="{{ logo_style }}">
+      {%- capture text_fallback -%}
+        <span class="h2">{{ shop.name }}</span>
+      {%- endcapture -%}
+      <span
+        class="header-logo__image-container header-logo__image-container--original"
+        data-testid="header-logo"
+      >
+        {% render 'image',
+          image: settings.logo,
+          class: 'header-logo__image',
+          height: block_settings.custom_height,
+          text_fallback: text_fallback,
+          style: logo_style,
+          preload: true
+        %}
+      </span>
+
+      {% if use_inverse_logo %}
+        <span
+          class="header-logo__image-container header-logo__image-container--inverse"
+          data-testid="header-logo-inverse"
+          style="{{ inverse_logo_style }}"
+        >
+          {% render 'image',
+            image: inverse_logo,
+            class: 'header-logo__image',
+            height: block_settings.custom_height,
+            text_fallback: text_fallback,
+            style: inverse_logo_style,
+            preload: true
+          %}
+        </span>
+      {% endif %}
+
+      {% if preload_screen %}
+        <div class="loading-bar overflow-hidden"></div>
+      {% endif %}
+    </div>
+  </a>
+  {% unless preload_screen %}
+    {%- if request.page_type == 'index'-%}
+      </h1>
+    {%- endif -%}
+  {%- endunless -%}
+</div>
+
+{%- stylesheet -%}
+  .header-logo {
+    padding-inline-start: var(--header-logo-spacing-left, 0px);
+    padding-inline-end: var(--header-logo-spacing-right, 0px);
+
+    @media screen and (max-width: 1024px) {
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+    }
+  }
+
+  .header-logo__image-container {
+    min-width: 5rem;
+    width: var(--header-logo-image-width);
+    height: var(--header-logo-image-height);
+    display: block;
+    transform-origin: left top;
+    transition: transform var(--animation-speed-slowest) var(--ease-out-cubic);
+    will-change: transform;
+
+    @media (min-width: 750px) and (max-width: 1024px) {
+      width: calc(var(--header-logo-image-width) * 0.6);
+      height: calc(var(--header-logo-image-height) * 0.6);
+    }
+
+    img,
+    svg {
+      width: 100%;
+      height: auto;
+      aspect-ratio: var(--aspect-ratio);
+      object-fit: contain;
+      display: block;
+    }
+
+    @media screen and (max-width: 1024px) {
+      transform-origin: center top;
+    }
+
+    @media screen and (max-width: 749px) {
+      transform-origin: center;
+    }
+
+    @media screen and (max-width: 749px) {
+      width: var(--header-logo-image-width-mobile);
+      height: var(--header-logo-image-height-mobile);
+    }
+
+    @media screen and (max-width: 375px) {
+      width: calc(var(--header-logo-image-width-mobile) * 0.5);
+      height: calc(var(--header-logo-image-height-mobile) * 0.5);
+    }
+  }
+  .header__column--center .header-logo__image-container {
+    transform-origin: center top;
+  }
+  .header__column--right .header-logo__image-container {
+    transform-origin: right top;
+  }
+  .header-logo__image-container--inverse {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .header-logo:has(.header-logo__image-container--inverse) .header-logo__image-container--original {
+    opacity: var(--header-logo-opacity, 1);
+  }
+  .header-logo__image-container--inverse {
+    opacity: var(--header-logo-inverse-opacity, 0);
+  }
+  .header[transparent]:has(.details--dropdown:is(:hover)) .header-logo:has(.header-logo__image-container--inverse),
+  .header[data-sticky-state="active"] .header-logo:has(.header-logo__image-container--inverse) {
+    --header-logo-opacity: 1;
+    --header-logo-inverse-opacity: 0;
+  }
+  .header.header--reveal-logo-on-sticky[data-scroll-direction='down'] .header__heading-logo-wrapper,
+  .header.header--reveal-logo-on-sticky[data-sticky-state='idle'] .header__heading-logo-wrapper,
+  .header.header--reveal-logo-on-sticky[data-sticky-state='active'] .header__heading-logo-wrapper {
+    height: calc(10rem / var(--aspect-ratio));
+  }
+  .header.header--reveal-logo-on-sticky[data-scroll-direction='down'] .header-logo__image-container,
+  .header.header--reveal-logo-on-sticky[data-sticky-state='idle'] .header-logo__image-container,
+  .header.header--reveal-logo-on-sticky[data-sticky-state='active'] .header-logo__image-container {
+    transform: scale(calc(10rem / var(--header-logo-image-width)));
+
+    @media screen and (max-width: 1024px) {
+      transform: scale(calc(6rem / var(--header-logo-image-width-mobile)));
+    }
+  }
+{%- endstylesheet -%}

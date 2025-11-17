@@ -1,0 +1,22 @@
+.list-menu--right {
+  right: 0;
+}
+
+.list-menu--disclosure {
+  position: absolute;
+  min-width: 100%;
+  width: 20rem;
+  border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+}
+
+.list-menu--disclosure.header__submenu-wrapper-grandchild {
+  opacity: var(--opacity-0);
+  visibility: hidden;
+  overflow: hidden;
+  color: var(--color-foreground);
+  background: var(--color-background);
+}
+
+.list-menu--disclosure:focus {
+  outline: none;
+}

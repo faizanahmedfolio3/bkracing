@@ -1,0 +1,375 @@
+{% doc %}
+  Renders a set of links for paginated results. Must be used within paginate tags.
+
+  Usage:
+  {% paginate results by 2 %}
+    {% render 'pagination', paginate: paginate, anchor: '#yourID', suffix: 'pagination' %}
+  {% endpaginate %}
+
+  Accepts:
+  - paginate: {Object}
+  - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% enddoc %}
+
+{% liquid
+  assign sec_stts = section.settings
+  assign pagination_type = sec_stts.pagination_type
+%}
+
+{% capture list_class %}
+  pagination__list list-unstyled flex flex-wrap
+{% endcapture %}
+
+{% capture item_class %}
+  pagination__item inline-flex items-center justify-center relative w-full p-0 decoration-none color-foreground border-style
+{% endcapture %}
+
+{% capture icons_style %}
+  {% if sec_stts.pagination_icons_type == 'chevron' %}
+    {{- 'icon-caret.svg' | inline_asset_content -}}
+  {% else %}
+    {{- 'icon-arrow.svg' | inline_asset_content -}}
+  {% endif %}
+{% endcapture %}
+
+{%- if paginate.parts.size > 0 -%}
+  <div
+    class="
+      pagination-wrapper
+      spacing-style
+      {{ pagination_type }}
+    "
+    style="
+      {% render 'spacing-style', settings: sec_stts, suffix: suffix %}
+      {% render 'border-override', settings: sec_stts %}
+      --pagination-alignment: {{ sec_stts.pagination_alignment | default: 'center' }};
+    "
+  >
+    <nav
+      class="pagination{% if pagination_type == 'infinite' %} hidden{% endif %}"
+      role="navigation"
+      aria-label="{{ 'content.pagination.label' | t }}"
+    >
+      <ul class="{{ list_class }}" role="list">
+        {%- if paginate.previous -%}
+          <li>
+            <a
+              href="{{ paginate.previous.url }}{{ anchor }}"
+              class="{{ item_class }} pagination__item--prev pagination__item-arrow link motion-reduce"
+              aria-label="{{ 'content.pagination.previous' | t }}"
+            >
+              <span class="visually-hidden">{{ 'content.pagination.button_previous' | t }}</span>
+              <span class="svg-wrapper">
+                {{ icons_style }}
+              </span>
+            </a>
+          </li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+          <li>
+            {%- if part.is_link -%}
+              <a
+                href="{{ part.url }}{{ anchor }}"
+                class="{{ item_class }} link"
+                aria-label="{{ 'content.pagination.page' | t: number: part.title }}"
+              >
+                {{- part.title -}}
+              </a>
+            {%- else -%}
+              {%- if part.title == paginate.current_page -%}
+                <a
+                  role="link"
+                  aria-disabled="true"
+                  class="{{ item_class }} pagination__item--current light"
+                  aria-current="page"
+                  aria-label="{{ 'content.pagination.page' | t: number: part.title }}"
+                >
+                  {{- part.title -}}
+                </a>
+              {%- else -%}
+                <span class="pagination__item">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+          <li>
+            <a
+              href="{{ paginate.next.url }}{{ anchor }}"
+              class="{{ item_class }} pagination__item--next pagination__item-arrow link motion-reduce"
+              aria-label="{{ 'content.pagination.next' | t }}"
+            >
+              <span class="visually-hidden">{{ 'content.pagination.button_next' | t }}</span>
+              <span class="svg-wrapper">
+                {{ icons_style }}
+              </span>
+            </a>
+          </li>
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    {% if sec_stts.pagination_type == 'infinite' %}
+      <!-- Infinite Scrolling Button -->
+      <infinite-scrolling class="infinite-scrolling-wrapper block center">
+        <div class="pagination-page-item pagination-page-total flex-center flex-wrap gap-2xs">
+          <span>{{ 'content.start_count' | t }}</span>
+          <span data-total-start>{{ paginate.current_offset | plus: 1 }}</span>
+          <span>-</span>
+          {%- if paginate.next -%}
+            <span data-total-end>{{ paginate.current_offset | plus: paginate.page_size }}</span>
+          {%- else -%}
+            <span data-total-end>{{ paginate.items }}</span>
+          {%- endif -%}
+          <span>{{ 'content.end_count' | t: count: paginate.items }}</span>
+          {%- if paginate.next -%}
+            {% liquid
+              assign pg_current = paginate.current_offset | plus: paginate.page_size
+              assign pg_total = paginate.items
+              assign total_progress = pg_current | times: 100 | divided_by: pg_total | append: '%'
+            %}
+          {%- else -%}
+            {%- assign total_progress = '100%' -%}
+          {%- endif -%}
+          <div class="progress-wrapper flex-center w-full">
+            <div class="pagination-total-progress w-full overflow-hidden">
+              <span style="width: {{ total_progress }}" class="pagination-total-item h-full block"></span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="button button--primary infinite-scrolling-btn"
+          data-infinite-scrolling
+          aria-label="{{ 'content.show_more' | t }}"
+        >
+          <span class="text">
+            {%- if paginate.next -%}
+              {{ 'content.show_more' | t }}
+            {%- else -%}
+              {{ 'content.no_more' | t }}
+            {%- endif -%}
+          </span>
+          {% render 'loading-spinner' %}
+        </button>
+      </infinite-scrolling>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .pagination__list {
+    justify-content: var(--pagination-alignment);
+  }
+
+  .pagination__list > li {
+    min-width: 4rem;
+  }
+
+  .pagination__list > li:not(:last-child) {
+    margin-right: 1.6rem;
+  }
+
+  .pagination__item {
+    display: inline-flex;
+    height: 4rem;
+    color: var(--pagination-color);
+    background-color: var(--pagination-active-color);
+    border: var(--border-width) solid var(--pagination-color);
+    font-size: var(--body-s-font-size);
+    box-shadow: rgba(var(--pagination-active-color-rgb) / 0.25) 0rem 0rem 0rem 0rem;
+    transition: background-color var(--animation-speed) var(--ease-out-smooth),
+      box-shadow var(--animation-speed) var(--ease-out-smooth);
+
+    &:has(.icon-arrow) {
+      padding: 0 1.3rem;
+    }
+  }
+
+  .pagination__item--current {
+    background: var(--pagination-color);
+    border-color: rgba(var(--pagination-active-color-rgb) / .25);
+    color: var(--pagination-active-color);
+    box-shadow: rgba(var(--pagination-active-color-rgb) / .25) 0 4px 4px;
+  }
+
+  .pagination__item:hover {
+    background: transparent;
+    border-color: var(--pagination-active-color);
+    box-shadow: rgba(var(--pagination-active-color-rgb) / 0.25) 0 4px 4px 0;
+  }
+
+  .pagination__item--next,
+  .pagination__item--prev {
+    transition: transform var(--animation-speed) var(--ease-out-smooth);
+
+    &:hover {
+      border-color: var(--pagination-active-color);
+    }
+  }
+
+  .pagination__list > li:has(.pagination__item--next) {
+    margin-right: 2rem;
+  }
+
+  .pagination__list > li:has(.pagination__item--prev) {
+    margin-left: 0.4rem;
+  }
+
+  .pagination__item-arrow .svg-wrapper {
+    &:has(.icon-arrow) {
+      width: 3.2rem;
+      height: 1.4rem;
+    }
+
+    &:has(.icon-caret) {
+      margin-right: -0.2rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .pagination__item--next {
+    .icon {
+      &.icon-caret {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &:hover .icon {
+      &.icon-caret {
+        transform: rotate(-90deg) scale(1.07);
+      }
+
+      &.icon-arrow {
+        transform: rotate(0deg) scale(1.07);
+      }
+    }
+  }
+
+  .pagination__item--prev {
+    .icon {
+      &.icon-caret {
+        transform: rotate(90deg);
+      }
+
+      &.icon-arrow {
+        transform: rotate(180deg);
+      }
+    }
+
+    &:hover .icon {
+      &.icon-caret {
+        transform: rotate(90deg) scale(1.07);
+      }
+
+      &.icon-arrow {
+        transform: rotate(180deg) scale(1.07);
+      }
+    }
+  }
+
+  .infinite-scrolling-wrapper {
+    margin-top: 2rem;
+  }
+
+  .infinite-scrolling-btn {
+    width: 100%;
+    max-width: 29rem;
+  }
+
+  .infinite-scrolling-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+
+    .text {
+      opacity: 0;
+    }
+  }
+
+  .pagination-wrapper.infinite-scrolling-active .pagination {
+    display: none;
+  }
+
+  .pagination-wrapper.infinite-scrolling-active .infinite-scrolling-wrapper {
+    display: block;
+  }
+
+  .product-grid.loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .product-grid__item {
+    animation: fadeInUp 0.5s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .pagination-page-item.pagination-page-total {
+    margin: var(--margin-sm) 0;
+    font-size: var(--body-s-font-size, 1.4rem);
+    color: var(--color-foreground, #000);
+  }
+
+  .progress-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  .pagination-total-progress {
+    height: 0.4rem;
+    background-color: var(--pagination-color);
+    border-radius: var(--style-border-radius-xs);
+    max-width: 16rem;
+  }
+
+  .pagination-total-item {
+    background-color: var(--pagination-active-color);
+    border-radius: var(--style-border-radius-xs);
+    transition: width 0.5s ease-in-out;
+  }
+
+  [data-total-start].updating,
+  [data-total-end].updating {
+    animation: numberUpdate 0.5s ease-in-out;
+  }
+
+  @keyframes numberUpdate {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+      color: var(--pagination-active-color);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .infinite-scrolling-btn {
+      min-width: 16rem;
+      padding: 1rem 2rem;
+      font-size: var(--font-size--xs);
+    }
+
+    .pagination-page-item.pagination-page-total {
+      gap: 0.3rem;
+      font-size: var(--font-size--xs);
+    }
+  }
+{% endstylesheet %}

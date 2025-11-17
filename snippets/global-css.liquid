@@ -1,0 +1,53 @@
+{{ 'vendor.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+
+{%- if settings.show_countdown -%}
+    <link rel="stylesheet" href="{{ 'component-card-countdown.css' | asset_url }}"  media="print" onload="this.media='all'">
+{%- endif -%}
+
+{%- if settings.show_calculator_free_shipping_message -%}
+    <link rel="stylesheet" href="{{ 'component-calculator-shipping.css' | asset_url }}"  media="print" onload="this.media='all'">
+{%- endif -%}
+
+{%- if settings.swatch != blank -%}
+    <link rel="stylesheet" href="{{ 'component-swatch.css' | asset_url }}"  media="print" onload="this.media='all'">
+{%- endif -%}
+
+{% comment %} {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+    <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}"  media="print" onload="this.media='all'">
+{%- endif -%} {% endcomment %}
+
+<link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}"  media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}"  media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}"  media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}"  media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="{{ 'animation.css' | asset_url }}"  media="print" onload="this.media='all'">
+
+{% comment %} Fallback for browsers that don't support preload {% endcomment %}
+<noscript>
+    <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}">
+
+    {%- if settings.show_countdown -%}
+        <link rel="stylesheet" href="{{ 'component-card-countdown.css' | asset_url }}">
+    {%- endif -%}
+    {%- if settings.show_calculator_free_shipping_message -%}
+        <link rel="stylesheet" href="{{ 'component-calculator-shipping.css' | asset_url }}">
+    {%- endif -%}
+    {%- if settings.swatch != blank -%}
+        <link rel="stylesheet" href="{{ 'component-swatch.css' | asset_url }}">
+    {%- endif -%}
+    {% comment %} {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+        <link rel="stylesheet" href="{{ 'component-localization-form.css' | asset_url }}">
+    {%- endif -%} {% endcomment %}
+    {%- if settings.predictive_search_enabled -%}
+        <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}">
+    {%- endif -%}
+    <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'animation.css' | asset_url }}">
+</noscript>

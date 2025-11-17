@@ -1,0 +1,502 @@
+
+<link rel="stylesheet" href="{{ 'component-recent-sale-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-recent-sale-popup.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% liquid
+  assign product_list = section.settings.product_list
+  assign time_to_show = section.settings.time_to_show
+  assign time_appear = section.settings.time_appear
+  assign random_hours = section.settings.random_hours
+  assign customer_list = section.settings.customer_list
+  assign location_list = section.settings.location_list
+
+  assign color_scheme = section.settings.color_scheme
+  assign other_text_color = section.settings.other_text_color
+  assign show_on_mobile = section.settings.show_on_mobile
+  assign max_width_desktop = section.settings.max_width_desktop
+
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_left = section.settings.padding_left
+  assign padding_right = section.settings.padding_right
+  assign popup_position = section.settings.popup_position
+%}
+
+{%- capture attr -%}
+style="
+{% if padding_left != 0 %}--pl:{{ padding_left }}px;{% endif %}
+{% if padding_top != 0 %}--pt:{{ padding_top }}px;{% endif %}
+{% if padding_bottom != 0 %}--pb:{{ padding_bottom }}px;{% endif %}
+{% if padding_right != 0 %}--pr:{{ padding_right }}px;{% endif %}
+  --duration-slide-in: {{ time_appear }}s;
+  --other-text-color: {{ other_text_color }};
+  --max-width-desktop: {{ max_width_desktop }}px;
+"
+{%- endcapture -%}
+
+<div class="fixed left-0 bottom-0 w-full z-100 duration-slide-in" style="--animation-slide-in: 0.3s;">
+  <recent-sale-popup
+    class="recent-sale-popup recent-sale-popup--{{ popup_position }} color-{{ color_scheme }}"
+    data-product-list="{{ product_list | json | escape }}"
+    data-time-to-show="{{ time_to_show }}"
+    data-time-appear="{{ time_appear }}"
+    data-random-hours="{{ random_hours }}"
+    data-customer-list="{{ customer_list }}"
+    data-location-list="{{ location_list }}"
+    data-show-on-mobile="{{ show_on_mobile }}"
+    {{ attr }}
+  >
+    <div class="recent-sale-popup__inner">
+      <a
+        href="#"
+        class="recent-sale-popup-close absolute top-0 right-0"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        <span class="svg-wrapper icon-close">
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </span>
+      </a>
+      <div class="recent-sale-popup-content flex" style="--gap-x: 12px;">
+        <div class="recent-sale-product-list hidden">
+          {% for product in product_list %}
+            <div class="recent-sale-product-item"
+              data-product-image="{{ product.featured_image | image_url: width: 75 }}"
+              data-product-title="{{ product.title | escape }}"
+              data-product-url="{{ product.url }}"
+              data-product-alt="{{ product.title | escape }}">
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="recent-sale-popup-content-media" style="--w: 75px; --h: 100px;">
+          <img class="random-product-image"
+            src="{{ product_list.first.featured_image | image_url: width: 75 }}"
+            alt="{{ product_list.first.title | escape | default: 'Product' }}"
+            width="75"
+            height="100">
+        </div>
+        <div class="recent-sale-popup-content-info flex flex-column justify-between w-full">
+          <span class="flex flex-column" style="--gap-y: 4px; --mb: 20px;">
+            <span><span class="font-bold random-customer">Customer Name</span> <span class="font-light other-text">recently bought</span> </span>
+            <span class="font-bold random-product-name">Product Name</span>
+            <span class="random-location">Location</span>
+          </span>
+
+          <span class="font-light random-time other-text">
+            Time
+          </span>
+        </div>
+        <div class="recent-sale-popup-content-view">
+          <a href="#" class="button">
+            <span class="svg-wrapper icon-view">
+              {{- 'icon-eye.svg' | inline_asset_content -}}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-sale-popup-progress">
+      <div class="recent-sale-popup-progress-bar"></div>
+    </div>
+  </recent-sale-popup>
+</div>
+
+<script defer="defer">
+  class RecentSalePopup extends HTMLElement {
+    constructor() {
+      super();
+
+      this.productList = this.getAttribute('data-product-list');
+      this.timeToShow = parseInt(this.getAttribute('data-time-to-show')) || 10;
+      this.timeAppear = parseInt(this.getAttribute('data-time-appear')) || 10;
+      this.randomHours = this.getAttribute('data-random-hours');
+      this.customerList = this.getAttribute('data-customer-list');
+      this.locationList = this.getAttribute('data-location-list');
+      this.showOnMobile = this.getAttribute('data-show-on-mobile');
+
+      this.isVisible = false;
+      this.currentTimeout = null;
+      this.progressInterval = null;
+
+      this.init();
+    }
+
+    init() {
+      // Parse arrays from pipe-separated strings
+      this.products = this.parseProductList();
+      this.customers = this.parseArray(this.customerList);
+      this.locations = this.parseArray(this.locationList);
+      this.timeOptions = this.parseArray(this.randomHours);
+
+      // Bind methods
+      this.showNotification = this.showNotification.bind(this);
+      this.hideNotification = this.hideNotification.bind(this);
+      this.closePopup = this.closePopup.bind(this);
+
+      // Add event listeners
+      this.addEventListener('click', this.closePopup);
+
+      // Start the notification cycle
+      if (window.innerWidth > 750) {
+        this.startNotificationCycle();
+      }
+
+      if (window.innerWidth <= 749 && this.showOnMobile) {
+        this.startNotificationCycle();
+      }
+    }
+
+    parseProductList() {
+      // First try to get products from the hidden product list in DOM
+      const productItems = this.querySelectorAll('.recent-sale-product-item');
+      if (productItems.length > 0) {
+        return Array.from(productItems).map(item => ({
+          title: item.getAttribute('data-product-title') || '',
+          url: item.getAttribute('data-product-url') || '#',
+          image: item.getAttribute('data-product-image') || '',
+          alt: item.getAttribute('data-product-alt') || ''
+        }));
+      }
+
+      // Fallback to JSON parsing if available
+      if (this.productList) {
+        try {
+          const products = JSON.parse(this.productList);
+          return products.map(product => ({
+            title: product.title || '',
+            url: product.url || '#',
+            image: product.featured_image || product.images?.[0] || '',
+            alt: product.title || ''
+          }));
+        } catch (e) {
+          console.warn('Could not parse product list:', e);
+        }
+      }
+
+      return [];
+    }
+
+    parseArray(str) {
+      if (!str) return [];
+
+      // Try different separators
+      let separator = '|';
+      if (str.includes(',')) separator = ',';
+      if (str.includes(';')) separator = ';';
+
+      // Split and clean up each item
+      const items = str.split(separator)
+        .map(item => item.trim())
+        .filter(item => item && item.length > 0);
+
+      return items;
+    }
+
+    getRandomItem(array) {
+      if (!array || array.length === 0) return '';
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    getRandomTime() {
+      const timeOption = this.getRandomItem(this.timeOptions);
+      if (!timeOption) return '2 minutes ago';
+
+      // Extract number and unit from time option
+      const match = timeOption.match(/(\d+)\s*(minute|hour|second)s?/i);
+      if (match) {
+        const value = parseInt(match[1]);
+        const unit = match[2].toLowerCase();
+        return `${value} ${unit}${value > 1 ? 's' : ''} ago`;
+      }
+
+      return timeOption;
+    }
+
+    updateNotificationContent() {
+      const product = this.getRandomItem(this.products);
+      const customer = this.getRandomItem(this.customers);
+      const location = this.getRandomItem(this.locations);
+      const time = this.getRandomTime();
+
+      // Update product image
+      const productImage = this.querySelector('.random-product-image');
+      if (productImage) {
+        if (product.image) {
+          productImage.src = product.image;
+          productImage.alt = product.alt || product.title || 'Product';
+        }
+      }
+
+      // Update product name and link
+      const productName = this.querySelector('.random-product-name');
+      const productLink = this.querySelector('.recent-sale-popup-content-view a');
+      if (productName) productName.textContent = product.title || 'Product';
+      if (productLink) productLink.href = product.url || '#';
+
+      // Update customer name
+      const customerElement = this.querySelector('.random-customer');
+      if (customerElement) {
+        // Fallback: if no customers parsed, use default names
+        const customerName = customer || this.getDefaultCustomer();
+        customerElement.textContent = customerName;
+      }
+
+      // Update location
+      const locationElement = this.querySelector('.random-location');
+      if (locationElement) {
+        const locationText = location ? `in ${location}` : 'in Unknown Location';
+        locationElement.textContent = locationText;
+      }
+
+      // Update time
+      const timeElement = this.querySelector('.random-time');
+      if (timeElement) timeElement.textContent = time;
+    }
+
+    getDefaultCustomer() {
+      const defaultCustomers = ['Someone'];
+      return defaultCustomers[Math.floor(Math.random() * defaultCustomers.length)];
+    }
+
+    showNotification() {
+      this.updateNotificationContent();
+      this.classList.add('is-show');
+      this.isVisible = true;
+
+      // Start progress bar animation
+      this.startProgressBar();
+
+      // Hide notification after time_appear
+      this.currentTimeout = setTimeout(() => {
+        this.hideNotification();
+      }, this.timeAppear * 1000);
+    }
+
+    hideNotification() {
+      this.classList.remove('is-show');
+      this.isVisible = false;
+
+      // Stop progress bar
+      this.stopProgressBar();
+
+      // Clear current timeout
+      if (this.currentTimeout) {
+        clearTimeout(this.currentTimeout);
+        this.currentTimeout = null;
+      }
+
+      // Show next notification after time_to_show
+      this.currentTimeout = setTimeout(() => {
+        this.showNotification();
+      }, this.timeToShow * 1000);
+    }
+
+    startProgressBar() {
+      const progressBar = this.querySelector('.recent-sale-popup-progress-bar');
+      if (!progressBar) return;
+
+      // Reset progress bar
+      progressBar.style.width = '0%';
+      progressBar.style.transition = 'none';
+
+      // Start animation
+      setTimeout(() => {
+        progressBar.style.transition = `width ${this.timeAppear}s linear`;
+        progressBar.style.width = '100%';
+      }, 10);
+    }
+
+    stopProgressBar() {
+      const progressBar = this.querySelector('.recent-sale-popup-progress-bar');
+      if (progressBar) {
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+      }
+    }
+
+    startNotificationCycle() {
+      // Show first notification after a short delay
+      setTimeout(() => {
+        this.showNotification();
+      }, this.timeToShow * 1000);
+    }
+
+    closePopup(event) {
+      // Only close if clicking the close button
+      if (event.target.closest('.recent-sale-popup-close')) {
+        event.preventDefault();
+        this.hideNotification();
+
+        // Stop the cycle
+        if (this.currentTimeout) {
+          clearTimeout(this.currentTimeout);
+          this.currentTimeout = null;
+        }
+      }
+    }
+
+    disconnectedCallback() {
+      // Clean up timeouts when element is removed
+      if (this.currentTimeout) {
+        clearTimeout(this.currentTimeout);
+      }
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval);
+      }
+    }
+  }
+
+  customElements.define('recent-sale-popup', RecentSalePopup);
+</script>
+
+{% schema %}
+{
+  "name": "t:names.recent_sale_popup",
+  "tag": "section",
+  "class": "section-recent-sale-popup",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["custom.popup"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "select",
+      "id": "popup_position",
+      "label": "t:settings.popup_position",
+      "options": [
+        { "value": "left", "label": "t:options.left" },
+        { "value": "right", "label": "t:options.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "t:settings.show_on_mobile",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "other_text_color",
+      "label": "t:settings.other_text_color",
+      "default": "#8D8D8D"
+    },
+    {
+      "type": "range",
+      "id": "max_width_desktop",
+      "label": "t:settings.max_width_desktop",
+      "default": 420,
+      "min": 400,
+      "max": 800,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "t:settings.product_list",
+      "limit": 10
+    },
+    {
+      "type": "range",
+      "id": "time_to_show",
+      "label": "t:settings.time_to_show",
+      "default": 10,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "info": "t:info.time_to_show_info"
+    },
+    {
+      "type": "range",
+      "id": "time_appear",
+      "label": "t:settings.time_appear",
+      "default": 10,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "info": "t:info.time_appear_info"
+    },
+    {
+      "type": "text",
+      "id": "random_hours",
+      "label": "t:settings.random_hours",
+      "default": "1 minutes | 15 minutes | 20 minutes | 25 minutes | 30 minutes"
+    },
+    {
+      "type": "text",
+      "id": "customer_list",
+      "label": "t:settings.customer_list",
+      "default": "Customer 1 | Customer 2 | Customer 3"
+    },
+    {
+      "type": "text",
+      "id": "location_list",
+      "label": "t:settings.location_list",
+      "default": "Location 1 | Location 2 | Location 3"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.recent_sale_popup"
+    }
+  ]
+}
+{% endschema %}

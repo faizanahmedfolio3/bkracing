@@ -1,0 +1,419 @@
+{% liquid
+  assign bl_stts = block.settings
+  assign movement_direction = bl_stts.movement_direction
+  assign gap_between_elements = bl_stts.gap_between_elements
+
+  assign marquee_type = bl_stts.marquee_type
+  if marquee_type == 'auto'
+    assign element_scroll = 'div'
+  else
+    assign element_scroll = 'marquee-scroll'
+  endif
+%}
+
+{%- capture attr_scroll -%}
+  data-speed="1" data-direction="{{ movement_direction | replace: 'normal', 'left' | replace: 'reverse', 'right' }}" data-parallax="1.5"
+{%- endcapture -%}
+
+<marquee-component
+  class="
+    block w-full overflow-hidden
+    spacing-style
+    gap-style
+    {% if bl_stts.inherit_color_scheme == false %}color-scheme-custom{% endif %}
+    {% if bl_stts.positions_type == 'floating' %}position-style{% endif %}
+  "
+  style="
+    --marquee-direction: {{ movement_direction }};
+    {%- render 'spacing-style', settings: bl_stts %};
+    {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
+    {% if bl_stts.inherit_color_scheme == false %}
+      {% render 'color-scheme-style', settings: bl_stts %}
+    {% endif %}
+    {%- if bl_stts.positions_type == 'floating' -%}{%- render 'position-style', settings: bl_stts -%}{%- endif -%}
+    {%- if bl_stts.transparent_background == true -%}background-color: transparent;{%- endif -%}
+  "
+  data-speed-factor="{{ bl_stts.speed }}"
+  data-movement-direction="{{ movement_direction }}"
+  {{ block.shopify_attributes }}
+>
+  <{{element_scroll }} class="marquee__wrapper flex w-fit whitespace-nowrap" {% if marquee_type == 'scroll' %}{{ attr_scroll }}{% endif %} >
+    <div class="marquee__content flex">
+      <div class="marquee__repeated-items flex-center">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </{{element_scroll }}>
+</marquee-component>
+
+{% stylesheet %}
+  marquee-component {
+    background: var(--color-background);
+
+    &.position-style {
+      position: absolute;
+      top: var(--position-vertical);
+      left: var(--position-horizontal);
+      transform: translate(-50%, -50%);
+      z-index: 1;
+
+      @media screen and (max-width: 749px) {
+        top: var(--position-vertical-mobile);
+        left: var(--position-horizontal-mobile);
+      }
+    }
+  }
+
+  .marquee__wrapper {
+    display: flex;
+    gap: var(--marquee-gap);
+    width: fit-content;
+    white-space: nowrap;
+  }
+
+  .marquee__content {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+  }
+
+  .marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
+    white-space: nowrap;
+  }
+
+  .marquee__content .marquee__repeated-items * {
+    max-width: none;
+  }
+
+  .marquee__repeated-items {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee__repeated-items > * {
+    align-content: center;
+  }
+
+  .hero__content-wrapper.layout-panel-flex--column marquee-component {
+    --margin-inline: var(--full-page-margin-inline-offset);
+
+    width: -webkit-fill-available;
+    min-height: max-content;
+  }
+
+  .marquee__content .marquee__repeated-items svg{
+    max-width: 200px;
+    height: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .marquee__content .marquee__repeated-items svg{
+      max-width: 400px;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    marquee-scroll.marquee__wrapper {
+      width: 100%;
+    }
+    
+    .marquee__content .marquee__repeated-items svg{
+      max-width: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    marquee-scroll .marquee__content,
+    marquee-component:not([data-disabled]):has(:not(marquee-scroll)) .marquee__wrapper {
+      animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
+      will-change: transform;
+    }
+
+    marquee-scroll .marquee__content {
+      --percent: -100%;
+      width: max-content;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (max-width: 749px) {
+    marquee-scroll .marquee__content,
+    marquee-component:not([data-disabled]):has(:not(marquee-scroll)) .marquee__wrapper {
+      animation-duration: calc(var(--marquee-speed) * 3);
+    }
+  }
+
+
+  @keyframes marquee-motion {
+
+    to {
+      transform: translate3d(calc(var(--percent, -50%) - (var(--marquee-gap) / 2)), 0, 0);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.marquee",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "logo"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "movement_direction",
+      "label": "t:settings.motion_direction",
+      "options": [
+        {
+          "value": "reverse",
+          "label": "t:options.forward"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.reverse"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "gap_between_elements",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "scheme_background",
+      "label": "t:settings.background",
+      "default": "#FFFFFF",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color_background",
+      "id": "scheme_background_gradient",
+      "label": "t:settings.background_gradient",
+      "info": "t:info.background_gradient_info",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_foreground_heading",
+      "label": "t:settings.headings",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_foreground",
+      "label": "t:settings.text",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_primary",
+      "label": "t:settings.primary_color",
+      "default": "#000F9F",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_primary_hover",
+      "label": "t:settings.primary_hover_color",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_border",
+      "label": "t:settings.borders",
+      "default": "#E6E6E6",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "color",
+      "id": "scheme_shadow",
+      "label": "t:settings.shadow_color",
+      "default": "#000000",
+      "alpha": true,
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_background",
+      "label": "t:settings.transparent_background",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "positions_type",
+      "label": "t:settings.positions_type",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "floating",
+          "label": "t:options.floating"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "range",
+      "id": "position-horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.horizontal_position",
+      "default": 50,
+      "visible_if": "{{ block.settings.positions_type == 'floating' }}"
+    },
+    {
+      "type": "range",
+      "id": "position-vertical",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.vertical_position",
+      "default": 0,
+      "visible_if": "{{ block.settings.positions_type == 'floating' }}"
+    },
+    {
+      "type": "range",
+      "id": "position-horizontal-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.mobile_horizontal_position",
+      "default": 50,
+      "visible_if": "{{ block.settings.positions_type == 'floating' }}"
+    },
+    {
+      "type": "range",
+      "id": "position-vertical-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.mobile_vertical_position",
+      "default": 0,
+      "visible_if": "{{ block.settings.positions_type == 'floating' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.animations"
+    },
+    {
+      "type": "select",
+      "id": "marquee_type",
+      "label": "t:settings.type",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "scroll",
+          "label": "t:options.scroll"
+        }
+      ],
+      "default": "scroll"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "label": "t:settings.speed",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.marquee",
+      "category": "t:categories.decorative",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We make things that work better and last longer.</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "var(--font-size--h2)",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "nowrap",
+            "width": "fit-content"
+          }
+        }
+      },
+      "block_order": ["text"]
+    }
+  ]
+}
+{% endschema %}

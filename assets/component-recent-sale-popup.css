@@ -1,0 +1,71 @@
+.recent-sale-popup {
+  position: absolute;
+  bottom: 100%;
+  margin-left: 0;
+  margin-bottom: calc(var(--sticky-atc-height) + 30px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  max-width: var(--max-width-desktop);
+  width: 100%;
+  border: 0.5px solid #F4F4F4;
+}
+
+@media (min-width: 749px) {
+  .recent-sale-popup--left {
+    left: 30px;
+  }
+
+  .recent-sale-popup--right {
+    right: 30px;
+  }
+}
+
+@media (max-width: 749px) {
+  .recent-sale-popup {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+  }
+}
+
+.recent-sale-popup.is-show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.recent-sale-popup-content-view {
+  align-self: flex-end;
+}
+
+.recent-sale-popup-close {
+  right: var(--pr);
+  top: var(--pt);
+}
+
+.recent-sale-popup-progress {
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.recent-sale-popup-progress .recent-sale-popup-progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: var(--color-foreground);
+  transition: width 1s ease;
+}
+
+.other-text {
+  color: var(--other-text-color);
+}
+
+.recent-sale-popup-content-media {
+  min-width: var(--w);
+  height: var(--h);
+}

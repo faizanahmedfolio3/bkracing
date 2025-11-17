@@ -1,0 +1,60 @@
+{% liquid
+    if current_variant.inventory_management and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= productMaxStock
+        assign checkShowHotStock = true
+    else
+        assign checkShowHotStock = false
+    endif
+
+    assign progressBarWidth = current_variant.inventory_quantity | times: 100 | divided_by: productMaxStock
+
+    assign type_preset = type_preset
+    assign progress_bar_height = progress_bar_height
+%}
+
+{% capture attr %}
+    style="--progress-bar-width: {{ progressBarWidth }}%; --progress-bar-height: {{ progress_bar_height }}; --progress-bar-color: {{ progress_bar_color }}; --progress-bar-color_2: {{ progress_bar_color_2 }}; --hot-stock-text-color: {{ text_color }};"
+{% endcapture %}
+
+{% stylesheet %}
+    .hotStock-progress {
+        max-width: 300px;
+        height: var(--progress-bar-height);
+        background-color: #f8f8f8;
+        text-align: left;
+        margin: 8px 0 0;
+        display: block;
+        overflow: hidden;
+    }
+
+    .hotStock-text {
+        color: var(--hot-stock-text-color);
+    }
+
+    .hotStock-progress-item {
+        width: var(--progress-bar-width);
+        height: 100%;
+        display: block;
+        /* animation: progressBar 1s ease-in-out; */
+        background: linear-gradient(45deg, var(--progress-bar-color) 0%, var(--progress-bar-color_2) 100%);
+        transition: width ease 1s;
+    }
+
+    @keyframes progressBar {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: var(--progress-bar-width);
+        }
+    }
+{% endstylesheet %}
+
+<div class="productView-hotStock{% if checkShowHotStock == false %} hidden{% endif %}" data-hot-stock="{{ productMaxStock }}" {{variantCount}} {% if variantCount < 2 %} data-current-inventory="{{ current_variant.inventory_quantity }}"{% endif %} {{ attr }}>
+    <span class="hotStock-text {{ type_preset }}">
+        {{ 'products.product.hot_stock' | t : inventory: current_variant.inventory_quantity }}
+    </span>
+    <div class="hotStock-progress">
+        <span class="hotStock-progress-item"></span>
+    </div>
+</div>

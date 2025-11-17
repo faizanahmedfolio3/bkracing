@@ -1,0 +1,290 @@
+{% doc %}
+  Intended for use in a block similar to the button block.
+
+  @param {string} link - link to render
+  @param {object} [block] - The block
+  @param {string} [style_class] - The style class
+  @param {string} [link_underline] - The link underline
+  @param {string} [link_hover_underline] - The link hover underline
+  @param {string} [link_reveal] - The link reveal
+  @param {string} [open_in_new_tab] - The open in new tab
+  @param {string} [shopify_attributes] - The shopify attributes
+  @param {string} [label] - The label
+  @param {string} [button_style] - The button style
+  @param {string} [class] - The class
+  @param {string} [style] - The style
+  @param {string} [icon] - The icon
+  @param {string} [wrap] - The wrap
+  @param {string} [font_style] - The font style
+
+  @example
+  {% render 'button', link: '/collections/all' %}
+{% enddoc %}
+
+{%- liquid
+  assign link = link | default: block.settings.link
+  assign style_class = style_class | default: block.settings.style_class
+  assign link_underline = link_underline | default: block.settings.link_underline
+  assign link_hover_underline = link_hover_underline | default: block.settings.link_hover_underline
+  assign link_reveal = link_reveal | default: block.settings.link_reveal
+  assign open_in_new_tab = open_in_new_tab | default: block.settings.open_in_new_tab
+  assign shopify_attributes = shopify_attributes | default: block.shopify_attributes
+  assign label = label | default: block.settings.label
+  assign button_style = button_style | default: block.settings.button_style
+  assign wrap = wrap | default: block.settings.wrap
+  assign font_style = font_style | default: block.settings.font_style
+-%}
+<a
+  {% if link == blank %}
+    role="link"
+    aria-disabled="true"
+  {% else %}
+    href="{{ link }}"
+  {% endif %}
+  class="
+    {{ class }}
+    size-style
+    {{ style_class }}
+    {% if link_reveal and style_class == 'link' %}link--reveal{% endif %}
+    {% if link_underline and style_class == 'link' %}link--underline{% endif %}
+    {% if link_hover_underline and style_class == 'link' and link_underline == false %}link--hover-underline{% endif %}
+    {% if button_style == 'outline' %}button--outline{% endif %}
+    {{ style_class }}--{{ block.id }}
+  "
+  style="
+    {% render 'size-style', settings: block.settings %}
+    {% render 'button-style', settings: block.settings %}
+    {{ style }}
+    {% if style_class == 'link' %}
+      {% render 'typography-style', settings: block.settings, button_link: true, font_style: font_style %}
+    {% endif %}
+  "
+  {%- if open_in_new_tab -%}
+    target="_blank"
+    rel="noopener noreferrer"
+  {%- endif -%}
+  {{ shopify_attributes }}
+  {% if link_reveal and style_class == 'link' %}
+    data-text="{{ label }}"
+  {% endif %}
+  {{ shopify_attributes }}
+>
+  {%- if style_class == 'button' -%}
+    <span class="button-overflow relative overflow-hidden" data-button-text="{{ label }}">
+      <span class="button-text-main inline-block relative z-1">
+        {{ label }}
+      </span>
+    </span>
+  {%- else -%}
+    <span class="text">{{ label }}</span>
+  {%- endif -%}
+  {% if link_reveal and style_class == 'link' %}
+    <span class="text-mask link none{% if link_hover_underline and style_class == 'link' and link_underline == false %} link--hover-underline{% endif %}" data-text="{{ label }}">{{ label }}</span>
+  {% endif %}
+  {% if icon %}
+    {{ icon }}
+  {% endif %}
+</a>
+
+{% stylesheet %}
+  .button.size-style {
+    height: auto;
+  }
+
+  .button.button--outline,
+  .button-secondary.button--outline {
+    --border-outline-color: var(--button-color);
+    background-color: transparent;
+    border: 1px solid var(--border-outline-color);
+  }
+
+  .button:not(.button-unstyled) {
+    --color-effect-background: var(--color-primary-button-hover-background);
+    transition: color var(--animation-speed) var(--animation-easing),
+      box-shadow var(--animation-speed) var(--animation-easing),
+      background-color var(--animation-speed) var(--animation-easing),
+      transform var(--animation-speed) var(--animation-easing);
+
+    &:not(.deferred-media__poster, .prevent-active):active {
+      transform: scale(0.9);
+    }
+  }
+
+  .button-hover--effect .button-secondary:not(.button-unstyled, .header__icon, [disabled]) {
+    --color-effect-background: var(--color-secondary-button-hover-background);
+  }
+
+  .button-hover--effect .button:not(.button-unstyled, .header__icon, .button--outline) {
+    background-color: var(--color-primary-button-background);
+  }
+
+  .button-hover--effect .button-secondary:not(.button-unstyled, .header__icon, .button--outline) {
+    background-color: var(--color-secondary-button-background);
+  }
+
+  .button-hover--effect .button-secondary:not(.button-unstyled, .header__icon, [disabled]),
+  .button-hover--effect .button:not(.button-unstyled, .header__icon, [disabled]) {
+    --tss: transform var(--animation-slowest-smooth), opacity var(--animation-slowest-smooth);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    .button-text-main {
+      transition: var(--tss);
+    }
+
+    .button-overflow {
+      &:after {
+        content: attr(data-button-text);
+        transform: translateY(100%);
+        transition: var(--tss);
+        display: inline-block;
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: calc(100% + (max(0.2rem, var(--button-border-width)) * 2));
+      background-color: var(--color-effect-background);
+      backface-visibility: hidden;
+      will-change: transform;
+      transform: translate(-50%, -50%) rotate3d(0, 0, 2, 20deg) translate3d(-1.2em, 105%, 0);
+      transform-origin: 0% 100%;
+      transition: var(--tss);
+      z-index: -1;
+    }
+
+    &:hover {
+      .button-overflow:after {
+        transform: translateY(0);
+      }
+      .button-text-main {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      &:after {
+        transform: translate(-50%, -50%) rotate3d(0, 0, 1, 0) translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  .link {
+    cursor: pointer;
+    height: auto;
+    font-size: var(--button-font-size-link, var(--font-size--sm));
+    font-weight: var(--button-font-weight-link, var(--font-body--weight));
+    font-family: inherit;
+    text-decoration: none;
+    text-wrap: var(--text-wrap);
+    text-transform: var(--text-transform);
+    border: none;
+    box-shadow: none;
+
+    &[style*='--button-font-size-link'] {
+      font-size: var(--button-font-size-link);
+    }
+
+    @media screen and (min-width: 1025px) {
+      &:hover {
+        color: var(--color-primary-hover);
+      }
+    }
+  }
+
+  .link--text {
+    color: var(--color-foreground);
+
+    @media screen and (min-width: 1025px) {
+      &:hover{
+        color: rgb(var(--color-foreground-rgb) / var(--opacity-75));
+      }
+    }
+  }
+
+  .link--hover-underline .text,
+  .link--hover-underline:not(:has(.text)) {
+    transition: background-size var(--animation-values-slow), opacity var(--animation-speed)  var(--animation-delay, 0s) var(--animation-easing), color var(--animation-speed) var(--animation-delay, 0s) var(--animation-easing);
+  }
+
+  .link--underline:not(:has(.text)),
+  .link--underline .text,
+  .link--hover-underline .text,
+  .link--hover-underline:not(:has(.text)) {
+    --line-link-gap: min(100%, 1.35em);
+    text-decoration: none;
+  }
+
+  .link--underline:not(:has(.text)),
+  .link--underline .text {
+    background: linear-gradient(to right, var(--link-underline-color, currentColor), var(--link-underline-color, currentColor)) 0 var(--line-link-gap) / 0 1px no-repeat;
+    background-position-y: bottom;
+    background-position-x: left;
+    background-size: 100% 1px;
+    transition: background-size var(--animation-values-slow), opacity var(--animation-speed)  var(--animation-delay, 0s) var(--animation-easing), color var(--animation-speed) var(--animation-delay, 0s) var(--animation-easing);
+  }
+
+  .link--hover-underline .text,
+  .link--hover-underline:not(:has(.text)) {
+    background: linear-gradient(to left, var(--link-underline-color, currentColor), var(--link-underline-color, currentColor)) 0 var(--line-link-gap) / 0 1px no-repeat;
+    background-position-y: bottom;
+    background-position-x: right;
+    display: inline;
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .instagram-item .link--reveal,
+    .group-block-content .link--reveal {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      color: transparent !important;
+
+      .text-mask {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        color: var(--color-primary);
+        transition: transform var(--animation-slowest-smooth);
+        transform: translateY(100%);
+      }
+    }
+
+    .group-block-content:hover .link--reveal .text-mask,
+    .instagram-item:hover .link--reveal .text-mask {
+      transform: translateY(0);
+    }
+
+    .group-block-content .link--reveal.link--underline,
+    .instagram-item .link--reveal.link--underline {
+      padding-bottom: var(--offset-underline);
+      .text-mask {
+        text-decoration: underline;
+        text-underline-offset: var(--offset-underline);
+      }
+    }
+
+    .link--hover-underline:hover .text,
+    .link--hover-underline:not(:has(.text)):hover {
+      background-position-x: left;
+      background-size: 100% 1px;
+    }
+
+    .link--underline:hover .text,
+    .link--underline:not(:has(.text)):hover {
+      background-position-x: right;
+      background-size: 0% 1px;
+    }
+  }
+{% endstylesheet %}

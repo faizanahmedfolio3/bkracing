@@ -1,0 +1,649 @@
+{% comment %} REWRITE WITH TWO-SPACE INDENTATION {% endcomment %}
+{%- liquid
+  assign sec_stts = section.settings
+  assign default_layout_desktop = sec_stts.columns_desktop
+  assign section_width = sec_stts.section_width
+  assign color_scheme = sec_stts.color_scheme
+-%}
+
+<div
+  data-section-id="{{ section.id }}"
+  data-section-type="wishlist"
+  id="WishlistSection-{{ section.id }}"
+  data-section="{{ section.id }}"
+  class="section section-{{ section_width }} color-{{ color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <div class="wishlist-container">
+    <div class="section-global__header">
+      {%- content_for 'blocks'-%}
+    </div>
+    <div class="page-margin wishlist-content">
+      <div class="wishlist-table-wrapper">
+        <div class="product-listing" data-wishlist-container>
+          {% render 'switcher-grid',
+            columns_desktop: default_layout_desktop,
+            filter_type: 'horizontal',
+            style: 'style-1',
+            enable_hover_reveal: true,
+            heading_label_case: 'uppercase'
+          %}
+          <wishlist-view class="wishlist-items-container product-grid-container">
+            <div
+              class="wishlist-items-display grid-layout product-grid product-grid--{{ section.id }} product-grid--grid"
+              data-wishlist-items-grid-display
+              data-view="{{ default_layout_desktop }}"
+            ></div>
+          </wishlist-view>
+        </div>
+      </div>
+      <div
+        class="wishlist-footer pagination-right"
+        data-wishlist-footer
+      >
+        <a
+          class="wishlist-share link link-underline"
+          href="mailto:?subject= {{ page.title | strip_html }}&amp;body="
+          data-wishlist-share
+        >
+          <div class="mail-icon-container">
+            <svg
+              class="mail-icon"
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="none"
+            >
+              {%- render 'icon', icon: 'mail' -%}
+            </svg>
+          </div>
+          <span class="text">{{ 'content.share_wishlist_via_email' | t }}</span>
+        </a>
+        <ul class="pagination__list list-unstyled" role="list" id="wishlist-paginate"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- style -%}
+  .wishlist-content-text {
+    margin-bottom: 2rem;
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] {
+    --product-grid-columns-desktop: repeat(1, 1fr);
+    --card-grid-per-row: 1;
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .card {
+    --width-block-media: 40%;
+    display: grid;
+    grid-template-columns: var(--width-block-media) 1fr;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .card {
+      --width-block-media: 11rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .card {
+      --width-block-media: 30%;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .card {
+      --width-block-media: 20%;
+    }
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .product-description__collection {
+    display: block;
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='1'] .card--block-media {
+    grid-column: 1;
+    grid-row: 1 / span calc(var(--total-blocks) - 1);
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='2'] {
+    --product-grid-columns-desktop: repeat(2, 1fr);
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='3'] {
+    --product-grid-columns-desktop: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='3'] {
+      --product-grid-columns-desktop: repeat(2, 1fr);
+    }
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='4'] {
+    --product-grid-columns-desktop: repeat(4, 1fr);
+  }
+
+  @media screen and (max-width: 989px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='4'] {
+      --product-grid-columns-desktop: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='4'] {
+      --product-grid-columns-desktop: repeat(2, 1fr);
+    }
+  }
+
+  .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='5'] {
+    --product-grid-columns-desktop: repeat(5, 1fr);
+  }
+
+  @media screen and (max-width: 1599px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='5'] {
+      --product-grid-columns-desktop: repeat(4, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='5'] {
+      --product-grid-columns-desktop: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-grid--{{ section.id }}:is(.product-grid--grid)[data-view='5'] {
+      --product-grid-columns-desktop: repeat(2, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+{% javascript %}
+  class WishlistView extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.gridViewContainer = this.querySelector('[data-wishlist-items-grid-display]');
+      this.wishlistPaginateContainer = document.getElementById('wishlist-paginate');
+      this.viewCols = [...this.querySelectorAll('[data-col]')];
+
+      this.wishlistContainer = this.closest('[data-wishlist-container]');
+      this.wishlistFooter = document.querySelector('[data-wishlist-footer]');
+
+      this.viewCols.forEach(viewCol => {
+        viewCol.addEventListener('click', this.onViewColClick.bind(this));
+      });
+
+      window.addEventListener('resize', theme.utils.rafThrottle(this.onResize.bind(this)));
+
+      this.initWishlistPage();
+    }
+
+    getMaxColOnSize() {
+      const availableViewCols = this.viewCols.filter(view => {
+        return getComputedStyle(view, null).getPropertyValue('display') === 'inline-block';
+      }).map(view => Number(view.dataset.col));
+
+      return availableViewCols[availableViewCols.length - 1];
+    }
+
+    onResize() {
+      const selectedColEl = this.querySelector('[data-col].active');
+      if (!selectedColEl) return;
+      const selectedCol = Number(selectedColEl.dataset.col);
+      const maxColNum = this.getMaxColOnSize();
+
+      if (selectedCol > maxColNum) {
+        const target = this.viewCols.find(viewCol => Number(viewCol.dataset.col) === maxColNum);
+        if (target) target.click();
+      }
+    }
+
+    onViewColClick(event) {
+      const viewCol = event.target;
+      const col = Number(viewCol.dataset.col);
+
+      this.switchViewListGrid(col === 1);
+      this.setPaginationAndHeadingView(col === 1);
+      this.paginationForList(col === 1);
+      this.setGridColumns(col);
+      this.setActiveViewCol(viewCol);
+    }
+
+    switchViewListGrid(isList) {
+      if (isList) {
+        this.gridViewContainer.classList.add('productList');
+        return;
+      }
+
+      this.gridViewContainer.classList.remove('productList');
+    }
+
+    setGridColumns(col) {
+      this.gridViewContainer.style.setProperty('--grid-columns', col);
+    }
+
+    setActiveViewCol(colElement) {
+      this.viewCols.forEach(col => col.classList.remove('active'));
+      colElement.classList.add('active');
+    }
+
+    setPaginationAndHeadingView(isList) {
+      if (isList) {
+        this.wishlistPaginateContainer.style.display = 'flex';
+        return;
+      }
+
+      this.wishlistPaginateContainer.style.display = 'none';
+    }
+
+    paginationForList(isList) {
+      const items = this.gridViewContainer.querySelectorAll('.product');
+      const currentPage = Number(this.wishlistPaginateContainer.dataset.currentPage);
+
+      if (isList && currentPage) {
+        items.forEach((item, index) => {
+          if (index >= (currentPage - 1) * 3 && index < currentPage * 3) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      } else {
+        items.forEach((item) => {
+          item.style.display = '';
+        });
+      }
+    }
+
+    async initWishlistPage() {
+      if (typeof(Storage) !== 'undefined') {
+        const wishlistList = localStorage.getItem('wishlistItem') ? JSON.parse(localStorage.getItem('wishlistItem')) : [];
+
+        if (wishlistList.length > 0) {
+          try {
+            await Promise.all(wishlistList.map((handle, index) => this.setProductForWishlistPage(handle, index, wishlistList.length)));
+            this.calculateCard06Padding();
+
+            this.gridViewContainer.classList.add('is-loaded');
+            this.wishlistPagination();
+            this.setDefaultLayout();
+
+            document.addEventListener('update:pagination', this.wishlistPagination.bind(this));
+            document.addEventListener('add:wishlist-item', async (event) => {
+              const handle = event.detail.handle;
+              await this.setProductForWishlistPage(handle);
+            });
+            document.addEventListener('remove:wishlist-item', (event) => {
+              const handle = event.detail?.handle;
+              const productId = event.detail?.productId;
+              this.removeItemFromWishlistPage(handle, productId);
+            });
+          } catch(err) {
+            console.error(err);
+          }
+        } else {
+          if (this.wishlistContainer) {
+            this.wishlistContainer.classList.add('is-empty');
+            this.wishlistContainer.innerHTML = `
+              <div class="page-margin wishlist-content-empty center">
+                <span class="wishlist-content-text block">${window.wishlist.empty}</span>
+                <div class="wishlist-content-actions">
+                  <a class="button" href="${window.routes.collection_all}">
+                    ${window.wishlist.continue_shopping}
+                  </a>
+                </div>
+              </div>
+            `;
+          }
+
+          if (this.wishlistFooter) this.wishlistFooter.style.display = 'none';
+        }
+      } else {
+        alert('Sorry! No web storage support..');
+      }
+    }
+
+    setDefaultLayout() {
+      const defaultDesktopCol = parseInt(this.dataset.defaultDesktopCol);
+      const maxCol = this.getMaxColOnSize();
+      const defaultCol = (defaultDesktopCol <= maxCol) ? defaultDesktopCol : maxCol;
+
+      const targetViewCol = this.viewCols.find(viewCol => parseInt(viewCol.dataset.col) === defaultCol );
+      if (targetViewCol) {
+        targetViewCol.click();
+      }
+    }
+
+    async setProductForWishlistPage(handle, index, wishlistListLength) {
+      try {
+
+        const res = await fetch(`${window.routes.shop_origin}/products/${handle}?view=block_wishlist_card`);
+        const data = await res.text();
+        const parser = new DOMParser();
+
+        const parsedDoc = parser.parseFromString(data, 'text/html');
+        const productHTML = parsedDoc.querySelectorAll('#MainContent .card--block')[0];
+
+        this.gridViewContainer.appendChild(productHTML);
+        productHTML.dataset.productHandle = handle;
+
+        this.updateProductForWishlistPage();
+
+        const item = this.wishlistContainer.querySelector(`.card--block[data-product-handle="${handle}"]`);
+
+        if (item != null) {
+          item.classList.add('wishlist-added');
+          item.querySelector('.text').textContent = window.wishlist.remove;
+          item.classList.add('is-in-grid');
+          productHTML.dataset.wishlistAdded = `wishlist-${item.dataset.productId}`;
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    updateProductForWishlistPage() {
+      const sectionFetcher = document.querySelector('section-fetcher');
+
+      if (sectionFetcher && typeof sectionFetcher.initialize === 'function') {
+        sectionFetcher.initialize();
+      } else {
+        console.error('WishlistView: No section fetcher component found or initialize method not available');
+      }
+    }
+
+    wishlistPagination() {
+      const wishlistList = localStorage.getItem('wishlistItem') ? JSON.parse(localStorage.getItem('wishlistItem')) : [];
+
+      this.wishlistPaginateContainer.setAttribute('data-current-page', 1);
+      while (this.wishlistPaginateContainer.firstChild) {
+        this.wishlistPaginateContainer.removeChild(this.wishlistPaginateContainer.firstChild);
+      }
+
+      if (!this.gridViewContainer.classList.contains('productList')) return;
+      this.gridViewContainer.classList.remove('is-loaded');
+
+      this.totalPages = Math.ceil(wishlistList.filter(item => item != null).length / 3);
+
+      if (this.totalPages <= 1) {
+        [...this.gridViewContainer.children].forEach(child => {
+          child.style.display = 'block';
+        });
+        this.gridViewContainer.classList.add('is-loaded');
+        return;
+      }
+
+      this.gridViewContainer.classList.add('is-loaded');
+    }
+
+    removeItemFromWishlistPage(handle, productId) {
+      let productElement = null;
+
+      if (handle) {
+        productElement = this.gridViewContainer.querySelector(`[data-product-handle="${handle}"]`);
+      }
+
+      if (!productElement && productId) {
+        productElement = this.gridViewContainer.querySelector(`[data-wishlist-added="wishlist-${productId}"]`);
+      }
+
+      if (productElement) {
+        productElement.remove();
+      }
+
+      const wishlistList = localStorage.getItem('wishlistItem') ? JSON.parse(localStorage.getItem('wishlistItem')) : [];
+      const remainingItems = this.gridViewContainer.querySelectorAll('[data-product-handle]');
+
+      if (wishlistList.length === 0 || remainingItems.length === 0) {
+        if (this.wishlistContainer) {
+          this.wishlistContainer.classList.add('is-empty');
+          this.wishlistContainer.innerHTML = `
+            <div class="page-margin wishlist-content-empty center">
+              <span class="wishlist-content-text block">${window.wishlist.empty}</span>
+              <div class="wishlist-content-actions">
+                <a class="button" href="${window.routes.collection_all}">
+                  ${window.wishlist.continue_shopping}
+                </a>
+              </div>
+            </div>
+          `;
+        }
+
+        if (this.wishlistFooter) {
+          this.wishlistFooter.style.display = 'none';
+        }
+      } else {
+        this.wishlistPagination();
+        const updateWishlistMailEvent = new CustomEvent('update:wishlist-mail', {
+          bubbles: true
+        });
+        document.dispatchEvent(updateWishlistMailEvent);
+
+        if (this.gridViewContainer.classList.contains('productList')) {
+          const currentPage = Number(this.wishlistPaginateContainer.dataset.currentPage) || 1;
+          this.paginationForList(true);
+        }
+      }
+    }
+
+    paginateToPages(nextPageNumber = null) {
+      const children = [...this.gridViewContainer.children];
+
+      if (nextPageNumber == null) {
+        children.forEach((element, index) => {
+          if (index >= 3) {
+            element.style.display = 'none';
+          }
+          else {
+            element.style.display = 'block';
+          }
+        });
+        return;
+      }
+
+      children.forEach((element, index) => {
+        if (index >= (nextPageNumber - 1) * 3 && index < nextPageNumber * 3) {
+          element.style.display = 'block';
+        }
+        else {
+          element.style.display = 'none';
+        }
+      });
+
+      if (nextPageNumber === 1) {
+        this.wishlistPaginateContainer.querySelector('.prev').classList.add('disabled');
+        this.wishlistPaginateContainer.querySelector('.next').classList.remove('disabled');
+      }
+      else if (nextPageNumber === this.totalPages) {
+        this.wishlistPaginateContainer.querySelector('.next').classList.add('disabled');
+        this.wishlistPaginateContainer.querySelector('.prev').classList.remove('disabled');
+      }
+      else {
+        this.wishlistPaginateContainer.querySelector('.prev').classList.remove('disabled');
+        this.wishlistPaginateContainer.querySelector('.next').classList.remove('disabled');
+      }
+    }
+
+    removeAndAddPaginationButtonEvents() {
+      const container = this.wishlistPaginateContainer;
+      const newContainer = container.cloneNode(true);
+      container.parentNode.replaceChild(newContainer, container);
+      this.wishlistPaginateContainer = newContainer;
+
+      this.wishlistPaginateContainer.addEventListener('click', (event) => {
+        const link = event.target.closest('li a');
+        if (!link) return;
+
+        event.preventDefault();
+        const li = link.parentElement;
+        const isPrev = li.classList.contains('prev');
+        const isNext = li.classList.contains('next');
+        let pageNumber = parseInt(link.dataset.page);
+
+        const currentButton = this.wishlistPaginateContainer.querySelector('.active');
+        let curPage = currentButton ? parseInt(currentButton.querySelector('.link').dataset.page) : 1;
+
+        if (isPrev) {
+          pageNumber = curPage - 1;
+          if (pageNumber <= 0) pageNumber = 1;
+        }
+
+        if (isNext) {
+          pageNumber = curPage + 1;
+          if (pageNumber > this.totalPages) pageNumber = this.totalPages;
+        }
+
+        this.wishlistPaginateContainer.dataset.currentPage = pageNumber;
+        this.paginateToPages(pageNumber);
+
+        if (currentButton) {
+          currentButton.classList.remove('active');
+        }
+        const newActive = this.wishlistPaginateContainer.querySelector(`[data-page="${pageNumber}"]`);
+        if (newActive && newActive.parentElement) {
+          newActive.parentElement.classList.add('active');
+        }
+      });
+    }
+
+    updateShareWishlistViaMail() {
+      const regex = /(<([^>]+)>)/ig;
+      const addedItems = document.querySelectorAll('[data-wishlist-added]');
+
+      const shareLinkElement = document.querySelector('[data-wishlist-share]');
+      let href = 'mailto:?subject= Wish List&body=';
+
+      addedItems.forEach((item, index) => {
+        const price = item.querySelector('.price__sale .price__last .price-item')?.textContent || item.querySelector('.price__regular .price__last .price-item')?.textContent;
+        const title = item.querySelector('[data-product-title]')?.dataset.productTitle;
+        const url = item.querySelector('[data-product-url]')?.dataset.productUrl;
+
+        href += encodeURIComponent(title + '\nPrice: ' + price?.replace(regex, '') + '\nLink: ' + window.location.protocol + '//' + window.location.hostname + url +'\n\n');
+      });
+
+      shareLinkElement.href = href;
+    }
+
+    calculateCard06Padding() {
+      if (!document.body.classList.contains('product-card-layout-06')) return;
+
+      const cardAction = document.querySelector('.card .card-action.card-grid__hidden');
+
+      if (cardAction != undefined) {
+        cardAction.classList.remove('card-grid__hidden');
+        const padding = cardAction.scrollHeight;
+        document.querySelector('[data-wishlist-items-grid-display]').style.setProperty('--card-06-padding', padding + 'px');
+        cardAction.classList.add('card-grid__hidden');
+      }
+    }
+  }
+  if (!customElements.get('wishlist-view')) customElements.define('wishlist-view', WishlistView);
+{% endjavascript %}
+
+<style type="text/css" media="screen">
+  #WishlistSection-{{ section.id }} .wishlist-footer .wishlist-share {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:names.wishlist",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.popup", "aside"]
+  },
+  "blocks": [
+    {
+      "type": "_breadcrumb"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:settings.number_of_columns_on_desktop"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

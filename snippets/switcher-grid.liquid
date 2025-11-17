@@ -1,0 +1,200 @@
+{% comment %}
+  Render grid view
+  Accepts:
+  - columns_desktop: {String} Type of columns
+  - filter_type: {String} Type of filter
+
+  Usage:
+  {% render 'switcher-grid', columns_desktop: columns_desktop, filter_type: 'vertical' %}
+{% endcomment %}
+
+{% case section.settings.product_card_size %}
+  {% when 'small' %}
+    {% assign product_card_number = 5 %}
+  {% when 'medium' %}
+    {% assign product_card_number = 4 %}
+  {% when 'large' %}
+    {% assign product_card_number = 3 %}
+  {% when 'extra-large' %}
+    {% assign product_card_number = 2 %}
+  {% when 'extra-extra-large' %}
+    {% assign product_card_number = 1 %}
+{% endcase %}
+
+<grid-view class="switcher-grid no-js-hidden flex items-center {{ class }}">
+  <span class="switcher-grid__label facet-filters__field-label none lg:block {{ heading_label_case }}" style="--font-size: {{ heading_label_font_size }};">{{ 'content.view_as' | t }}</span>
+  <ul
+    class="grid-view--list desktop-grid-view flex justify-center list-unstyled"
+    role="list"
+    style="--p: 1.3rem 2rem;"
+  >
+    <li class="grid-view--item grid-view-list">
+      <button
+        class="button--grid-view t-button flex items-center justify-center{% if product_card_number == 1 %} active{% else %} cursor-pointer{% endif %}"
+        type="button"
+        aria-label="list"
+        data-grid="1"
+        style="--p: 1rem;--w: 4rem;--h: 4rem;"
+      ></button>
+    </li>
+    <li class="grid-view--item grid-view-2">
+      <button
+        class="button--grid-view t-button flex items-center justify-center{% if product_card_number == 2 %} active{% else %} cursor-pointer{% endif %}"
+        type="button"
+        aria-label="2"
+        data-grid="2"
+        style="--p: 1rem;--w: 4rem;--h: 4rem;"
+      ></button>
+    </li>
+    <li class="grid-view--item grid-view-3">
+      <button
+        class="button--grid-view t-button flex items-center justify-center{% if product_card_number == 3 %} active{% else %} cursor-pointer{% endif %}"
+        type="button"
+        aria-label="3"
+        data-grid="3"
+        style="--p: 1rem;--w: 4rem;--h: 4rem;"
+      ></button>
+    </li>
+    <li class="grid-view--item grid-view-4">
+      <button
+        class="button--grid-view t-button flex items-center justify-center{% if product_card_number == 4 %} active{% else %} cursor-pointer{% endif %}"
+        type="button"
+        aria-label="4"
+        data-grid="4"
+        style="--p: 1rem;--w: 4rem;--h: 4rem;"
+      ></button>
+    </li>
+    <li class="grid-view--item grid-view-5">
+      <button
+        class="button--grid-view t-button flex items-center justify-center{% if product_card_number == 5 %} active{% else %} cursor-pointer{% endif %}"
+        type="button"
+        aria-label="5"
+        data-grid="5"
+        style="--p: 1rem;--w: 4rem;--h: 4rem;"
+      ></button>
+    </li>
+  </ul>
+</grid-view>
+
+{%- stylesheet -%}
+  .switcher-grid .grid-view--list .grid-view--item .button--grid-view {
+    --color-inactive: rgba(var(--color-border-rgb) / 0.5);
+    --color-active: var(--color-border);
+    display: inline-block;
+    vertical-align: middle;
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    border: 1px solid var(--color-inactive);
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.active .button--grid-view {
+    border-color: var(--color-active);
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-2 .button--grid-view {
+    width: 19px;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-4 .button--grid-view {
+    width: 33px;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-5 .button--grid-view {
+    width: 40px;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item .button--grid-view .icon {
+    width: 20px;
+    height: 100%;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-5,
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-4,
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-3 {
+    display: none;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.active {
+    background-color: var(--bg-white);
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item + .grid-view--item {
+    margin-left: 5px;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item .button--grid-view {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item .button--grid-view:before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 18px;
+    top: 3px;
+    left: 3px;
+    background-color: var(--color-inactive);
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item .button--grid-view.active:before {
+    --color-inactive: var(--color-border);
+  }
+
+  .switcher-grid .grid-view--list .grid-view--item.grid-view-list .button--grid-view:before {
+    width: 18px;
+    height: 4px;
+    box-shadow: 0 7px 0 var(--color-inactive), 0 14px 0 var(--color-inactive);
+  }
+
+  @media (min-width: 360px) {
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-2 .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-inactive);
+    }
+  }
+
+  @media (min-width: 750px) {
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-3 {
+      display: inline-block;
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-3 .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-inactive), 14px 0 0 var(--color-inactive);
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-3.active .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-active), 14px 0 0 var(--color-active);
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-3.active .button--grid-view {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  @media (min-width: 990px) {
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-4 {
+      display: inline-block;
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-4 .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-inactive), 14px 0 0 var(--color-inactive), 21px 0 0 var(--color-inactive);
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-4.active .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-active), 14px 0 0 var(--color-active), 21px 0 0 var(--color-active);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-5 {
+      display: inline-block;
+    }
+
+    .switcher-grid .grid-view--list .grid-view--item.grid-view-5 .button--grid-view:before {
+      box-shadow: 7px 0 0 var(--color-inactive), 14px 0 0 var(--color-inactive), 21px 0 0 var(--color-inactive),
+        28px 0 0 var(--color-inactive);
+    }
+  }
+{%- endstylesheet -%}

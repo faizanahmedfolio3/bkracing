@@ -1,0 +1,35 @@
+<div class="card-product__group-item card-wishlist">
+  <wish-list class="h-full w-full">
+    <button
+      type="button"
+      title="{{ 'content.add' | t }}"
+      class="{{ class_button }} wishlist-button w-full"
+      data-wishlist
+      data-wishlist-handle="{{ card_product.handle }}"
+      data-product-id="{{ card_product.id }}"
+    >
+      <span class="{{ class_text }}">
+        <span class="{{ class_text_inner }}">{{ 'content.add' | t }}</span>
+      </span>
+      <svg
+        class="wishlist-button__icon"
+        aria-hidden="true"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        width="16"
+        height="16"
+      >
+        {% render 'icon', icon: 'heart' %}
+      </svg>
+    </button>
+  </wish-list>
+</div>
+
+{%  stylesheet  %}
+  .add-to-cart-button-inner .wishlist-button.wishlist-added {
+    color: var(--color-primary-button-hover-text);
+    background-color: var(--color-primary-button-hover-background);
+    box-shadow: rgb(99 99 99 / var(--opacity-20)) 0px .2rem .8rem 0px;
+  }
+{% endstylesheet %}

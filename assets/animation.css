@@ -1,0 +1,138 @@
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee-animate-rtl {
+  -webkit-animation: marquee-rtl var(--marquee-duration) linear infinite;
+  animation: marquee-rtl var(--marquee-duration) linear infinite;
+}
+.marquee-animate {
+  -webkit-animation: marquee var(--marquee-duration) linear infinite;
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+@media (hover: hover) {
+  .marquee-list:hover .marquee-scroll {
+    animation-play-state: paused;
+  }
+  .title-wrapper-marquee:hover .title-marquee {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes search-element-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(.8rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes search-element-slide-up-heading {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes menu-drawer-item-open {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes menu-item-open {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(25%);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes header-sticky-slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes header-sticky-slide-up {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.animate-shimmer {
+  animation-duration: 2.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: inherit;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  border: none!important;
+  border-radius: 0!important;
+  background: var(--bg-medium-gray);
+  background: linear-gradient(to right, var(--bg-medium-gray) 4%, var(--bg-light-gray) 25%, var(--bg-medium-gray) 36%);
+  background-size: 2000px 100%;
+}

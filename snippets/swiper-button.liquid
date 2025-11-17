@@ -1,0 +1,107 @@
+{% comment %} <hover-button class="swiper-button swiper-button-prev {{ class_prev }}">
+  <span class="svg-wrapper">
+    {%- render 'icon-arrow' -%}
+  </span>
+</hover-button>
+<hover-button class="swiper-button swiper-button-next {{ class_next }}">
+  <span class="svg-wrapper">
+    {%- render 'icon-arrow' -%}
+  </span>
+</hover-button>
+
+
+.swiper-button {
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--arrow-background-hover);
+    z-index: -1;
+    border-radius: var(--arrow-radius);
+    display: block;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+  }
+  &.swiper-button-prev {
+    &:before {
+      transform-origin: left;
+    }
+  }
+  &.swiper-button-next {
+    &:before {
+      transform-origin: right;
+    }
+  }
+
+  &:hover {
+    &:before {
+      transform: scaleX(1);
+    }
+
+    &.swiper-button-prev {
+    &:before {
+      transform-origin: right;
+    }
+  }
+  &.swiper-button-next {
+    &:before {
+      transform-origin: left;
+    }
+  }
+  }
+}
+
+.swiper-button:hover {
+  color: var(--arrow-color-hover);
+} {% endcomment %}
+
+
+<hover-button class="swiper-button swiper-button-prev {{ class_prev }}">
+  <span class="fill-bg absolute" data-fill-bg></span>
+  <span class="svg-wrapper">
+    {%- render 'icon-arrow' -%}
+  </span>
+</hover-button>
+<hover-button class="swiper-button swiper-button-next {{ class_next }}">
+  <span class="fill-bg absolute" data-fill-bg></span>
+  <span class="svg-wrapper">
+    {%- render 'icon-arrow' -%}
+  </span>
+</hover-button>
+
+{% stylesheet %}
+  .swiper-button {
+    overflow: hidden;
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background-color: var(--arrow-background);
+      z-index: -1;
+      border-radius: var(--arrow-radius);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        --arrow-color: var(--arrow-color-hover);
+        --arrow-background: var(--arrow-background-hover);
+      }
+    }
+  }
+
+  .swiper-button .fill-bg {
+    background-color: var(--arrow-color);
+    z-index: -2;
+    inset: -1px;
+    border-radius: var(--arrow-radius);
+  }
+
+  .swiper-button-prev .fill-bg {
+    transform: translateX(100%);
+  }
+
+  .swiper-button-next .fill-bg {
+    transform: translateX(-100%);
+  }
+{% endstylesheet %}

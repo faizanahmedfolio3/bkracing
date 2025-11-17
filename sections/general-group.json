@@ -1,0 +1,46 @@
+{
+  "name": "General group",
+  "type": "aside",
+  "sections": {
+    "color_swatches_wJV8Fg": {
+      "type": "color-swatches",
+      "blocks": {
+        "color_swatch_item_XyXCQ8": {
+          "type": "color_swatch_item",
+          "settings": {
+            "color_swatch_name": "blue",
+            "color_swatch_color_1": "rgba(0,0,0,0)",
+            "color_swatch_color_2": "#1199bb"
+          }
+        },
+        "color_swatch_item_xMJNny": {
+          "type": "color_swatch_item",
+          "settings": {
+            "color_swatch_name": "beige",
+            "color_swatch_color_1": "#c8ae7e",
+            "color_swatch_color_2": "#fafdf3"
+          }
+        },
+        "color_swatch_item_JBBnKT": {
+          "type": "color_swatch_item",
+          "settings": {
+            "color_swatch_name": "darkorange",
+            "color_swatch_color_1": "#383030",
+            "color_swatch_color_2": "#df753a",
+            "color_swatch_image": ""
+          }
+        }
+      },
+      "block_order": [
+        "color_swatch_item_XyXCQ8",
+        "color_swatch_item_xMJNny",
+        "color_swatch_item_JBBnKT"
+      ],
+      "name": "Color Swatches",
+      "settings": {}
+    }
+  },
+  "order": [
+    "color_swatches_wJV8Fg"
+  ]
+}
