@@ -19,7 +19,7 @@
             "link": "",
             "open_in_new_tab": false,
             "slide_background": true,
-            "container": "page-width page-width--full",
+            "container": "page-width",
             "height": "fit",
             "media_type_1": "image",
             "image_1": "shopify://shop_images/Container.jpg",
