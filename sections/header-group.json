@@ -187,10 +187,10 @@
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default",
-        "padding-block-start-top": 5,
-        "padding-block-end-top": 0,
-        "padding-block-start-bottom": 20,
-        "padding-block-end-bottom": 20
+        "padding-block-start-top": 10,
+        "padding-block-end-top": 10,
+        "padding-block-start-bottom": 0,
+        "padding-block-end-bottom": 0
       }
     }
   },
