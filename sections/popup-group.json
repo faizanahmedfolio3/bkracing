@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Popup group",
   "type": "custom.popup",
@@ -212,6 +221,7 @@
         "social_media_WFXftf",
         "back_to_top_jPnP9G"
       ],
+      "disabled": true,
       "settings": {
         "background": "#ffffff",
         "icon": "#000000",
@@ -398,6 +408,7 @@
                 "custom_width_mobile": 100,
                 "custom_width_mobile_pixel": 100,
                 "height": "fit",
+                "image_position": "cover",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -565,6 +576,8 @@
                       "name": "t:names.heading",
                       "settings": {
                         "text": "<h2>New arrivals</h2>",
+                        "collection_description_only": false,
+                        "collapse_text": false,
                         "typing_text": false,
                         "primary_text": "Welcome to our store!",
                         "secondary_text": "Exclusive offers just for you.",
@@ -621,6 +634,8 @@
                         "border_custom_width": 100,
                         "border_radius": 0,
                         "text_effect": "none",
+                        "heading_only": false,
+                        "heading_effect": "none",
                         "animation_repeat": false,
                         "padding-block-start": 0,
                         "padding-block-end": 0,
@@ -634,6 +649,8 @@
                       "name": "t:names.text",
                       "settings": {
                         "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
+                        "collection_description_only": false,
+                        "collapse_text": false,
                         "typing_text": false,
                         "primary_text": "Welcome to our store!",
                         "secondary_text": "Exclusive offers just for you.",
@@ -690,6 +707,8 @@
                         "border_custom_width": 100,
                         "border_radius": 0,
                         "text_effect": "none",
+                        "heading_only": false,
+                        "heading_effect": "none",
                         "animation_repeat": false,
                         "padding-block-start": 0,
                         "padding-block-end": 0,
@@ -733,6 +752,8 @@
                         "input_border_width": 1,
                         "input_border_radius": 0,
                         "input_alignment": "center",
+                        "custom_input_height": false,
+                        "input_height": 40,
                         "input_type_preset": "paragraph",
                         "input_focus_effect": "none",
                         "focus_border_color": "#3399ff",
@@ -810,6 +831,7 @@
       "block_order": [
         "group_bK8anF"
       ],
+      "disabled": true,
       "settings": {
         "popup_expire": 1,
         "popup_delay": 10,
@@ -837,13 +859,13 @@
             "vertical_alignment_flex_direction_column_mobile": "center",
             "gap": 0,
             "inherit_color_scheme": true,
-            "scheme_background": "#FFFFFF",
+            "scheme_background": "#ffffff",
             "scheme_background_gradient": "",
             "scheme_foreground_heading": "#000000",
             "scheme_foreground": "#000000",
-            "scheme_primary": "#000F9F",
+            "scheme_primary": "#000f9f",
             "scheme_primary_hover": "#000000",
-            "scheme_border": "#E6E6E6",
+            "scheme_border": "#e6e6e6",
             "scheme_shadow": "#000000",
             "border": "none",
             "border_width": 1,
@@ -882,13 +904,13 @@
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
                 "inherit_color_scheme": false,
-                "scheme_background": "#FFFFFF",
+                "scheme_background": "#ffffff",
                 "scheme_background_gradient": "",
                 "scheme_foreground_heading": "#000000",
                 "scheme_foreground": "#000000",
-                "scheme_primary": "#000F9F",
+                "scheme_primary": "#000f9f",
                 "scheme_primary_hover": "#000000",
-                "scheme_border": "#E6E6E6",
+                "scheme_border": "#e6e6e6",
                 "scheme_shadow": "#000000",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
@@ -919,13 +941,13 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "scheme_background": "#FFFFFF",
+                "scheme_background": "#ffffff",
                 "scheme_background_gradient": "",
                 "scheme_foreground_heading": "#000000",
                 "scheme_foreground": "#000000",
-                "scheme_primary": "#000F9F",
+                "scheme_primary": "#000f9f",
                 "scheme_primary_hover": "#000000",
-                "scheme_border": "#E6E6E6",
+                "scheme_border": "#e6e6e6",
                 "scheme_shadow": "#000000",
                 "border": "none",
                 "border_width": 1,
@@ -945,6 +967,8 @@
                   "name": "t:names.heading",
                   "settings": {
                     "text": "<p>Special Picks for You</p>",
+                    "collection_description_only": false,
+                    "collapse_text": false,
                     "typing_text": false,
                     "primary_text": "Welcome to our store!",
                     "secondary_text": "Exclusive offers just for you.",
@@ -1001,6 +1025,8 @@
                     "border_custom_width": 100,
                     "border_radius": 0,
                     "text_effect": "none",
+                    "heading_only": false,
+                    "heading_effect": "none",
                     "animation_repeat": false,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -1014,6 +1040,8 @@
                   "name": "t:names.text",
                   "settings": {
                     "text": "<p>We’ve handpicked a few styles we think you’ll love. Use code STYLE20 for 20% OFF your order today.</p>",
+                    "collection_description_only": false,
+                    "collapse_text": false,
                     "typing_text": false,
                     "primary_text": "Welcome to our store!",
                     "secondary_text": "Exclusive offers just for you.",
@@ -1070,6 +1098,8 @@
                     "border_custom_width": 100,
                     "border_radius": 0,
                     "text_effect": "none",
+                    "heading_only": false,
+                    "heading_effect": "none",
                     "animation_repeat": false,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -1111,6 +1141,7 @@
                     "custom_width_tablet": 100,
                     "width_mobile": "fill",
                     "custom_width_mobile": 100,
+                    "collection": "",
                     "products_to_show": 4,
                     "columns_desktop": 3,
                     "columns_desktop_carousel": 3,
@@ -1270,6 +1301,7 @@
                   "type": "button",
                   "settings": {
                     "label": "Continue shopping",
+                    "link": "",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "button_style": "custom",
@@ -1325,6 +1357,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.before_you_leave",
       "settings": {
         "popup_expire_minutes": 1,
