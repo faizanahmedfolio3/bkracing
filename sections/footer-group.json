@@ -1310,8 +1310,8 @@
                     "icon_color_hover": "#ffffff",
                     "icon_bg_color_hover": "transparent",
                     "icon_border_color_hover": "#232323",
-                    "gap_x": 10,
-                    "gap_y": 10,
+                    "gap_x": 15,
+                    "gap_y": 15,
                     "padding-block-start": 0,
                     "padding-block-end": 0
                   },
