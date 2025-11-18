@@ -423,7 +423,7 @@
                     "button_type_preset": "paragraph",
                     "background_button": true,
                     "integrated_button": false,
-                    "gap": 20,
+                    "gap": 25,
                     "submit_width": "fit-content",
                     "submit_custom_width": 27,
                     "submit_width_mobile": "custom",
