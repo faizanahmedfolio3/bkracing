@@ -99,7 +99,7 @@
       ],
       "name": "Header- Automotive",
       "settings": {
-        "gap": 20,
+        "gap": 10,
         "align_items": "center",
         "logo_width": 190,
         "logo_width_mobile": 150,
