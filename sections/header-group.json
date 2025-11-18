@@ -156,9 +156,9 @@
         "divider_size": "page-width",
         "border_width": 0,
         "enable_shadow": false,
-        "color_scheme_top": "scheme-1",
-        "color_scheme_top_mb": "scheme-9",
-        "color_scheme_search_inline": "scheme-4",
+        "color_scheme_top": "scheme-fcf4124c-fce6-44a2-b452-8b84c4e3337e",
+        "color_scheme_top_mb": "scheme-fcf4124c-fce6-44a2-b452-8b84c4e3337e",
+        "color_scheme_search_inline": "scheme-fcf4124c-fce6-44a2-b452-8b84c4e3337e",
         "color_scheme_bottom": "scheme-1",
         "color_scheme_transparent": "scheme-4",
         "menu_mobile_color_scheme": "scheme-1",
@@ -187,8 +187,8 @@
         "product_color_scheme": "default",
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default",
-        "padding-block-start-top": 20,
-        "padding-block-end-top": 20,
+        "padding-block-start-top": 5,
+        "padding-block-end-top": 0,
         "padding-block-start-bottom": 0,
         "padding-block-end-bottom": 0
       }
