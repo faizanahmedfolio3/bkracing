@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Header group",
   "type": "header",
@@ -150,11 +159,8 @@
             "promotion_banner_layout": "right",
             "image_border_thickness": 0,
             "image_corner_radius": 0,
-            "image_1": "",
             "link_url_1": "",
-            "image_2": "",
             "link_url_2": "",
-            "image_3": "",
             "link_url_3": ""
           }
         },
@@ -164,7 +170,7 @@
             "menu_item": "COLLECTIONS",
             "grid": "5",
             "width": "page-width",
-            "megamenu_submenu": "custom-menu",
+            "megamenu_submenu": "",
             "product_collection": "classic-new-arrival",
             "product_limit": 4,
             "product_columns": 4,
@@ -173,7 +179,6 @@
             "vertical_alignment_flex_direction_column": "justify-start",
             "show_promotion_banner": true,
             "banner_row": "bottom",
-            "image_1": "",
             "image_border_thickness": 0,
             "image_corner_radius": 0,
             "link_url_1": "",
@@ -192,9 +197,7 @@
             "show_promotion_banner": true,
             "image_border_thickness": 0,
             "image_corner_radius": 0,
-            "image_1": "",
             "link_url_1": "",
-            "image_2": "",
             "link_url_2": "",
             "show_brand": true,
             "brand_title": "BRANDS BY ALPHABET",
@@ -267,6 +270,7 @@
         "actions_type": "icon",
         "actions_row": "top",
         "section_width": "full-width",
+        "page_width_custom": 1570,
         "enable_sticky_header": "always",
         "divider_width": 0,
         "divider_size": "page-width",
@@ -363,8 +367,7 @@
                     "link": "#",
                     "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -374,11 +377,9 @@
                   "settings": {
                     "title": "New In",
                     "link": "#",
-                    "sub_menu": "mobile-menu-new-in",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": "",
-                    "banner_level_2": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -388,11 +389,9 @@
                   "settings": {
                     "title": "Accessories",
                     "link": "#",
-                    "sub_menu": "mobile-menu-accessories",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": "",
-                    "banner_level_2": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -402,11 +401,9 @@
                   "settings": {
                     "title": "Shop This Look",
                     "link": "#",
-                    "sub_menu": "mobile-menu-shop-this-look",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": "",
-                    "banner_level_2": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -416,11 +413,9 @@
                   "settings": {
                     "title": "Blog",
                     "link": "#",
-                    "sub_menu": "mobile-menu-blog",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": "",
-                    "banner_level_2": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -430,10 +425,9 @@
                   "settings": {
                     "title": "Buy Theme",
                     "link": "https://1.envato.market/dokaB2",
-                    "sub_menu": "mobile-menu-buy-theme",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -445,8 +439,7 @@
                     "link": "",
                     "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -458,8 +451,7 @@
                     "link": "https://new-ella-demo-07.myshopify.com/account/login",
                     "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 }
@@ -490,10 +482,9 @@
                   "settings": {
                     "title": "Home Page",
                     "link": "",
-                    "sub_menu": "mobile-menu-home-page",
+                    "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -505,8 +496,7 @@
                     "link": "",
                     "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -518,8 +508,7 @@
                     "link": "",
                     "sub_menu": "",
                     "image_type_level_1": "image",
-                    "svg_upload_level_1": "",
-                    "image_level_1": ""
+                    "svg_upload_level_1": ""
                   },
                   "blocks": {}
                 },
@@ -569,6 +558,7 @@
         "media_type": "circle",
         "media_width": 35,
         "show_image_sub_menu": true,
+        "sub_media_type": "rectangle",
         "media_width_sub_menu": 70,
         "show_country": true,
         "country_selector_style": true,
