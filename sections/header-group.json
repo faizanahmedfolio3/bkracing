@@ -17,7 +17,9 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
+            "type": "html",
             "text": "<div class=\"message\">\n<span><img src=\"https://cdn.shopify.com/s/files/1/0081/3305/0458/files/icon-announcement-bar.png?v=1635331732\" alt=\"\"></span> <span>Buy Now, Pay Later Starting at 0% APR</span> <span class=\"btn\">Learn More</span>\n</div>",
+            "text_rich": "<p>Welcome to our store</p>",
             "btn_color": "#f84248",
             "btn_border_color": "#ffffff",
             "btn_bg_color": "#ffffff",
@@ -28,6 +30,7 @@
       "block_order": [
         "announcement-bar-0"
       ],
+      "disabled": true,
       "settings": {
         "layout": "slider",
         "enable_close": false,
@@ -40,7 +43,11 @@
         "arrow_active": false,
         "content_max_width": 38,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top_tablet": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom": 0,
+        "padding_bottom_tablet": 0,
+        "padding_bottom_mobile": 0
       }
     },
     "cd70f884-a33f-44c2-a411-3439d3dfe9f4": {
@@ -49,8 +56,8 @@
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-0": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/logo-home-3.png",
-            "logo_width": 100,
+            "logo": "shopify://shop_images/bkRacing-logo.png",
+            "logo_width": 150,
             "logo_text": "",
             "logo_font_size": 30,
             "logo_font_weight": "900",
@@ -70,6 +77,7 @@
         },
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-2": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "customer_service_text": "<p>Customer Service</p><p><strong>(090) 123-ELLA</strong></p>",
             "text_size": 14,
@@ -79,7 +87,11 @@
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-3": {
           "type": "wishlist",
           "settings": {
-            "color": "#ffffff"
+            "color": "#ffffff",
+            "show_wishlist_number": false,
+            "wishlist_text_size": 14,
+            "wishlist_color_item": "#ffffff",
+            "wishlist_bg_item": "#232323"
           }
         },
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-4": {
@@ -174,6 +186,7 @@
             "hot_label_bg_gradient": "",
             "vertical_menu_layout": "none",
             "vertical_menu": "",
+            "auto_show_index": true,
             "title_categories": "Categories",
             "title_categories_font_size": 12,
             "title_categories_color": "#ffffff",
@@ -204,6 +217,7 @@
             "show_search": false,
             "show_customer": false,
             "show_wishlist": false,
+            "show_wishlist_number": false,
             "show_cart": false,
             "text_font_size": 14,
             "show_language_currency_sticky": false,
@@ -217,7 +231,9 @@
             "icon_help_border_color": "#dedede",
             "cart_count_bubble_color": "#ffffff",
             "cart_count_bubble_bg": "#f84248",
-            "cart_count_bubble_bg_gradient": ""
+            "cart_count_bubble_bg_gradient": "",
+            "wishlist_color_item": "#ffffff",
+            "wishlist_bg_item": "#232323"
           }
         },
         "a72d8435-5670-46a5-b33b-ec4ea203685d": {
@@ -228,7 +244,6 @@
             "item": "New in",
             "column": 3,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/home-3-mega-menu-1.jpg",
             "banner_url_1": "shopify://collections/blazero",
             "show_product": true,
             "product_title": "Featured Products",
@@ -243,13 +258,10 @@
             "item": "Trend",
             "column": 3,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/home-3-mega-menu-2_5c3853d2-d737-42ef-bfeb-d0d1cd55b989.jpg",
             "banner_url_1": "shopify://collections/metropolis",
             "show_banner_2": true,
-            "banner_2": "shopify://shop_images/home-3-mega-menu-3_7899f54e-5551-4c44-99e7-584ec2e13e2b.jpg",
             "banner_url_2": "shopify://collections/blazero",
             "show_banner_3": true,
-            "banner_3": "shopify://shop_images/home-3-mega-menu-4.jpg",
             "banner_url_3": "shopify://collections/suito"
           }
         },
@@ -262,20 +274,17 @@
             "item": "Collections",
             "column": 5,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/mega-menu-5-min_bed4008c-a526-4f79-bf90-de226d983ab6.jpg",
             "banner_url_1": "shopify://collections/glamos",
             "show_banner_2": true,
-            "banner_2": "shopify://shop_images/mega-menu-6-min_d3ab983d-3bb9-4be5-8267-25a499928d98.jpg",
             "banner_url_2": "shopify://collections/milancelos",
             "show_banner_3": true,
-            "banner_3": "shopify://shop_images/mega-menu-7-min_00f66086-6ca1-4e85-b4d2-7f24eed16811.jpg",
             "banner_url_3": "shopify://collections/new-in",
             "show_banner_4": true,
-            "banner_4": "shopify://shop_images/mega-menu-8-min_fdd0c3a5-3f20-4380-b948-72a661754ec1.jpg",
             "banner_url_4": "shopify://collections/congue",
             "show_banner_5": true,
-            "banner_5": "shopify://shop_images/mega-menu-9-min.jpg",
-            "banner_url_5": "shopify://collections/blazero"
+            "banner_url_5": "shopify://collections/blazero",
+            "show_banner_6": false,
+            "banner_url_6": ""
           }
         },
         "8af6e7ac-796d-4bf2-9982-87946bc1358a": {
@@ -364,25 +373,28 @@
         "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
           "type": "menu",
           "settings": {
-            "color": "#232323"
+            "color": "#232323",
+            "menu_tab_bg": "#000000"
           }
         },
         "163e2cb5-14f2-4af6-9ac3-77193c082f53": {
           "type": "search",
           "settings": {
+            "icon": "1",
+            "popup_action": false,
             "color": "#232323"
           }
         },
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
           "type": "logo",
           "settings": {
-            "logo_mobile": "shopify://shop_images/logo-mb-home-3.png",
             "logo_width_mobile": 65,
             "logo_text": "",
             "logo_font_size": 20,
             "logo_font_weight": "900",
             "logo_text_transform": "uppercase",
-            "logo_color": "#232323"
+            "logo_color": "#232323",
+            "alignment": "center"
           }
         },
         "20dae707-64c0-4ea3-a05e-561cae9836d8": {
@@ -396,6 +408,7 @@
           "type": "cart",
           "settings": {
             "icon": "3",
+            "show_cart_count_bubble": true,
             "color": "#232323",
             "color_bubble": "#ffffff",
             "bg_bubble": "#232323"
@@ -413,6 +426,9 @@
         "background": "#ffffff",
         "gradient": "",
         "sticky_header_type": "on_scroll",
+        "enable_transparent": false,
+        "transparent_color": "#ffffff",
+        "transparent_border_color": "",
         "padding_top": 0,
         "padding_bottom": 0
       }
