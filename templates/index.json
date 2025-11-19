@@ -710,7 +710,7 @@
                 "text_mexKVK": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Top Solid Motor Mount (Cavalier),F23 Traction Blocks – Limited Slip LSD,</p>",
+                    "text": "<p>Top Solid Motor Mount (Cavalier),F23 Traction Blocks – Limited Slip LSD,VUE Electric Power Steering Controller,VUE Electric Power Steering Controller</p>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
@@ -882,9 +882,9 @@
                     "spacing_text_right": 0,
                     "stroke_text": false,
                     "stroke_text_content": "",
-                    "width": "100%",
+                    "width": "custom",
                     "unit": "percent",
-                    "custom_width": 100,
+                    "custom_width": 60,
                     "custom_width_pixel": 500,
                     "inherit_text_alignment": true,
                     "justify_alignment": false,
@@ -934,7 +934,7 @@
                 "text_eTi8Xz": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Top Solid Motor Mount (Cavalier),F23 Traction Blocks – Limited Slip LSD,</p>",
+                    "text": "<p>Ecotec Race Header, LD Front Clip (Engine Bay) – UniversalVUE Electric Power Steering Controller,VUE Electric Power Steering Controller</p>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
@@ -1086,7 +1086,7 @@
                 "text_9C6XHK": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Performance Parts</h2>",
+                    "text": "<h2>Body / Fitment / Panels</h2>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
@@ -1158,7 +1158,7 @@
                 "text_QnAV3i": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Top Solid Motor Mount (Cavalier),F23 Traction Blocks – Limited Slip LSD,</p>",
+                    "text": "<p>LD Front Clip (Engine Bay) – UniversalVUE Electric Power Steering Controller,VUE Electric Power Steering Controller</p>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
@@ -1310,7 +1310,7 @@
                 "text_WLNUkP": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Performance Parts</h2>",
+                    "text": "<h2>Merchandise & Fan Gear</h2>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
@@ -1382,7 +1382,7 @@
                 "text_7tdmDz": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Top Solid Motor Mount (Cavalier),F23 Traction Blocks – Limited Slip LSD,</p>",
+                    "text": "<p>BK Racing Bottle Coozie, BK Racing can Coozie, StickersVUE Electric Power Steering Controller,VUE Electric Power Steering Controller</p>",
                     "collection_description_only": false,
                     "collapse_text": false,
                     "typing_text": false,
