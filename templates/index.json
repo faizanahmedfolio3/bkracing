@@ -739,7 +739,7 @@
             "mg_bottom_text": 20,
             "color_text": "#ffffff",
             "sub_text": "Built for racers, by racers. Wear the attitude. Own the track.",
-            "fontsize_sub_text": 15,
+            "fontsize_sub_text": 20,
             "fontsize_sub_text_mb": 14,
             "mg_bottom_sub_text": 20,
             "color_sub_text": "#ffffff",
@@ -773,6 +773,10 @@
       },
       "block_order": [
         "39958ac5-c103-451a-89de-47ae729b4c1d"
+      ],
+      "custom_css": [
+        "h2.product-block__cap--text {line-height: 44px;}",
+        "h3.product-block__cap--subText {line-height: 21px;}"
       ],
       "settings": {
         "container": "fullwidth",
@@ -817,7 +821,7 @@
         "color_view_all_icon": "#eb492f",
         "view_all_icon_side": "left",
         "spacing_view_all_icon": 0,
-        "button_text": "Show More",
+        "button_text": "",
         "button_text_font_size": 14,
         "button_text_font_weight": "500",
         "button_text_text_transform": "uppercase",
