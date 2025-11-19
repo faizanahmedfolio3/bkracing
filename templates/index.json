@@ -789,6 +789,9 @@
         "16342924847ce35dfd-2",
         "image_yTacGt"
       ],
+      "custom_css": [
+        "h3{max-width: 400px;}"
+      ],
       "settings": {
         "container": "fullwidth",
         "padding_full_width": 0,
