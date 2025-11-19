@@ -790,7 +790,7 @@
         "product_block_collection": "collection-home-03-new",
         "product_block_limit": 4,
         "grid_gap": 30,
-        "pb_style": "style2",
+        "pb_style": "style1",
         "style_block_header": "style1",
         "product_block_title": "New Arrivals",
         "enable_border_title": false,
