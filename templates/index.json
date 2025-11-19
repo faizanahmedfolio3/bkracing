@@ -775,7 +775,7 @@
         "39958ac5-c103-451a-89de-47ae729b4c1d"
       ],
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "padding_full_width": 50,
         "disable_padding_content": false,
         "enable_border_top": false,
@@ -783,7 +783,7 @@
         "border_height": 1,
         "color_border_bottom": "#e8e8e8",
         "enable_minus_mg_top": false,
-        "minus_spacing_top": -90,
+        "minus_spacing_top": 0,
         "product_block_layout": "slider",
         "product_bg": "#1a212a",
         "product_bg_gradient": "",
