@@ -934,7 +934,8 @@
       ],
       "custom_css": [
         "h2.product-block__cap--text {line-height: 44px;}",
-        "h3.product-block__cap--subText {line-height: 21px;}"
+        "h3.product-block__cap--subText {line-height: 21px;}",
+        ".product-block__grid{padding-top: 120px;}"
       ],
       "settings": {
         "container": "fullwidth",
