@@ -776,7 +776,7 @@
       ],
       "settings": {
         "container": "fullwidth",
-        "padding_full_width": 50,
+        "padding_full_width": 0,
         "disable_padding_content": false,
         "enable_border_top": false,
         "enable_border_bottom": false,
