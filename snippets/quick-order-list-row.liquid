@@ -20,40 +20,38 @@
   data-cart-qty="{{ cart_qty }}"
 >
   <td class="variant-item__inner{% unless sku and show_sku %} variant-item__inner--no-sku{% endunless %}">
-    <div class="flex">
-      {%- if show_image -%}
-        <div class="variant-item__media">
-          <div class="variant-item__image-container{% unless image %} variant-item__image-container--no-img{% endunless %}">
-            {% if image %}
-              {%- assign img_height = 43 | divided_by: image.aspect_ratio | ceil -%}
-              {{
-                image
-                | image_url: width: 86
-                | image_tag:
-                  loading: 'lazy',
-                  fetchpriority: 'low',
-                  decoding: 'async',
-                  class: 'variant-item__image',
-                  width: 43,
-                  height: img_height,
-                  widths: '86',
-                  alt: image.alt
-                | escape
-              }}
-            {% endif %}
-          </div>
+    {%- if show_image -%}
+      <div class="variant-item__media">
+        <div class="variant-item__image-container global-media-settings{% unless is_modal %} gradient{% endunless %}{% unless image %} variant-item__image-container--no-img{% endunless %}">
+          {% if image %}
+            {%- assign img_height = 43 | divided_by: image.aspect_ratio | ceil -%}
+            {{
+              image
+              | image_url: width: 86
+              | image_tag:
+                loading: 'lazy',
+                fetchpriority: 'low',
+                decoding: 'async',
+                class: 'variant-item__image',
+                width: 43,
+                height: img_height,
+                widths: '86',
+                alt: image.alt
+              | escape
+            }}
+          {% endif %}
         </div>
-      {%- endif -%}
-      <div class="small-hide medium-hide">
-        <span class="variant-item__name h4 break">{{ item.title | escape }}</span>
-        {%- if show_sku -%}
-          <span class="variant-item__sku break">{{ sku | escape }}</span>
-        {%- endif -%}
       </div>
+    {%- endif -%}
+    <div class="small-hide">
+      <span class="variant-item__name h4 break">{{ item.title | escape }}</span>
+      {%- if show_sku -%}
+        <span class="variant-item__sku break">{{ sku | escape }}</span>
+      {%- endif -%}
     </div>
   </td>
 
-  <td class="variant-item__details large-up-hide">
+  <td class="variant-item__details medium-up-hide">
     <div class="variant-item__info">
       <span class="variant-item__name h4 break">{{ item.title | escape }}</span>
       {%- if show_sku -%}
@@ -89,14 +87,14 @@
                 {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
                   {%- assign variant_price = variant.price | money -%}
                   <span class="price-per-item--current price">
-                    {{- 'content.each' | t: money: variant_price -}}
+                    {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
                   </span>
                 {%- else -%}
                   {%- for price_break in volume_pricing_array -%}
                     {%- if cart_qty >= price_break.minimum_quantity -%}
                       {%- assign price_break_price = price_break.price | money -%}
                       <span class="price-per-item--current price">
-                        {{- 'content.each' | t: money: price_break_price -}}
+                        {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
                       </span>
                       {%- break -%}
                     {%- endif -%}
@@ -106,7 +104,7 @@
             </price-per-item>
           {%- else -%}
             <span class="price">
-              {{- 'content.each' | t: money: item_price -}}
+              {{ item_price }}{{- 'sections.quick_order_list.each' | t -}}
             </span>
           {%- endif -%}
         </dd>
@@ -125,14 +123,14 @@
             {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
               {%- assign variant_price = variant.price | money -%}
               <span class="price-per-item--current price">
-                {{- 'content.each' | t: money: variant_price -}}
+                {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
               </span>
             {%- else -%}
               {%- for price_break in volume_pricing_array -%}
                 {%- if cart_qty >= price_break.minimum_quantity -%}
                   {%- assign price_break_price = price_break.price | money -%}
                   <span class="price-per-item--current price">
-                    {{- 'content.each' | t: money: price_break_price -}}
+                    {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
                   </span>
                   {%- break -%}
                 {%- endif -%}
@@ -142,7 +140,7 @@
         </price-per-item>
       {%- else -%}
         <span class="price">
-          {{- 'content.each' | t: money: item_price -}}
+          {{ item_price }}{{- 'sections.quick_order_list.each' | t -}}
         </span>
       {%- endif -%}
     {%- endif -%}
@@ -161,7 +159,7 @@
     {%- endif -%}
   </td>
 
-  <td class="variant-item__totals right large-up-hide">
+  <td class="variant-item__totals right medium-up-hide">
     {%- render 'loading-spinner' -%}
     {% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
     {% # theme-check-disable %}
@@ -203,7 +201,7 @@
         <label class="visually-hidden" for="Quantity-{{ variant.id }}">
           {{ 'products.product.quantity.label' | t }}
         </label>
-        <div class="quantity-popover-container{% if is_available and has_popover %} quantity-popover-container--hover{% endif %}{% if cart_qty == 0 %} quantity-popover-container--empty{% endif %}">
+        <div class="quantity-popover-container{% if is_available and has_popover %} quantity-popover-container--hover{% endif %}{% if cart_qty == 0 %} quantity-popover-container--empty{% endif %}{% if variant.available == false or quantity_rule_soldout %} quantity-popover-container--soldout{% endif %}">
           {%- if has_qty_rules or has_vol_pricing -%}
             <button
               type="button"
@@ -216,9 +214,9 @@
                   {{ 'products.product.quantity.note' | t }}
                 {%- endif -%}
               "
-              class="quantity-popover__info-button quantity-popover__info-button--icon-only button button--tertiary small-hide medium-hide no-js-hidden"
+              class="quantity-popover__info-button quantity-popover__info-button--icon-only button button--tertiary small-hide1 no-js-hidden"
             >
-              {{- 'icon-info.svg' | inline_asset_content -}}
+              {% render 'icon-info' %}
             </button>
             <div
               class="global-settings-popup quantity-popover__info"
@@ -247,11 +245,11 @@
                 {%- endif -%}
               </div>
               <button
-                class="button-close button button--tertiary large-up-hide"
+                class="button-close button button--tertiary medium-up-hide"
                 type="button"
                 aria-label="{{ 'accessibility.close' | t }}"
               >
-                {{- 'icon-close.svg' | inline_asset_content -}}
+                {%- render 'icon-close' -%}
               </button>
               {%- if variant.quantity_price_breaks.size > 0 -%}
                 <volume-pricing class="parent-display">
@@ -259,7 +257,7 @@
                     <li>
                       <span>{{ variant.quantity_rule.min }}+</span>
                       {%- assign price = variant.price | money_with_currency -%}
-                      <span>{{ 'content.each' | t: money: price }}</span>
+                      <span>{{ 'sections.quick_order_list.each' | t: money: price }}</span>
                     </li>
                     {%- for price_break in variant.quantity_price_breaks -%}
                       <li>
@@ -268,7 +266,7 @@
                           <span aria-hidden="true">+</span></span
                         >
                         {%- assign price = price_break.price | money_with_currency -%}
-                        <span> {{ 'content.each' | t: money: price }}</span>
+                        <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
                       </li>
                     {%- endfor -%}
                   </ul>
@@ -293,12 +291,10 @@
           >
             <a
               href="{{ item.url_to_remove }}"
-              class="button--tertiary"
-              aria-label="{{ 'content.remove_title' | t: title: item.title }}"
+              class="button button--tertiary"
+              aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
             >
-              <span class="svg-wrapper">
-                {{- 'icon-remove.svg' | inline_asset_content -}}
-              </span>
+              {% render 'icon-remove' %}
             </a>
           </quick-order-list-remove-button>
         {% endif %}
@@ -306,10 +302,10 @@
       {%- if has_popover -%}
         <button
           type="button"
-          class="quantity-popover__info-button quantity-popover__info-button--icon-with-label button button--tertiary large-up-hide"
+          class="quantity-popover__info-button quantity-popover__info-button--icon-with-label button button--tertiary medium-up-hide"
           aria-expanded="false"
         >
-          {{- 'icon-info.svg' | inline_asset_content -}}
+          {% render 'icon-info' %}
           <span>
             {%- if has_vol_pricing -%}
               {{ 'products.product.volume_pricing.note' | t }}
@@ -320,19 +316,27 @@
         </button>
       {%- endif -%}
       <div
-        class="variant-item__error large-up-hide"
+        class="variant-item__error medium-up-hide"
         id="Quick-order-list-item-error-mobile-{{ variant.id }}"
         role="alert"
       >
         <small class="variant-item__error-text"></small>
-        <span class="svg-wrapper">
-          {{- 'icon-error.svg' | inline_asset_content -}}
-        </span>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="icon icon-error"
+          viewBox="0 0 13 13"
+        >
+          <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+          <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+          <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+          <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+        </svg>
       </div>
     </quantity-popover>
   </td>
   {%- assign item_price = item.price | money -%}
-  <td class="variant-item__price small-hide medium-hide center">
+  <td class="variant-item__price small-hide">
     {%- if item.compare_at_price -%}
       <dl class="variant-item__discounted-prices">
         <dt class="visually-hidden">
@@ -360,14 +364,14 @@
                 {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
                   {%- assign variant_price = variant.price | money -%}
                   <span class="price-per-item--current price">
-                    {{- 'content.each' | t: money: variant_price -}}
+                    {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
                   </span>
                 {%- else -%}
                   {%- for price_break in volume_pricing_array -%}
                     {%- if cart_qty >= price_break.minimum_quantity -%}
                       {%- assign price_break_price = price_break.price | money -%}
                       <span class="price-per-item--current price">
-                        {{- 'content.each' | t: money: price_break_price -}}
+                        {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
                       </span>
                       {%- break -%}
                     {%- endif -%}
@@ -377,7 +381,7 @@
             </price-per-item>
           {%- else -%}
             <span class="price">
-              {{- 'content.each' | t: money: item_price -}}
+              {{ item_price }}{{- 'sections.quick_order_list.each' | t -}}
             </span>
           {%- endif -%}
         </dd>
@@ -396,14 +400,14 @@
             {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
               {%- assign variant_price = variant.price | money -%}
               <span class="price-per-item--current price">
-                {{- 'content.each' | t: money: variant_price -}}
+                {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
               </span>
             {%- else -%}
               {%- for price_break in volume_pricing_array -%}
                 {%- if cart_qty >= price_break.minimum_quantity -%}
                   {%- assign price_break_price = price_break.price | money -%}
                   <span class="price-per-item--current price">
-                    {{- 'content.each' | t: money: price_break_price -}}
+                    {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
                   </span>
                   {%- break -%}
                 {%- endif -%}
@@ -413,7 +417,7 @@
         </price-per-item>
       {%- else -%}
         <span class="price">
-          {{- 'content.each' | t: money: item_price -}}
+          {{ item_price }}{{- 'sections.quick_order_list.each' | t -}}
         </span>
       {%- endif -%}
     {%- endif -%}
@@ -431,7 +435,7 @@
       </div>
     {%- endif -%}
   </td>
-  <td class="variant-item__totals right small-hide medium-hide">
+  <td class="variant-item__totals right small-hide">
     {%- render 'loading-spinner' -%}
     {% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
     {% # theme-check-disable %}
@@ -439,14 +443,22 @@
     {% # theme-check-enable %}
   </td>
 </tr>
-<tr class="small-hide medium-hide hidden desktop-row-error">
+<tr class="small-hide hidden desktop-row-error">
   <td></td>
   <td>
     <div class="variant-item__error" id="Quick-order-list-item-error-desktop-{{ variant.id }}" role="alert">
       <small class="variant-item__error-text"></small>
-      <span class="svg-wrapper">
-        {{- 'icon-error.svg' | inline_asset_content -}}
-      </span>
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="icon icon-error"
+        viewBox="0 0 13 13"
+      >
+        <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+      </svg>
     </div>
   </td>
   <td></td>

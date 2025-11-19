@@ -1,53 +1,55 @@
 if (typeof window.compareColor === 'undefined') {
-
-    window.compareColor = function () {
+    window.compareColor = function() {
         class CompareColor extends HTMLElement {
             constructor() {
                 super();
 
-                this.init();
-            }
-
-            init() {
-                this.imageList = this.querySelector('.halo-compare-colors-image');
-                this.textList = this.querySelector('[class*="compare-colors-text"]');
+                this.popup = this;
+                this.imageList = $(this.querySelector('.halo-compareColors-image'));
+                this.textList = this.querySelector('.halo-compareColors-text');
                 this.sortTable = document.getElementById('sortTableList');
 
-                this.debouncedOnChange = this.debounce((event) => {
+                $(document).on('click', '[data-open-compare-color-popup]', (event) => {
+                    this.loadNode();
+                    this.setOpenPopup(event);
+                });
+
+                $(document).on('click', '[data-close-compare-color-popup]', (event) => {
+                    this.setClosePopup(event);
+                });
+
+                this.debouncedOnChange = debounce((event) => {
                     this.onChangeHandler(event);
-                    if (!this.classList.contains('node-loaded')) {
-                        this.loadNode();
-                    }
                 }, 0);
 
-                const list = this.querySelectorAll('ul li');
+                this.querySelector('ul') ? this.querySelector('ul').addEventListener('input', this.debouncedOnChange.bind(this)) : document.querySelector('.productView-compareColor')?.classList.add('hidden');
 
-                list.forEach((item) => {
-                    item.addEventListener('click', this.debouncedOnChange.bind(this));
-                });
-            }
-
-            debounce(fn, delay) {
-                let timer;
-                return function (...args) {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => fn.apply(this, args), delay);
-                };
+                document.body.addEventListener('click', this.onBodyClickEvent.bind(this));
             }
 
             loadNode() {
+                if (this.matches('.node-loaded')) return;
                 this.classList.add('node-loaded');
 
-                if (document.body.classList.contains('template-product')) {
-                    const urlScriptCC = this.dataset.urlScriptCompareColor;
+                const urlStyleCC = this.dataset.urlStyleCompareColor;
+                if (urlStyleCC != '') {
+                    const loadStyleSheet = document.createElement("link");
+                    loadStyleSheet.rel = 'stylesheet';
+                    loadStyleSheet.type = 'text/css';
+                    loadStyleSheet.href = urlStyleCC;
+                    this.parentNode.insertBefore(loadStyleSheet, this);
+                }
 
-                    if (urlScriptCC && !document.body.classList.contains('sortable-loader')) {
+                if (document.body.matches('.template-product')) {
+                    const urlScriptCC = this.dataset.urlScriptCompareColor;
+                    
+                    if (urlScriptCC != '' && !document.body.matches('.sortable-loader')) {
                         document.body.classList.add('sortable-loader');
                         const loadScript = document.createElement("script");
                         loadScript.src = urlScriptCC;
                         document.body.appendChild(loadScript);
                     }
-
+        
                     setTimeout(() => {
                         if (window.innerWidth >= 1025 && this.sortTable) {
                             new Sortable(this.sortTable, {
@@ -56,62 +58,71 @@ if (typeof window.compareColor === 'undefined') {
                         } else {
                             this.onRemoveHandler();
                         }
-                    }, 200);
+                    }, 200)
                 }
             }
 
-            onChangeHandler(event) {
+            setOpenPopup(event){
+                event.preventDefault();
+                event.stopPropagation();
+
+                document.body.classList.add('compare-color-show');
+                if (document.body.classList.contains('quick-view-show')) {
+                    $('.halo-popup-content .halo-compare-color-popup').addClass('is-show');
+                }
+                else {
+                    $('#MainContent .halo-compare-color-popup').addClass('is-show');
+                }
+            }
+
+            setClosePopup(event){
+                event.preventDefault();
+                event.stopPropagation();
+
+                document.body.classList.remove('compare-color-show');
+                $('.halo-compare-color-popup').removeClass('is-show');
+            }
+
+            onChangeHandler(event){
                 event.preventDefault();
 
-                const itemSwatch = event.target;
-                const label = itemSwatch.closest('.swatch');
-                const id = label.getAttribute('data-value');
+                var input = event.target,
+                    label = input.nextElementSibling,
+                    id = input.value;
 
-                if (!itemSwatch.classList.contains('active')) {
-                    const title = label.getAttribute('data-title');
-                    const image = label.getAttribute('data-variant-img');
-                    const item = document.createElement('div');
-                    item.className = `item item-${id} item-compare-color`;
-                    item.innerHTML = `
-                        <span class="image"><img src="${image}" alt="${title}"></span>
-                        <span class="title center">${title}</span>
-                    `;
-                    this.imageList.appendChild(item);
-                    itemSwatch.classList.add('active');
+                if(input.checked){
+                    var title = label.getAttribute('title'),
+                        image = label.getAttribute('data-variant-img'),
+                        item = `<div class="item item-${id} item-compare-color"><span class="image"><img src="${image}" alt="${title}"></span><span class="title text-center">${title}</span></div>`;
+
+                    this.imageList.append(item);
                 } else {
-                    const item = this.imageList.querySelector(`.item-${id}`);
-                    if (item) item.remove();
-                    itemSwatch.classList.remove('active');
+                    this.imageList.find(`.item-${id}`).remove();
                 }
 
-                if (this.imageList.children.length > 0) {
+                if(this.imageList.children().length > 0){
                     this.textList.style.display = 'none';
-                } else {
+                } else{
                     this.textList.style.display = 'block';
                 }
             }
 
-            onRemoveHandler() {
-                this.imageList.addEventListener('click', (event) => {
-                    const item = event.target.closest('.item');
-                    if (item) {
-                        event.preventDefault();
-                        const classList = Array.from(item.classList);
-                        const itemIdClass = classList.find(cls => cls.startsWith('item-') && !cls.includes('compare-color'));
-                        const itemId = itemIdClass?.replace('item-', '');
-                        const optionId = `swatch-compare-color-${itemId}`;
-                        const input = document.getElementById(optionId);
+            onRemoveHandler(){
+                this.imageList.on('click', '.item', (event) => {
+                    event.preventDefault();
 
-                        if (input) {
-                            input.click();
-                        }
-                    }
+                    var $target = event.currentTarget,
+                        itemId = $target.classList[1].replace('item-', ''),
+                        optionId = `swatch-compare-color-${itemId}`,
+                        item = $(document.getElementById(optionId));
+
+                    item.trigger('click');
                 });
             }
 
-            onBodyClickEvent(event) {
-                if (document.body.classList.contains('compare-color-show')) {
-                    if (!this.contains(event.target) && !event.target.closest('[data-open-compare-color-popup], .halo-popup-content')) {
+            onBodyClickEvent(event){
+                if(document.body.classList.contains('compare-color-show')){
+                    if ((!this.contains(event.target)) && ($(event.target).closest('[data-open-compare-color-popup], .halo-popup-content').length === 0)){
                         this.setClosePopup(event);
                     }
                 }
@@ -121,5 +132,16 @@ if (typeof window.compareColor === 'undefined') {
         customElements.define('compare-color', CompareColor);
     };
 
-    window.compareColor();
+    var quickViewShow = document.body.classList.contains('quick-view-show'),
+        productCompareColor = $('.halo-productView .productView-compareColor').length;
+
+    if (document.body.classList.contains('template-product')) {
+        if (!quickViewShow && productCompareColor) {
+            window.compareColor();
+        } else if (quickViewShow && productCompareColor === 0) {
+            window.compareColor();
+        }
+    } else {
+        window.compareColor();
+    }
 }

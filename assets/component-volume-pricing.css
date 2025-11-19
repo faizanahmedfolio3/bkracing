@@ -4,15 +4,16 @@ volume-pricing {
 }
 
 volume-pricing li:nth-child(odd) {
-  background: rgb(var(--color-foreground-rgb) / var(--opacity-4));
+  background: #efefef;
 }
 
 volume-pricing ul {
-  margin-top: 1.2rem;
+  margin-top: 1.2rem !important;
+  margin-bottom: 1.2rem !important;
 }
 
 volume-pricing li {
-  font-size: var(--font-size--sm);
+  font-size: 1.4rem;
   letter-spacing: 0.06rem;
   padding: 0.6rem 0.8rem;
   display: flex;
@@ -20,7 +21,7 @@ volume-pricing li {
 }
 
 div.volume-pricing-note {
-  margin-top: -2.6rem;
+  margin-top: 6px;
 }
 
 .product--no-media .volume-pricing-note {
@@ -33,12 +34,19 @@ div.volume-pricing-note {
 
 .volume-pricing-note span,
 volume-pricing .label-show-more {
-  font-size: var(--font-size--2xs);
+  font-size: 1.2rem;
   letter-spacing: 0.07rem;
 }
 
 volume-pricing show-more-button {
   margin-top: 0.8rem;
+}
+
+volume-pricing show-more-button .button-show-more {
+    background: var(--btn-2-bg);
+    border-color: var(--btn-2-border);
+    color: var(--btn-2-color);
+    border: 0;
 }
 
 .product-form__input price-per-item,
@@ -49,8 +57,8 @@ volume-pricing show-more-button {
 }
 
 .product-form__input .price-per-item {
-  color: var(--color-foreground);
-  font-size: var(--font-size--sm);
+  color: rgba(var(--color-foreground));
+  font-size: 1.4rem;
   letter-spacing: 0.06rem;
 }
 
@@ -64,7 +72,43 @@ volume-pricing show-more-button {
 
 .price-per-item__container .variant-item__old-price,
 .price__regular .variant-item__old-price {
-  color: rgb(var(--color-foreground-rgb) / var(--opacity-75));
-  font-size: var(--font-size--2xs);
+  color: rgba(var(--color-foreground), 0.75);
+  font-size: 1.2rem;
   letter-spacing: 0.07rem;
+}
+
+.quantity__rules.caption {
+  margin-top: 15px;
+}
+
+.wrapper-price-volumn {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.wrapper-price-volumn price-per-item {
+  margin-bottom: 12px;
+}
+
+.style-arrows-8 .volume-pricing-note span {
+  font-size: 1.3rem;
+}
+
+.style-arrows-8 .quantity__rules {
+  font-size: 1.4rem;
+}
+
+.productView-group .variant-item__old-price,
+.wrapper-price-volumn .variant-item__old-price {
+  display: none;
+}
+
+.productView-group .price-per-item {
+  margin-top: 12px;
+}
+
+.quantity__rules .divider + .divider::before {
+  content: '\2022';
+  margin: 0 0.5rem;
 }

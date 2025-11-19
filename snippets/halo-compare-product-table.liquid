@@ -1,12 +1,15 @@
-<div class="halo-compare-product-content">
-	<div class="relative max-w-full max-h-full overflow-x-a">
-		<table class="compareTable relative">
+<div class="halo-compareProduct-content">
+	<div class="halo-compareProduct-table custom-scrollbar-x">
+		<table class="compareTable">
 			<thead>
-				<tr class="compare-table-row">
-					{%- assign headings = 'product,sku,description,collection,availability,product_type,other_details' | split: ',' -%}
-					{%- for heading in headings -%}
-						<th class="compareTable-heading center font-bold uppercase body-l-font-size"><span class="whitespace-nowrap">{{ 'content.compare.' | append: heading | t }}</span></th>
-					{%- endfor -%}
+				<tr class="compareTable-row">
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.product' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.sku' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.description' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.collection' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.availability' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.product_type' | t }}</span></th>
+					<th class="compareTable-heading"><span class="compareTable-headingText">{{ 'compare.general.other_details' | t }}</span></th>
 				</tr>
 			</thead>
 			<tbody></tbody>

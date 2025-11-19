@@ -16,14 +16,11 @@ if (!customElements.get('show-more-button')) {
       expandShowMore(event) {
         const parentDisplay = event.target.closest('[id^="Show-More-"]').closest('.parent-display');
         const parentWrap = parentDisplay.querySelector('.parent-wrap');
-        const currentHeight = parentWrap.clientHeight * 2;
         this.querySelectorAll('.label-text').forEach((element) => element.classList.toggle('hidden'));
         parentDisplay.querySelectorAll('.show-more-item').forEach((item) => item.classList.toggle('hidden'));
         if (!this.querySelector('.label-show-less')) {
           this.classList.add('hidden');
         }
-
-        parentWrap.style.maxHeight = currentHeight + 'px';
       }
     }
   );

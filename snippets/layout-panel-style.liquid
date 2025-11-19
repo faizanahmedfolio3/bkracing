@@ -6,9 +6,6 @@
       settings: {block.settings || section.settings}
   endcomment
 
-  assign content_direction = custom_content_direction | default: settings.content_direction
-  assign content_direction_tablet = custom_content_direction_tablet | default: settings.content_direction_tablet
-  assign content_direction_mobile = custom_content_direction_mobile | default: settings.content_direction_mobile
   assign horizontal_alignment = settings.horizontal_alignment
 
   assign vertical_alignment = settings.vertical_alignment
@@ -16,55 +13,21 @@
     assign vertical_alignment = 'last baseline'
   endif
 
-  unless content_direction == 'row'
-    assign horizontal_alignment = settings.horizontal_alignment_flex_direction_column | default: settings.horizontal_alignment
-    assign vertical_alignment = settings.vertical_alignment_flex_direction_column | default: settings.vertical_alignment
+  unless settings.content_direction == 'row'
+    assign horizontal_alignment = settings.horizontal_alignment_flex_direction_column
+    assign vertical_alignment = settings.vertical_alignment_flex_direction_column
   endunless
 
-  assign horizontal_alignment_tablet = settings.horizontal_alignment_tablet
-  assign vertical_alignment_tablet = settings.vertical_alignment_tablet
+  assign vertical_alignment_mobile = vertical_alignment
 
-  unless content_direction_tablet == 'row'
-    assign horizontal_alignment_tablet = settings.horizontal_alignment_flex_direction_column_tablet
-    assign vertical_alignment_tablet = settings.vertical_alignment_flex_direction_column_tablet
-  endunless
-
-  assign horizontal_alignment_mobile = settings.horizontal_alignment_mobile
-  assign vertical_alignment_mobile = settings.vertical_alignment_mobile
-
-  unless content_direction_mobile == 'row'
-    assign horizontal_alignment_mobile = settings.horizontal_alignment_flex_direction_column_mobile
-    assign vertical_alignment_mobile = settings.vertical_alignment_flex_direction_column_mobile
-  endunless
-
-  if horizontal_alignment_mobile == blank
-    assign horizontal_alignment_mobile = horizontal_alignment
-  endif
-
-  if vertical_alignment_mobile == blank
-    assign vertical_alignment_mobile = vertical_alignment
+  if settings.vertical_on_mobile and vertical_alignment == 'last baseline'
+    assign vertical_alignment_mobile = 'flex-end'
   endif
 -%}
 
---flex-direction: {{ content_direction | default: 'column' }};
---flex-wrap: {{ settings.wrap | default: 'nowrap' }};
-{%- if settings.wrap_tablet -%}
-  --flex-wrap-tablet: {{ settings.wrap_tablet }};
-{%- endif -%}
+--flex-direction: {{ settings.content_direction | default: 'column' }}; --flex-wrap: nowrap;
 
---flex-direction-mobile: {{ settings.content_direction_mobile | default: 'column' }};
-{%- render 'gap-style', value: settings.gap, scale_min: scale_min -%}
---horizontal-alignment: {{ horizontal_alignment }};
-{%- if horizontal_alignment_tablet != blank -%}
-  --horizontal-alignment-tablet: {{ horizontal_alignment_tablet }};
-{%- endif -%}
-{%- if horizontal_alignment_mobile != blank -%}
-  --horizontal-alignment-mobile: {{ horizontal_alignment_mobile }};
-{%- endif -%}
---vertical-alignment: {{ vertical_alignment }};
-{%- if vertical_alignment_tablet != blank -%}
-  --vertical-alignment-tablet: {{ vertical_alignment_tablet }};
-{%- endif -%}
-{%- if vertical_alignment_mobile != blank -%}
-  --vertical-alignment-mobile: {{ vertical_alignment_mobile }};
-{%- endif -%}
+{% render 'gap-style', value: settings.gap %}
+
+--horizontal-alignment: {{ horizontal_alignment }}; --vertical-alignment: {{ vertical_alignment }};
+--vertical-alignment-mobile: {{ vertical_alignment_mobile }};
