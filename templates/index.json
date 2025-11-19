@@ -573,7 +573,7 @@
             "align_items_spacing_top_bottom_position_mb": 0,
             "align_items_spacing_top": 40,
             "align_items_spacing_bottom": 40,
-            "align_items_spacing_lr": 10,
+            "align_items_spacing_lr": 40,
             "sub_title": "",
             "border_sub_title": false,
             "color_sub_title": "#ffffff",
@@ -582,7 +582,7 @@
             "mg_bottom_sub_title": 10,
             "title": "Performance Parts",
             "color_title": "#ffffff",
-            "fontsize_title": 30,
+            "fontsize_title": 40,
             "fontsize_title_mb": 20,
             "font_weight_title": "500",
             "enable_style_italic": false,
@@ -802,7 +802,7 @@
         "center_mode": false,
         "item_distance": 0,
         "item_radius": 0,
-        "enable_arrows": true,
+        "enable_arrows": false,
         "enable_arrows_mb": false,
         "position_horizontal_slick_arrow": "0",
         "enable_dots": false,
@@ -864,175 +864,12 @@
         "shadow_spread": 0,
         "shadow_color": "transparent",
         "shadow_inset": "no",
-        "mg_top_desktop": 100,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 30,
-        "mg_bottom_desktop": 100,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 30
-      }
-    },
-    "1634272671c17064b9": {
-      "type": "brand-slider",
-      "blocks": {
-        "b1d10b76-8345-438d-87a7-5a17087c36a8": {
-          "type": "image",
-          "settings": {
-            "title": "<b>COSMOPOLIS</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-featured"
-          }
-        },
-        "ef133e5f-4e7f-448a-a391-7f8c009ef225": {
-          "type": "image",
-          "settings": {
-            "title": "<b>SUITÓ</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-new"
-          }
-        },
-        "96ba5e66-2f5e-4fa2-83e2-3415c2a6ebe5": {
-          "type": "image",
-          "settings": {
-            "title": "<b>MILANCÉLOS</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-featured"
-          }
-        },
-        "a4653c1b-fa80-478a-a7eb-bc85962cd5c8": {
-          "type": "image",
-          "settings": {
-            "title": "<b>BLAZÉRO</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-new"
-          }
-        },
-        "e2700fc7-1fc8-4c31-bb16-de6d09a0b7ec": {
-          "type": "image",
-          "settings": {
-            "title": "<b>LA COSMÓ</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-all"
-          }
-        },
-        "7f80f897-e16c-4551-8c19-2420147acf4d": {
-          "type": "image",
-          "settings": {
-            "title": "<b>PULVINAR</b><br>SERIES",
-            "color_text": "#232323",
-            "color_text_hover": "#232323",
-            "description": "",
-            "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-featured"
-          }
-        }
-      },
-      "block_order": [
-        "b1d10b76-8345-438d-87a7-5a17087c36a8",
-        "ef133e5f-4e7f-448a-a391-7f8c009ef225",
-        "96ba5e66-2f5e-4fa2-83e2-3415c2a6ebe5",
-        "a4653c1b-fa80-478a-a7eb-bc85962cd5c8",
-        "e2700fc7-1fc8-4c31-bb16-de6d09a0b7ec",
-        "7f80f897-e16c-4551-8c19-2420147acf4d"
-      ],
-      "settings": {
-        "container": "container",
-        "padding_full_width": 0,
-        "brands_block_style": "style_1",
-        "brand_layout": "slider",
-        "scroll_from": "ltr",
-        "brand_scroll_time": "20",
-        "display_brand_border": true,
-        "brand_bg": "#f8f8f8",
-        "brand_bg_gradient": "",
-        "title_align": "center",
-        "brand_title": "",
-        "color_title": "#232323",
-        "fontsize_title": 16,
-        "fontsize_title_mb": 16,
-        "mg_bottom_title": 12,
-        "mg_bottom_title_mb": 12,
-        "enable_border_title": false,
-        "border_color_title": "#051c42",
-        "brand_des": "",
-        "color_des": "#3c3c3c",
-        "fontsize_des": 16,
-        "mg_bottom_des": 0,
-        "view_all": "",
-        "view_all_fs": 12,
-        "font_weight_view_all": "400",
-        "mg_bottom_view": 30,
-        "enable_border_view_all": true,
-        "link_view_all": "",
-        "color_view_all": "#3c3c3c",
-        "icon_view_all": "",
-        "color_view_all_icon": "#eb492f",
-        "view_all_icon_side": "left",
-        "spacing_view_all_icon": 0,
-        "btn_text": "",
-        "btn_link": "",
-        "fontsize_btn": 12,
-        "btn_spacing_top": 15,
-        "enable_button_icon": false,
-        "button_border_radius": 0,
-        "btn_color": "#828282",
-        "btn_border_color": "rgba(0,0,0,0)",
-        "btn_background_color": "rgba(0,0,0,0)",
-        "btn_color_hover": "#828282",
-        "btn_border_color_hover": "rgba(0,0,0,0)",
-        "btn_background_color_hover": "rgba(0,0,0,0)",
-        "enable_autoplay": false,
-        "brand_speed": "3000",
-        "brand_rows": "6",
-        "enable_arrows": true,
-        "enable_dots": false,
-        "enable_center_mode": false,
-        "style_position_arrows": "none",
-        "position_horizontal_arrow": 15,
-        "color_arrow": "",
-        "arrow_background": "",
-        "arrow_background_gradient": "",
-        "arrow_border": "",
-        "color_arrow_hover": "",
-        "arrow_background_hover": "",
-        "arrow_background_gradient_hover": "",
-        "arrow_border_hover": "",
-        "brand_rows_mb": "2",
-        "brand_image_ratio": "square",
-        "item_distance": 15,
-        "margin_bottom_image": 0,
-        "margin_bottom_image_mb": 0,
-        "brand_item_border": "none",
-        "border_radius": 0,
-        "border_color": "#e2e5e7",
-        "border_color_hover": "#2d2d2d",
-        "hover_effect": "zoom",
-        "color_border_image_hover": "#000000",
-        "fontsize_text": 16,
-        "fontsize_text_mb": 13,
-        "font_weight_title": "400",
-        "margin_bottom_title": 0,
-        "mg_top_desktop": 70,
-        "mg_top_tablet": 35,
-        "mg_top_mobile": 30,
-        "mg_bottom_desktop": 55,
-        "mg_bottom_tablet": 30,
-        "mg_bottom_mobile": 25
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "1635930670b6b2f58d": {
@@ -1224,6 +1061,169 @@
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 40,
+        "mg_bottom_mobile": 25
+      }
+    },
+    "1634272671c17064b9": {
+      "type": "brand-slider",
+      "blocks": {
+        "b1d10b76-8345-438d-87a7-5a17087c36a8": {
+          "type": "image",
+          "settings": {
+            "title": "<b>COSMOPOLIS</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-featured"
+          }
+        },
+        "ef133e5f-4e7f-448a-a391-7f8c009ef225": {
+          "type": "image",
+          "settings": {
+            "title": "<b>SUITÓ</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-new"
+          }
+        },
+        "96ba5e66-2f5e-4fa2-83e2-3415c2a6ebe5": {
+          "type": "image",
+          "settings": {
+            "title": "<b>MILANCÉLOS</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-featured"
+          }
+        },
+        "a4653c1b-fa80-478a-a7eb-bc85962cd5c8": {
+          "type": "image",
+          "settings": {
+            "title": "<b>BLAZÉRO</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-new"
+          }
+        },
+        "e2700fc7-1fc8-4c31-bb16-de6d09a0b7ec": {
+          "type": "image",
+          "settings": {
+            "title": "<b>LA COSMÓ</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-all"
+          }
+        },
+        "7f80f897-e16c-4551-8c19-2420147acf4d": {
+          "type": "image",
+          "settings": {
+            "title": "<b>PULVINAR</b><br>SERIES",
+            "color_text": "#232323",
+            "color_text_hover": "#232323",
+            "description": "",
+            "color_des": "#3c3c3c",
+            "link": "shopify://collections/collection-home-03-featured"
+          }
+        }
+      },
+      "block_order": [
+        "b1d10b76-8345-438d-87a7-5a17087c36a8",
+        "ef133e5f-4e7f-448a-a391-7f8c009ef225",
+        "96ba5e66-2f5e-4fa2-83e2-3415c2a6ebe5",
+        "a4653c1b-fa80-478a-a7eb-bc85962cd5c8",
+        "e2700fc7-1fc8-4c31-bb16-de6d09a0b7ec",
+        "7f80f897-e16c-4551-8c19-2420147acf4d"
+      ],
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "brands_block_style": "style_1",
+        "brand_layout": "slider",
+        "scroll_from": "ltr",
+        "brand_scroll_time": "20",
+        "display_brand_border": true,
+        "brand_bg": "#f8f8f8",
+        "brand_bg_gradient": "",
+        "title_align": "center",
+        "brand_title": "",
+        "color_title": "#232323",
+        "fontsize_title": 16,
+        "fontsize_title_mb": 16,
+        "mg_bottom_title": 12,
+        "mg_bottom_title_mb": 12,
+        "enable_border_title": false,
+        "border_color_title": "#051c42",
+        "brand_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "mg_bottom_des": 0,
+        "view_all": "",
+        "view_all_fs": 12,
+        "font_weight_view_all": "400",
+        "mg_bottom_view": 30,
+        "enable_border_view_all": true,
+        "link_view_all": "",
+        "color_view_all": "#3c3c3c",
+        "icon_view_all": "",
+        "color_view_all_icon": "#eb492f",
+        "view_all_icon_side": "left",
+        "spacing_view_all_icon": 0,
+        "btn_text": "",
+        "btn_link": "",
+        "fontsize_btn": 12,
+        "btn_spacing_top": 15,
+        "enable_button_icon": false,
+        "button_border_radius": 0,
+        "btn_color": "#828282",
+        "btn_border_color": "rgba(0,0,0,0)",
+        "btn_background_color": "rgba(0,0,0,0)",
+        "btn_color_hover": "#828282",
+        "btn_border_color_hover": "rgba(0,0,0,0)",
+        "btn_background_color_hover": "rgba(0,0,0,0)",
+        "enable_autoplay": false,
+        "brand_speed": "3000",
+        "brand_rows": "6",
+        "enable_arrows": true,
+        "enable_dots": false,
+        "enable_center_mode": false,
+        "style_position_arrows": "none",
+        "position_horizontal_arrow": 15,
+        "color_arrow": "",
+        "arrow_background": "",
+        "arrow_background_gradient": "",
+        "arrow_border": "",
+        "color_arrow_hover": "",
+        "arrow_background_hover": "",
+        "arrow_background_gradient_hover": "",
+        "arrow_border_hover": "",
+        "brand_rows_mb": "2",
+        "brand_image_ratio": "square",
+        "item_distance": 15,
+        "margin_bottom_image": 0,
+        "margin_bottom_image_mb": 0,
+        "brand_item_border": "none",
+        "border_radius": 0,
+        "border_color": "#e2e5e7",
+        "border_color_hover": "#2d2d2d",
+        "hover_effect": "zoom",
+        "color_border_image_hover": "#000000",
+        "fontsize_text": 16,
+        "fontsize_text_mb": 13,
+        "font_weight_title": "400",
+        "margin_bottom_title": 0,
+        "mg_top_desktop": 70,
+        "mg_top_tablet": 35,
+        "mg_top_mobile": 30,
+        "mg_bottom_desktop": 55,
+        "mg_bottom_tablet": 30,
         "mg_bottom_mobile": 25
       }
     },
