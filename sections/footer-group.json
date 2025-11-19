@@ -19,7 +19,11 @@
           "settings": {
             "newsletter_content_direction": "column",
             "newsletter_form_justify_content": "center",
+            "spacing_tb": 75,
+            "custom_width": false,
+            "width": "",
             "section_title": "NEWSLETTER SIGN UP",
+            "special_text": "",
             "section_title_font_size": 20,
             "section_title_font_size_mb": 16,
             "section_title_font_weight": "600",
@@ -28,15 +32,27 @@
             "section_title_color": "#ffffff",
             "mg_bottom_title": 0,
             "mg_bottom_title_mb": 0,
+            "section_subtitle": "",
+            "section_subtitle_font_size": 16,
+            "section_subtitle_font_size_mb": 24,
+            "section_subtitle_font_weight": "400",
+            "section_subtitle_text_transform": "none",
+            "section_subtitle_font_style": "normal",
+            "section_subtitle_color": "#191919",
+            "mg_bottom_subtitle": 0,
+            "mg_bottom_subtitle_mb": 0,
+            "show_between_input_button": false,
             "section_description": "<p>Receive our latest updates about our products and promotions.</p>",
             "section_description_font_size": 14,
             "section_description_font_size_mb": 14,
             "section_description_font_weight": "400",
             "section_description_color": "#b0b4b8",
             "margin_bottom_des": 18,
+            "button_style": "text",
             "button_text": "SUBMIT",
             "button_font_size": 16,
             "button_width": 150,
+            "button_border_radius": 0,
             "button_text_color": "#ffffff",
             "button_border_color": "#f84248",
             "button_background_color": "#f84248",
@@ -47,6 +63,8 @@
             "button_gradient_color_hover": "",
             "button_text_transform": "uppercase",
             "button_font_weight": "600",
+            "show_box_shadow_button": false,
+            "shadow_color_button": "rgba(0,0,0,0)",
             "show_input_field": true,
             "input_style": "style_1",
             "input_placeholder": "enter your email address",
@@ -57,7 +75,9 @@
             "input_background_color": "#ffffff",
             "input_border_color": "#ffffff",
             "form_gap": 10,
-            "input_width_behavior": "auto"
+            "input_width_behavior": "auto",
+            "show_box_shadow_input": false,
+            "shadow_color_input": "rgba(0,0,0,0)"
           }
         }
       },
@@ -67,11 +87,13 @@
       "settings": {
         "container": "container",
         "padding_full_width": 0,
-        "background": "#232830",
+        "background": "#1a212a",
         "background_gradient": "",
+        "enable_parallax": true,
         "section_text_align": "center",
         "justify_section_content": "center",
         "section_item_distance": 20,
+        "enable_social_media_below": false,
         "mg_top_desktop": 60,
         "mg_top_tablet": 30,
         "mg_top_mobile": 20,
@@ -88,7 +110,7 @@
           "settings": {
             "custom_width": "25",
             "heading": "Categories",
-            "menu": "shop",
+            "menu": "footer",
             "mg_bottom": 0
           }
         },
@@ -97,16 +119,7 @@
           "settings": {
             "custom_width": "25",
             "heading": "Further Info.",
-            "menu": "about",
-            "mg_bottom": 0
-          }
-        },
-        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-0": {
-          "type": "link_list",
-          "settings": {
-            "custom_width": "25",
-            "heading": "Customer Service",
-            "menu": "customer-service",
+            "menu": "footer-menu-2",
             "mg_bottom": 0
           }
         },
@@ -122,10 +135,10 @@
             "address_text": "<p>685 Market Street</p><p>San Francisco, CA 94105, US</p>",
             "phone_icon": "phone_icon",
             "show_phone_icon": true,
-            "phone_text": "<p>Call us: <a href=\"tel:%20(090)%20123-ELLA\">(090) 123-EIIA</a></p>",
+            "phone_text": "<p>Call us: 00-0000000</p>",
             "email_icon": "envelope_outline_icon",
             "show_email_icon": true,
-            "email_text": "<p>Email:<a href=\"mailto:example@domain.com\">example@domain.com</a> </p>",
+            "email_text": "<p>Email:<a href=\"mailto:info@bkracing.com\" title=\"mailto:info@bkracing.com\">info@bkracing.com</a></p>",
             "icon_size": 22,
             "icon_color": "#d1d2d3",
             "content_spacing": 15,
@@ -152,7 +165,6 @@
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-5": {
           "type": "trust_image",
           "settings": {
-            "image_trust": "shopify://shop_images/trust.png",
             "margin_top_image_trust": 50,
             "image_trust_align": "center"
           }
@@ -169,7 +181,7 @@
             "footer_bottom_bg_gradient": "",
             "show_copyright": true,
             "enable_layout_grid": true,
-            "copyright_content": "<p>Ella Demo. Powered By Shopify. Shopify Themes By HaloThemes.Com</p>",
+            "copyright_content": "<p>This form is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply. © 2025</p>",
             "copyright_content_color": "#d1d2d3",
             "show_payment": true,
             "payment_margin_top": 0,
@@ -177,21 +189,21 @@
             "payment_type": "custom",
             "show_payment_visa": true,
             "show_payment_master": true,
-            "show_payment_maestro": true,
+            "show_payment_maestro": false,
             "show_payment_american_express": true,
             "show_payment_apple_pay": true,
             "show_payment_bitcoin": false,
             "show_payment_dankort": false,
             "show_payment_diners_club": false,
-            "show_payment_discover": false,
+            "show_payment_discover": true,
             "show_payment_paypal": false,
             "show_payment_dogecoin": false,
             "show_payment_dwolla": false,
             "show_payment_forbrugsforeningen": false,
-            "show_payment_jcb": false,
+            "show_payment_jcb": true,
             "show_payment_litecoin": false,
             "show_payment_afterpay": false,
-            "show_payment_google_pay": false,
+            "show_payment_google_pay": true,
             "show_payment_ideal": false,
             "show_payment_klarna": false,
             "show_payment_klarna-pay-later": false,
@@ -203,7 +215,6 @@
       "block_order": [
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-1",
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-2",
-        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-0",
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-4",
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-5",
         "cf4d3462-37d6-4f22-a28b-1aa0a70e178b"
@@ -217,6 +228,7 @@
         "type_footer_heading_font_weight": "700",
         "type_footer_heading_font_style": "normal",
         "type_footer_heading_text_transform": "uppercase",
+        "type_footer_heading_margin_bottom": 12,
         "type_footer_heading_letter_spacing": ".02em",
         "type_footer_link": "font_1",
         "type_footer_link_font_size": 14,
@@ -228,7 +240,7 @@
         "border_footer_top_color": "#282828",
         "pdtop_footer_top": 35,
         "pdbottom_footer_top": 50,
-        "footer_top_bg": "#232830",
+        "footer_top_bg": "#1a212a",
         "footer_top_bg_gradient": "",
         "show_footer_top_bg_img": false,
         "footer_top_bg_position_x": "center",
