@@ -108,7 +108,7 @@
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-1": {
           "type": "link_list",
           "settings": {
-            "custom_width": "25",
+            "custom_width": "33",
             "heading": "Categories",
             "menu": "footer",
             "mg_bottom": 0
@@ -117,7 +117,7 @@
         "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-2": {
           "type": "link_list",
           "settings": {
-            "custom_width": "25",
+            "custom_width": "33",
             "heading": "Further Info.",
             "menu": "footer-menu-2",
             "mg_bottom": 0
