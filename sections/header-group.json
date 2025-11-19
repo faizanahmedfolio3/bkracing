@@ -133,6 +133,7 @@
       "blocks": {
         "sections--14682829619277__cee5e8bf-bc87-4f80-a26d-8bc03f0dca97-16808536000ac75523-0": {
           "type": "logo",
+          "disabled": true,
           "settings": {
             "logo_position": "sticky_menu",
             "logo_width": 100,
@@ -150,8 +151,8 @@
             "menu": "main-menu",
             "menu_top_spacing": 13,
             "menu_bottom_spacing": 13,
-            "grid_gap_menu_item": 15,
-            "alignment": "left",
+            "grid_gap_menu_item": 18,
+            "alignment": "center",
             "bg_mega_menu": "#ffffff",
             "bg_mega_menu_gradient": "",
             "lv_1_color": "#ffffff",
@@ -188,7 +189,7 @@
             "vertical_menu": "",
             "auto_show_index": true,
             "title_categories": "Categories",
-            "title_categories_font_size": 12,
+            "title_categories_font_size": 23,
             "title_categories_color": "#ffffff",
             "icon_title_categories_color": "#ffffff",
             "title_categories_border_color": "#dedede",
@@ -208,6 +209,7 @@
         },
         "sections--14682829619277__cee5e8bf-bc87-4f80-a26d-8bc03f0dca97-16808536000ac75523-2": {
           "type": "header_icons",
+          "disabled": true,
           "settings": {
             "customer_service_text": "",
             "show_help": false,
