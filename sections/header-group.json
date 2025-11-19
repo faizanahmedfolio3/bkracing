@@ -89,7 +89,7 @@
           "settings": {
             "color": "#ffffff",
             "show_wishlist_number": false,
-            "wishlist_text_size": 14,
+            "wishlist_text_size": 12,
             "wishlist_color_item": "#ffffff",
             "wishlist_bg_item": "#232323"
           }
@@ -117,6 +117,9 @@
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-3",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-4",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-5"
+      ],
+      "custom_css": [
+        ".wishlist-text,.customer-links, .cart-text {display: none !important;}"
       ],
       "settings": {
         "container": "1370",
