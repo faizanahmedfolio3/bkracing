@@ -775,8 +775,8 @@
         "39958ac5-c103-451a-89de-47ae729b4c1d"
       ],
       "settings": {
-        "container": "fullwidth",
-        "padding_full_width": 0,
+        "container": "container",
+        "padding_full_width": 50,
         "disable_padding_content": false,
         "enable_border_top": false,
         "enable_border_bottom": false,
