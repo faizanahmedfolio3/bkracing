@@ -11,115 +11,176 @@
   "type": "footer",
   "name": "Footer Group",
   "sections": {
-    "footer-1": {
-      "type": "footer-01",
+    "ab264fd4-7aa0-40d6-b7e9-db6a61baba53": {
+      "type": "newsletter",
       "blocks": {
-        "592a8373-a70d-47d3-a311-321a645e1f14": {
+        "3c71eb67-386f-4ca9-93b5-6a9071eaf804": {
+          "type": "newsletter",
+          "settings": {
+            "newsletter_content_direction": "column",
+            "newsletter_form_justify_content": "center",
+            "section_title": "NEWSLETTER SIGN UP",
+            "section_title_font_size": 20,
+            "section_title_font_size_mb": 16,
+            "section_title_font_weight": "600",
+            "section_title_text_transform": "none",
+            "section_title_font_style": "normal",
+            "section_title_color": "#ffffff",
+            "mg_bottom_title": 0,
+            "mg_bottom_title_mb": 0,
+            "section_description": "<p>Receive our latest updates about our products and promotions.</p>",
+            "section_description_font_size": 14,
+            "section_description_font_size_mb": 14,
+            "section_description_font_weight": "400",
+            "section_description_color": "#b0b4b8",
+            "margin_bottom_des": 18,
+            "button_text": "SUBMIT",
+            "button_font_size": 16,
+            "button_width": 150,
+            "button_text_color": "#ffffff",
+            "button_border_color": "#f84248",
+            "button_background_color": "#f84248",
+            "button_gradient_color": "",
+            "button_text_color_hover": "#ffffff",
+            "button_border_color_hover": "#232323",
+            "button_background_color_hover": "#232323",
+            "button_gradient_color_hover": "",
+            "button_text_transform": "uppercase",
+            "button_font_weight": "600",
+            "show_input_field": true,
+            "input_style": "style_1",
+            "input_placeholder": "enter your email address",
+            "input_text_font_size": 14,
+            "input_width": 480,
+            "input_border_radius": 0,
+            "input_placeholder_color": "#505050",
+            "input_background_color": "#ffffff",
+            "input_border_color": "#ffffff",
+            "form_gap": 10,
+            "input_width_behavior": "auto"
+          }
+        }
+      },
+      "block_order": [
+        "3c71eb67-386f-4ca9-93b5-6a9071eaf804"
+      ],
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "background": "#232830",
+        "background_gradient": "",
+        "section_text_align": "center",
+        "justify_section_content": "center",
+        "section_item_distance": 20,
+        "mg_top_desktop": 60,
+        "mg_top_tablet": 30,
+        "mg_top_mobile": 20,
+        "mg_bottom_desktop": 10,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 40
+      }
+    },
+    "a8466708-7dc1-47ac-a5d6-6e3099e1c9fb": {
+      "type": "footer-05",
+      "blocks": {
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-1": {
           "type": "link_list",
           "settings": {
-            "custom_width": "20",
-            "heading": "Shop",
+            "custom_width": "25",
+            "heading": "Categories",
             "menu": "shop",
-            "mg_bottom": 11
+            "mg_bottom": 0
           }
         },
-        "a6e74cd6-bd47-4ada-98b5-15e28b94aef6": {
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-2": {
           "type": "link_list",
           "settings": {
-            "custom_width": "20",
-            "heading": "Information",
-            "menu": "information",
-            "mg_bottom": 10
+            "custom_width": "25",
+            "heading": "Further Info.",
+            "menu": "about",
+            "mg_bottom": 0
           }
         },
-        "2265e00a-3824-4d57-af37-fa00fa88a555": {
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-0": {
           "type": "link_list",
           "settings": {
-            "custom_width": "20",
+            "custom_width": "25",
             "heading": "Customer Service",
             "menu": "customer-service",
-            "mg_bottom": 10
+            "mg_bottom": 0
           }
         },
-        "d935a709-71e0-48ff-8d74-5a367ae6d12d": {
-          "type": "newsletter_with_social",
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-4": {
+          "type": "text",
           "settings": {
-            "custom_width": "40",
-            "show_newsletter": true,
-            "heading": "Newsletter Sign Up",
-            "subtext": "<p>Sign up for exclusive updates, new arrivals & insider only discounts</p>",
-            "mg_top_des": 0,
-            "mg_bottom_des": 10,
-            "spacing_input": 10,
-            "newsletter_form_width": 420,
-            "input_text": "enter your email address",
-            "input_color": "#cfcfcf",
-            "input_color_bg": "#232323",
-            "input_color_border": "#d3d3d3",
-            "button_text": "Submit",
-            "button_width": 150,
-            "button_color": "#232323",
-            "button_color_border": "#ffffff",
-            "button_color_bg": "#ffffff",
-            "button_color_bg_gradient": "",
-            "button_color_hover": "#ffffff",
-            "button_color_border_hover": "#000000",
-            "button_color_bg_hover": "#000000",
-            "button_color_bg_gradient_hover": "",
-            "check_text": "",
-            "check_text_color": "#808080",
-            "check_text_fontsize": 14,
-            "check_input_color": "#ffffff",
-            "show_social": true,
-            "swap_social_position": false,
+            "custom_width": "25",
+            "heading": "",
+            "logo_margin_bottom": 35,
+            "subtext": "",
+            "address_icon": "point_icon",
+            "show_address_icon": true,
+            "address_text": "<p>685 Market Street</p><p>San Francisco, CA 94105, US</p>",
+            "phone_icon": "phone_icon",
+            "show_phone_icon": true,
+            "phone_text": "<p>Call us: <a href=\"tel:%20(090)%20123-ELLA\">(090) 123-EIIA</a></p>",
+            "email_icon": "envelope_outline_icon",
+            "show_email_icon": true,
+            "email_text": "<p>Email:<a href=\"mailto:example@domain.com\">example@domain.com</a> </p>",
+            "icon_size": 22,
+            "icon_color": "#d1d2d3",
+            "content_spacing": 15,
             "social_heading": "",
+            "show_social": true,
             "enable_bg_social": false,
             "social_margin_top": 35,
-            "social_icon_width": 12,
-            "social_icon_padding": 12,
+            "social_icon_width": 16,
+            "social_icon_padding": 10,
             "social_icon_border_width": 1,
             "social_icon_margin_right": 15,
-            "social_color": "#282828",
-            "social_border_color": "#ffffff",
-            "social_background_color": "#ffffff",
+            "social_color": "#232830",
+            "social_border_color": "#a5a8ab",
+            "social_background_color": "#a5a8ab",
             "social_background_color_gradient": "",
             "social_color_hover": "#282828",
             "social_border_color_hover": "#ffffff",
             "social_background_color_hover": "#ffffff",
             "social_background_color_gradient_hover": "",
             "social_box_hover_color": "#ffffff",
-            "show_app_store": false,
-            "app_store_heading": "",
-            "app_store_link_1": "",
-            "app_store_link_2": "",
-            "newsletter_margin_bottom": 20
+            "mg_bottom": 0
           }
         },
-        "41adb6e5-e71d-422b-a1e1-d2034c83869c": {
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-5": {
+          "type": "trust_image",
+          "settings": {
+            "image_trust": "shopify://shop_images/trust.png",
+            "margin_top_image_trust": 50,
+            "image_trust_align": "center"
+          }
+        },
+        "cf4d3462-37d6-4f22-a28b-1aa0a70e178b": {
           "type": "footer_bottom",
           "settings": {
             "pdtop_footer_bottom": 20,
             "pdbottom_footer_bottom": 40,
             "border_top": true,
-            "footer_bottom_color": "#cfcfcf",
+            "footer_bottom_color": "#d1d2d3",
             "border_top_color": "#282828",
-            "footer_bottom_bg": "#232323",
+            "footer_bottom_bg": "#3a3e45",
             "footer_bottom_bg_gradient": "",
             "show_copyright": true,
-            "show_shop_name": true,
             "enable_layout_grid": true,
-            "copyright_content": "<p>Ella Demo. All Rights Reserved. Powered by Shopify.<br/>Shopify Themes by <a href=\"http://halothemes.net/\" target=\"_blank\" title=\"halothemes\">Halothemes.net</a></p>",
-            "copyright_content_color": "#cfcfcf",
-            "shop_name": "",
+            "copyright_content": "<p>Ella Demo. Powered By Shopify. Shopify Themes By HaloThemes.Com</p>",
+            "copyright_content_color": "#d1d2d3",
             "show_payment": true,
             "payment_margin_top": 0,
+            "heading_payment": "",
             "payment_type": "custom",
             "show_payment_visa": true,
             "show_payment_master": true,
             "show_payment_maestro": true,
             "show_payment_american_express": true,
             "show_payment_apple_pay": true,
-            "show_payment_bitcoin": true,
+            "show_payment_bitcoin": false,
             "show_payment_dankort": false,
             "show_payment_diners_club": false,
             "show_payment_discover": false,
@@ -140,49 +201,50 @@
         }
       },
       "block_order": [
-        "592a8373-a70d-47d3-a311-321a645e1f14",
-        "a6e74cd6-bd47-4ada-98b5-15e28b94aef6",
-        "2265e00a-3824-4d57-af37-fa00fa88a555",
-        "d935a709-71e0-48ff-8d74-5a367ae6d12d",
-        "41adb6e5-e71d-422b-a1e1-d2034c83869c"
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-1",
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-2",
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-0",
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-4",
+        "sections--14855161806899__a8466708-7dc1-47ac-a5d6-6e3099e1c9fb-16765127282584ab4f-5",
+        "cf4d3462-37d6-4f22-a28b-1aa0a70e178b"
       ],
       "settings": {
-        "container": "1170",
-        "padding_full_width": 60,
+        "container": "1370",
+        "padding_full_width": 0,
         "type_footer_heading": "font_1",
-        "type_footer_heading_font_size": 15,
-        "type_footer_heading_line_height": 22,
-        "type_footer_heading_font_weight": "600",
+        "type_footer_heading_font_size": 16,
+        "type_footer_heading_line_height": 26,
+        "type_footer_heading_font_weight": "700",
+        "type_footer_heading_font_style": "normal",
         "type_footer_heading_text_transform": "uppercase",
-        "type_footer_heading_letter_spacing": ".05em",
+        "type_footer_heading_letter_spacing": ".02em",
         "type_footer_link": "font_1",
-        "type_footer_link_font_size": 12,
+        "type_footer_link_font_size": 14,
         "type_footer_link_font_weight": "400",
         "type_footer_link_text_transform": "capitalize",
-        "type_footer_link_line_height": 28,
+        "type_footer_link_line_height": 34,
         "type_footer_link_letter_spacing": ".02em",
         "enable_border_footer_top": false,
         "border_footer_top_color": "#282828",
         "pdtop_footer_top": 35,
-        "pdbottom_footer_top": 40,
-        "footer_top_bg": "#232323",
+        "pdbottom_footer_top": 50,
+        "footer_top_bg": "#232830",
         "footer_top_bg_gradient": "",
         "show_footer_top_bg_img": false,
         "footer_top_bg_position_x": "center",
         "footer_top_bg_position_y": "center",
         "footer_top_bg_repeat": "no-repeat",
         "footer_top_bg_attachment": "fixed",
-        "footer_top_bg_size": "cover",
+        "footer_top_bg_size": "contain",
         "footer_top_text_align": "left",
         "footer_top_title_color": "#ffffff",
-        "footer_top_color_link": "#cfcfcf",
-        "footer_top_color_link_hover": "#ffffff",
-        "show_border_item": false,
-        "footer_border_item": "#808080"
+        "footer_top_color_link": "#d1d2d3",
+        "footer_top_color_link_hover": "#ffffff"
       }
     }
   },
   "order": [
-    "footer-1"
+    "ab264fd4-7aa0-40d6-b7e9-db6a61baba53",
+    "a8466708-7dc1-47ac-a5d6-6e3099e1c9fb"
   ]
 }
