@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "layout_body": "boxed",
+    "layout_body": "default",
     "mobile_menu": "default",
     "product_page_layout": "default",
     "type_font_1": "google_fonts",
