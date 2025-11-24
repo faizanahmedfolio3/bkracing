@@ -1740,7 +1740,7 @@
       ],
       "settings": {
         "container": "1770",
-        "padding_full_width": 0,
+        "padding_full_width": 100,
         "disable_padding_content": false,
         "type_instagram": "app",
         "block_layout": "slider",
