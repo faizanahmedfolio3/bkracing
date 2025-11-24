@@ -1256,7 +1256,8 @@
       ],
       "custom_css": [
         "a.card-title {font-size: 16px !important; font-weight: bold; color: #fff;}",
-        ".card-price .price {color: #fff;}"
+        ".card-price .price {color: #fff;}",
+        ".card-summary.card-list__hidden {display: block !important; color: #e4e4e4;}"
       ],
       "settings": {
         "container": "container",
