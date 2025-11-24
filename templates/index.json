@@ -1254,6 +1254,7 @@
       "block_order": [
         "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6"
       ],
+      "custom_css": [],
       "settings": {
         "container": "container",
         "padding_full_width": 100,
@@ -1340,10 +1341,10 @@
         "enable_custom_color": true,
         "product_vendor_color": "#ffffff",
         "product_title_color": "#ffffff",
-        "product_title_color_hover": "#cecece",
+        "product_title_color_hover": "#ffffff",
         "product_price_color": "#ffffff",
         "product_price_sale_color": "#d12442",
-        "product_price_compare_color": "#b7b7b7",
+        "product_price_compare_color": "#ffffff",
         "mg_top_desktop": 100,
         "mg_top_tablet": 50,
         "mg_top_mobile": 75,
