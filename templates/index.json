@@ -951,7 +951,7 @@
         "product_block_layout": "slider",
         "product_bg": "#1a212a",
         "product_bg_gradient": "",
-        "product_block_collection": "collection-home-03-new",
+        "product_block_collection": "home-products",
         "product_block_limit": 4,
         "grid_gap": 30,
         "pb_style": "style1",
