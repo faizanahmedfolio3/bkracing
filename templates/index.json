@@ -1254,7 +1254,10 @@
       "block_order": [
         "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "a.card-title {font-size: 16px !important; font-weight: bold; color: #fff;}",
+        ".card-price .price {color: #fff;}"
+      ],
       "settings": {
         "container": "container",
         "padding_full_width": 100,
