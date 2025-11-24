@@ -1088,7 +1088,8 @@
         "ef133e5f-4e7f-448a-a391-7f8c009ef225": {
           "type": "image",
           "settings": {
-            "title": "<b>SUITÓ</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
@@ -1099,7 +1100,8 @@
         "96ba5e66-2f5e-4fa2-83e2-3415c2a6ebe5": {
           "type": "image",
           "settings": {
-            "title": "<b>MILANCÉLOS</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
@@ -1110,7 +1112,8 @@
         "a4653c1b-fa80-478a-a7eb-bc85962cd5c8": {
           "type": "image",
           "settings": {
-            "title": "<b>BLAZÉRO</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
@@ -1121,7 +1124,8 @@
         "e2700fc7-1fc8-4c31-bb16-de6d09a0b7ec": {
           "type": "image",
           "settings": {
-            "title": "<b>LA COSMÓ</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
@@ -1132,7 +1136,8 @@
         "7f80f897-e16c-4551-8c19-2420147acf4d": {
           "type": "image",
           "settings": {
-            "title": "<b>PULVINAR</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
@@ -1162,7 +1167,7 @@
         "title_align": "center",
         "brand_title": "Our Partners",
         "color_title": "#ffffff",
-        "fontsize_title": 16,
+        "fontsize_title": 20,
         "fontsize_title_mb": 16,
         "mg_bottom_title": 12,
         "mg_bottom_title_mb": 12,
