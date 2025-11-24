@@ -954,7 +954,7 @@
         "product_block_collection": "home-products",
         "product_block_limit": 4,
         "grid_gap": 30,
-        "pb_style": "style1",
+        "pb_style": "style2",
         "style_block_header": "style1",
         "product_block_title": "New Arrivals",
         "enable_border_title": false,
