@@ -1242,47 +1242,31 @@
     "1634629903f4af797d": {
       "type": "product-tab-block",
       "blocks": {
-        "34ef2296-eade-4d54-8f0e-3bd0bd2069a8": {
-          "type": "ProductTabs",
-          "settings": {
-            "title": "BEST SELLERS",
-            "collection": "collection-home-03-all"
-          }
-        },
         "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6": {
           "type": "ProductTabs",
           "settings": {
             "title": "EDITOR'S PICKS",
-            "collection": "collection-home-03-new"
-          }
-        },
-        "43d8916e-e183-4762-b075-927b91815e70": {
-          "type": "ProductTabs",
-          "settings": {
-            "title": "MOST POPULAR",
-            "collection": "collection-home-03-featured"
+            "collection": "dickinson-fabrication-collection"
           }
         }
       },
       "block_order": [
-        "34ef2296-eade-4d54-8f0e-3bd0bd2069a8",
-        "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6",
-        "43d8916e-e183-4762-b075-927b91815e70"
+        "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6"
       ],
       "settings": {
         "container": "container",
         "padding_full_width": 0,
         "disable_padding_content": false,
-        "product_bg": "#ffffff",
+        "product_bg": "#000000",
         "product_bg_gradient": "",
         "product_block_layout": "slider",
-        "product_block_limit": 6,
+        "product_block_limit": 4,
         "product_block_title": "",
         "fontsize_title": 16,
         "fontsize_title_mb": 16,
         "mg_bottom_title": 12,
         "enable_border_title": false,
-        "border_color_title": "#232323",
+        "border_color_title": "#FFFFFF",
         "enable_border_title2": false,
         "border_color_title2": "#232323",
         "color_title": "#232323",
@@ -1294,8 +1278,8 @@
         "link_view_all": "",
         "color_view_all": "#3c3c3c",
         "image_behavior": "none",
-        "product_block_per_row": "5",
-        "product_block_infinite_scroll": false,
+        "product_block_per_row": "4",
+        "product_block_infinite_scroll": true,
         "min_width_button": "344px",
         "product_block_dots": false,
         "product_block_dots_mb": true,
@@ -1304,16 +1288,16 @@
         "product_block_arrows_custom_position": false,
         "product_block_progress_bar": false,
         "enable_infinite": true,
-        "product_block_show": "5",
+        "product_block_show": "4",
         "product_block_per_view": "4",
         "show_half": true,
         "scroll_height": 4,
-        "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000000",
+        "scroll_track_bg": "rgba(0,0,0,0)",
+        "scroll_thumb_color": "rgba(0,0,0,0)",
         "scroll_thumb_hover_color": "#444444",
-        "display_button": false,
-        "button_text_scroll": "Shop Now",
-        "enable_button_icon": false,
+        "display_button": true,
+        "button_text_scroll": "ADD TO CART",
+        "enable_button_icon": true,
         "button_width": 280,
         "btn_spacing_top": 49,
         "position": "left",
@@ -1323,7 +1307,7 @@
         "mg_bottom_title_tab": 24,
         "type_tab_font": "font_1",
         "separation": true,
-        "style_separation": "style1",
+        "style_separation": "style2",
         "color_separation": "",
         "enable_scroll_title": true,
         "fontsize_tab": 20,
@@ -1337,11 +1321,11 @@
         "min_width_tab": 5,
         "border_width_tab": 3,
         "tab_align": "center",
-        "color_tab": "#969696",
+        "color_tab": "#ffffff",
         "border_color_tab": "#f84248",
         "bg_color_tab": "rgba(0,0,0,0)",
         "bg_color_gradient_tab": "",
-        "color_tab_active": "#232323",
+        "color_tab_active": "#ffffff",
         "border_color_tab_active": "",
         "bg_color_tab_active": "rgba(0,0,0,0)",
         "bg_color_gradient_tab_active": "",
