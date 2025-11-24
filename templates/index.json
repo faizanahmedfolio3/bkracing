@@ -1076,12 +1076,13 @@
         "b1d10b76-8345-438d-87a7-5a17087c36a8": {
           "type": "image",
           "settings": {
-            "title": "<b>COSMOPOLIS</b><br>SERIES",
+            "image": "shopify://shop_images/Untitled-1_1.png",
+            "title": "",
             "color_text": "#232323",
             "color_text_hover": "#232323",
             "description": "",
             "color_des": "#3c3c3c",
-            "link": "shopify://collections/collection-home-03-featured"
+            "link": ""
           }
         },
         "ef133e5f-4e7f-448a-a391-7f8c009ef225": {
@@ -1156,20 +1157,20 @@
         "scroll_from": "ltr",
         "brand_scroll_time": "20",
         "display_brand_border": true,
-        "brand_bg": "#f8f8f8",
+        "brand_bg": "#000000",
         "brand_bg_gradient": "",
         "title_align": "center",
-        "brand_title": "",
-        "color_title": "#232323",
+        "brand_title": "Our Partners",
+        "color_title": "#ffffff",
         "fontsize_title": 16,
         "fontsize_title_mb": 16,
         "mg_bottom_title": 12,
         "mg_bottom_title_mb": 12,
         "enable_border_title": false,
-        "border_color_title": "#051c42",
-        "brand_des": "",
-        "color_des": "#3c3c3c",
-        "fontsize_des": 16,
+        "border_color_title": "#ffffff",
+        "brand_des": "Our Partners",
+        "color_des": "rgba(0,0,0,0)",
+        "fontsize_des": 10,
         "mg_bottom_des": 0,
         "view_all": "",
         "view_all_fs": 12,
