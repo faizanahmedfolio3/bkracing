@@ -936,7 +936,8 @@
         "h2.product-block__cap--text {line-height: 50px;}",
         "h3.product-block__cap--subText {line-height: 33px;}",
         ".product-block__grid {padding-top: 120px;}",
-        ".product-block-has__banner .product-block__banner .product-block__cap.align-items--center .cap-content {max-width: 444px;}"
+        ".product-block-has__banner .product-block__banner .product-block__cap.align-items--center .cap-content {max-width: 444px;}",
+        ".card-media img{max-width: 195px;}"
       ],
       "settings": {
         "container": "fullwidth",
