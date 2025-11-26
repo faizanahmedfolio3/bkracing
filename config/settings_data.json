@@ -132,7 +132,7 @@
     "product_compare_type": "default",
     "show_quick_view": true,
     "product_quick_view_type": "icon",
-    "product_content_text_align": "center",
+    "product_content_text_align": "left",
     "badge_style": "1",
     "badge_postion": "left",
     "sale_badge_type": "text",
