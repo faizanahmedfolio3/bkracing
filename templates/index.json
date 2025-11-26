@@ -50,7 +50,7 @@
             "border_sub_heading": "none",
             "sub_title_position": "sub_title_above",
             "color_sub_heading": "#ffffff",
-            "heading": "Performance Starts Here.",
+            "heading": "DON’T JUST DRIVE – DOMINATE~",
             "letter_spacing_heading": "",
             "enable_border_heading": false,
             "font_style_heading": "normal",
@@ -58,7 +58,7 @@
             "line_height_heading": 40,
             "heading_spacing_bottom": 25,
             "color_heading": "#ffffff",
-            "slide-des": "Built for racers, by racers. Wear the attitude. Own the track.",
+            "slide-des": "Shop the Parts Champions Trust",
             "font_size_des": 16,
             "line_height_des": 22,
             "des_spacing_bottom": 45,
@@ -937,7 +937,7 @@
         "h3.product-block__cap--subText {line-height: 33px;}",
         ".product-block__grid {padding-top: 120px;}",
         ".product-block-has__banner .product-block__banner .product-block__cap.align-items--center .cap-content {max-width: 444px;}",
-        ".card-media img{max-width: 195px;}"
+        ".card-media img {max-width: 195px;}"
       ],
       "settings": {
         "container": "fullwidth",
@@ -1273,7 +1273,7 @@
         "fontsize_title_mb": 16,
         "mg_bottom_title": 12,
         "enable_border_title": false,
-        "border_color_title": "#FFFFFF",
+        "border_color_title": "#ffffff",
         "enable_border_title2": false,
         "border_color_title2": "#232323",
         "color_title": "#ffffff",
