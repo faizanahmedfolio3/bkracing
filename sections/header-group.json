@@ -106,7 +106,7 @@
             "color": "#ffffff",
             "cart_bg_item": "#f84248",
             "cart_color_item": "#ffffff",
-            "cart_item_font_size": 14
+            "cart_item_font_size": 10
           }
         }
       },
@@ -120,7 +120,7 @@
       ],
       "custom_css": [
         ".wishlist-text,.customer-links,.cart-text {display: none !important;}",
-        ".header-single-line__content{justify-content: flex-start;}"
+        ".header-single-line__content {justify-content: flex-start;}"
       ],
       "settings": {
         "container": "1370",
