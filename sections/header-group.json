@@ -119,7 +119,7 @@
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-5"
       ],
       "custom_css": [
-        ".wishlist-text,.customer-links, .cart-text {display: none !important;}"
+        ".wishlist-text,.customer-links,.cart-text {display: none !important;}"
       ],
       "settings": {
         "container": "1370",
