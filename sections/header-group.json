@@ -379,7 +379,7 @@
         "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
           "type": "menu",
           "settings": {
-            "color": "#232323",
+            "color": "#ffffff",
             "menu_tab_bg": "#000000"
           }
         },
@@ -394,6 +394,7 @@
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
           "type": "logo",
           "settings": {
+            "logo_mobile": "shopify://shop_images/bkRacing-logo.png",
             "logo_width_mobile": 65,
             "logo_text": "",
             "logo_font_size": 20,
@@ -407,7 +408,7 @@
           "type": "customer",
           "settings": {
             "icon": "2",
-            "color": "#232323"
+            "color": "#ffffff"
           }
         },
         "633f9dae-3f65-4bda-9ca8-9d3e231aaf9d": {
@@ -415,7 +416,7 @@
           "settings": {
             "icon": "3",
             "show_cart_count_bubble": true,
-            "color": "#232323",
+            "color": "#ffffff",
             "color_bubble": "#ffffff",
             "bg_bubble": "#232323"
           }
@@ -429,7 +430,7 @@
         "633f9dae-3f65-4bda-9ca8-9d3e231aaf9d"
       ],
       "settings": {
-        "background": "#ffffff",
+        "background": "#1a212a",
         "gradient": "",
         "sticky_header_type": "on_scroll",
         "enable_transparent": false,
