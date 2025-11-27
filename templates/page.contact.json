@@ -219,7 +219,7 @@
     "main": {
       "type": "main-contact-us-1",
       "custom_css": [
-        "h2, h3, p, a{color: #fff;}"
+        "h2,h3,p,a, span, label {color: #fff;}"
       ],
       "settings": {
         "container": "1170",
