@@ -438,7 +438,7 @@
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
-        "mg_bottom_desktop": 50,
+        "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 15,
         "mg_bottom_mobile": 15
       }
