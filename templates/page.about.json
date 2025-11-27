@@ -522,6 +522,7 @@
           "settings": {
             "row_reverse": true,
             "image_width": "50",
+            "image": "shopify://shop_images/Slider_Banner_Mobile.png",
             "flying_effect": false,
             "small_img_block_style": "style_1",
             "enable_divider": true,
@@ -758,6 +759,9 @@
         "471c21e7-2ee9-4f96-837a-14aa861e4436",
         "d87db763-d87d-4619-bfeb-2991343de838",
         "fcda05be-6663-46ff-a665-e015c619593b"
+      ],
+      "custom_css": [
+        ".halo-block {background-color: #000;}"
       ],
       "settings": {
         "id_section": "",
