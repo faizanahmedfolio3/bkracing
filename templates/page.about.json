@@ -879,6 +879,7 @@
       "block_order": [
         "026fa69e-8e2c-4f96-9f68-3d3e2c6a9d91"
       ],
+      "disabled": true,
       "settings": {
         "id_section": "",
         "container": "1770",
