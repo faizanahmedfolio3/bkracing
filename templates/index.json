@@ -84,7 +84,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "Shop Now",
-            "link": "shopify://collections/frontpage",
+            "link": "shopify://collections/all",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
