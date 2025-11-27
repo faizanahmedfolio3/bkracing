@@ -204,7 +204,7 @@
       ],
       "custom_css": [
         "div {background-color: #000;}",
-        "nav.breadcrumb{margin-top: 0;}"
+        "nav.breadcrumb {margin-top: 0;}"
       ],
       "settings": {
         "container": "1170",
@@ -440,6 +440,74 @@
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 15,
         "mg_bottom_mobile": 15
+      }
+    },
+    "rich_text_wzB76B": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Pz4QYc": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Mission",
+            "heading_size": 50,
+            "heading_size_mb": 30,
+            "heading_line_height": 1.3,
+            "heading_color": "#ffffff"
+          }
+        },
+        "text_Ct6ibz": {
+          "type": "text",
+          "settings": {
+            "text": "To empower drivers and builders with the best gear, knowledge, and service — so every race feels like victory.",
+            "text_size": 22,
+            "text_size_mb": 16,
+            "text_font_weight": "400",
+            "text_line_height": 1.5,
+            "margin_top_text": 20,
+            "text_color": "#ffffff",
+            "text_width": "800px"
+          }
+        },
+        "social_media_6mpcMy": {
+          "type": "social_media",
+          "settings": {
+            "social_spacing_top": 20,
+            "social_spacing_bottom": 0,
+            "social_icon_color": "#ffffff",
+            "social_icon_background_color": "",
+            "social_icon_background_gradient": "",
+            "social_icon_hover_color": "",
+            "social_icon_background_hover_color": "",
+            "social_icon_background_hover_gradient": "",
+            "social_icon_ring_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Pz4QYc",
+        "text_Ct6ibz",
+        "social_media_6mpcMy"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "color_border_bottom": "#ffffff",
+        "enable_minus_mg_top": false,
+        "minus_spacing_top": 0,
+        "rich_text_bg": "#000000",
+        "rich_text_bg_gradient": "",
+        "rich_text_bg_image": "shopify://shop_images/Frame_1000005955.png",
+        "enable_column": false,
+        "content_align": "center",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
       }
     },
     "164709134604b9bd62": {
@@ -837,6 +905,7 @@
     "1647067892807084e1",
     "main",
     "1647069160821d88be",
+    "rich_text_wzB76B",
     "164709134604b9bd62",
     "164707469606355f61"
   ]
