@@ -848,5 +848,10 @@
       }
     },
     "content_for_index": []
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "body{background-color: #000;}"
+    ]
   }
 }

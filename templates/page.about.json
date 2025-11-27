@@ -364,6 +364,9 @@
         "7ccfcefe-02c8-4e8b-9c16-a206ff50af09",
         "1b4ffb2e-482e-4b14-a9d9-8b345d8bac6b"
       ],
+      "custom_css": [
+        ".custom-service-block {padding-bottom: 100px;}"
+      ],
       "settings": {
         "id_section": "",
         "container": "1170",
