@@ -117,9 +117,9 @@
         "16470678927dafedcc-0"
       ],
       "settings": {
-        "container": "1770",
+        "container": "fullwidth",
         "padding_full_width": 0,
-        "slideshow_background": "",
+        "slideshow_background": "#000000",
         "slideshow_background_gradient": "",
         "border_radius": 0,
         "autoplay": true,
@@ -365,7 +365,7 @@
         "padding_full_width": 50,
         "display_border_top": true,
         "display_border_bottom": false,
-        "border_color": "#f84247",
+        "border_color": "rgba(0,0,0,0)",
         "service_block_swipe_on_mobile": "slider",
         "color_icon_slider": "#212121",
         "service_block_style": "style_1",
