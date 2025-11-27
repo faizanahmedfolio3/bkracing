@@ -790,7 +790,7 @@
         "style_bg": "none",
         "bg_color": "",
         "bg_color_gradient": "",
-        "mg_top_desktop": 15,
+        "mg_top_desktop": 50,
         "mg_top_tablet": 20,
         "mg_top_mobile": 20,
         "mg_bottom_desktop": 45,
