@@ -192,7 +192,7 @@
           "type": "content",
           "settings": {
             "title": "",
-            "content": "Cosmo lacus meleifend menean diverra loremous. Nullam sit amet orci rutrum risus laoreet semper vel non magna. Mauris vel sem a lectus vehicula ultricies. Etiam semper sollicitudin lectus indous scelerisque.",
+            "content": "We manufacture and sell the highest quality race parts for some of the fastest Ecotecs and 4 cylinders in North America!",
             "content_max_width": 700,
             "align": "center",
             "content_text_color": ""
@@ -207,9 +207,9 @@
         "padding_full_width": 0,
         "show_breadcrumb": true,
         "breadcrumb_alignment": "center",
-        "breadcrumb_bg": "",
+        "breadcrumb_bg": "#000000",
         "breadcrumb_gradient": "",
-        "breadcrumb_bg_mb": "#f6f6f6",
+        "breadcrumb_bg_mb": "#000000",
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
         "page_title_alignment": "center",
