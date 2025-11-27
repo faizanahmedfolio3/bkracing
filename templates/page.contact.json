@@ -170,7 +170,7 @@
         "dot_width_active": 130,
         "dot_width_mb": 38,
         "dot_width_active_mb": 65,
-        "arrow_active": true,
+        "arrow_active": false,
         "enable_custom_arrow": false,
         "arrow_width": 35,
         "arrow_height": 35,
@@ -182,7 +182,7 @@
         "arrow_border_color_hover": "",
         "arrow_bg_color_hover": "",
         "position_slick_arrow": "10%",
-        "position_vertical_slick_arrow": "50%",
+        "position_vertical_slick_arrow": "30%",
         "image_behavior": "none",
         "video_height": "41.7%",
         "video_height_mb": "41.7%",
@@ -208,18 +208,18 @@
         "number_desktop_size": 24,
         "number_mobile_size": 16,
         "lookbook_truncate": "1",
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 50
       }
     },
     "main": {
       "type": "main-contact-us-1",
       "custom_css": [
-        "h2,h3,p,a, span, label {color: #fff;}"
+        "h2,h3,p,a,span,label {color: #fff;}"
       ],
       "settings": {
         "container": "1170",
