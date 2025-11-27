@@ -16,6 +16,9 @@
     },
     "custom_liquid_Hf3f8z": {
       "type": "custom-liquid",
+      "custom_css": [
+        "h1, a {color: #fff;}"
+      ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
         "custom_liquid": ""
