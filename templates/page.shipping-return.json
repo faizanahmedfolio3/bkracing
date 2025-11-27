@@ -13,9 +13,17 @@
       "type": "main-page",
       "disabled": true,
       "settings": {}
+    },
+    "custom_liquid_Hf3f8z": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_liquid_Hf3f8z"
   ]
 }
