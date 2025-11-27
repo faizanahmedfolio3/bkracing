@@ -219,7 +219,8 @@
     "main": {
       "type": "main-contact-us-1",
       "custom_css": [
-        "h2,h3,p,a,span,label,.contact-text {color: #fff;}"
+        "h2,h3,p,a,span,label,.contact-text {color: #fff;}",
+        "input[type=\"submit\"] {background-color: #f84248 !important;}"
       ],
       "settings": {
         "container": "1170",
