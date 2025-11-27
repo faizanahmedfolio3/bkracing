@@ -205,7 +205,7 @@
       "custom_css": [
         "div {background-color: #000;}",
         "nav.breadcrumb {margin-top: 0;}",
-        "h2{font-size: 24px; color: #fff;}"
+        "h2 {font-size: 24px; color: #fff;}"
       ],
       "settings": {
         "container": "1170",
