@@ -337,7 +337,8 @@
         "9630b233-8164-4dad-ab64-8830bedf328a"
       ],
       "custom_css": [
-        ".quantity__container input {color: #000;}"
+        ".quantity__container input {color: #000;}",
+        ".product-form__buttons button{margin-top: 20px}"
       ],
       "settings": {
         "container": "default",
