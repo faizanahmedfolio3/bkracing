@@ -235,11 +235,22 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
+    },
+    "custom_liquid_qVxaaL": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "active-facets__button{color: #000;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": ""
+      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "product-recently-viewed"
+    "product-recently-viewed",
+    "custom_liquid_qVxaaL"
   ]
 }
