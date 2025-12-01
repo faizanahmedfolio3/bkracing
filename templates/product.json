@@ -32,7 +32,7 @@
           "settings": {
             "fontsize_text": 20,
             "fontsize_text_mb": 18,
-            "color_title": "#232323",
+            "color_title": "#ffffff",
             "spacing_top": 0,
             "spacing_bottom": 10
           }
@@ -54,7 +54,7 @@
             "show_short_description": true,
             "word_number": "17",
             "fontsize_text": 12,
-            "color_text": "#3c3c3c",
+            "color_text": "#ffffff",
             "spacing_top": 0,
             "spacing_bottom": 12
           }
@@ -136,7 +136,7 @@
             "show_compare_color": true,
             "show_compare_color_drop_drap": true,
             "compare_layout": "1",
-            "spacing_top": 0,
+            "spacing_top": 10,
             "spacing_bottom": 22
           }
         },
@@ -162,7 +162,7 @@
             "bin_border_color_hover": "#232323",
             "bin_bg_color_hover": "#232323",
             "bin_bg_color_hover_gradient": "",
-            "spacing_top": 0,
+            "spacing_top": 15,
             "spacing_bottom": 15
           }
         },
@@ -336,6 +336,9 @@
         "36addb13-cd73-4713-a15c-7d846c4724e7",
         "9630b233-8164-4dad-ab64-8830bedf328a"
       ],
+      "custom_css": [
+        ".quantity__container input {color: #000;}"
+      ],
       "settings": {
         "container": "default",
         "padding_full_width": 0,
@@ -475,6 +478,7 @@
     },
     "product-recently-viewed": {
       "type": "product-recently-viewed",
+      "custom_css": [],
       "settings": {
         "display_product_recently_viewed": true,
         "product_recently_viewed_container": "container",
