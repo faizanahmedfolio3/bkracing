@@ -1672,7 +1672,7 @@
       ],
       "name": "t:sections.tiktok_embedder.name",
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "padding_full_width": 0,
         "section_bg": "#1a212a",
         "section_gradient": "",
