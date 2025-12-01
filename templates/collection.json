@@ -123,7 +123,8 @@
         "2f7f02ac-4072-40ea-844f-59943e256971"
       ],
       "custom_css": [
-        ".page-sidebar.page-sidebar-left {background-color: #1A212A; padding: 10px 15px; color: #fff;}"
+        ".page-sidebar.page-sidebar-left {background-color: #1a212a; padding: 10px 15px; color: #fff;}",
+        ".page-sidebar.page-sidebar-left h2,.page-sidebar.page-sidebar-left a{color: #fff}"
       ],
       "settings": {
         "container": "default",
@@ -205,7 +206,7 @@
         "fontsize_title": 18,
         "fontsize_title_mb": 18,
         "border_color_title": "#232323",
-        "color_title": "#232323",
+        "color_title": "#ffffff",
         "product_recently_viewed_title_align": "center",
         "product_recently_viewed_limit": 10,
         "product_recently_viewed_image_ratio": "adapt",
