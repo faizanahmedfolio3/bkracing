@@ -1636,15 +1636,36 @@
     "tiktok_embedder_maMP64": {
       "type": "tiktok-embedder",
       "blocks": {
+        "tiktok_video_yFDFgK": {
+          "type": "tiktok_video",
+          "settings": {
+            "tiktok_video_embede_code": "7570535622876630286"
+          }
+        },
+        "tiktok_video_Lxcg4y": {
+          "type": "tiktok_video",
+          "settings": {
+            "tiktok_video_embede_code": "7576424160499420471"
+          }
+        },
         "tiktok_video_ieCWyQ": {
           "type": "tiktok_video",
           "settings": {
             "tiktok_video_embede_code": "7576420698223037751"
           }
+        },
+        "tiktok_video_CKrMik": {
+          "type": "tiktok_video",
+          "settings": {
+            "tiktok_video_embede_code": "7574158680174677262"
+          }
         }
       },
       "block_order": [
-        "tiktok_video_ieCWyQ"
+        "tiktok_video_yFDFgK",
+        "tiktok_video_Lxcg4y",
+        "tiktok_video_ieCWyQ",
+        "tiktok_video_CKrMik"
       ],
       "custom_css": [
         ".instagram-slide {padding-top: 50px;}"
