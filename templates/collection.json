@@ -239,7 +239,7 @@
     "custom_liquid_qVxaaL": {
       "type": "custom-liquid",
       "custom_css": [
-        "active-facets__button{color: #000;}"
+        "active-facets__button span.text {color: #000;}"
       ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
