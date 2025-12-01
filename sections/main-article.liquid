@@ -1,8 +1,8 @@
-{% if article.metafields.custom.json_ld %}
+{% comment %} {% if article.metafields.custom.json_ld %}
   <script type="application/ld+json">
     {{ article.metafields.custom.json_ld }}
   </script>
-{% endif %}
+{% endif %} {% endcomment %}
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 {{ 'component-grid.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-fancybox.css' | asset_url }}" media="print" onload="this.media='all'">
