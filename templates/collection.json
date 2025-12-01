@@ -127,7 +127,7 @@
         ".page-sidebar.page-sidebar-left h2,.page-sidebar.page-sidebar-left a {color: #fff;}",
         ".filter__price--apply {background: #fff !important; color: #000;}",
         ".button--primary.filter__price--apply {color: #232830;}",
-        "label {color: #fff;}"
+        "span.label-text {color: #000;}"
       ],
       "settings": {
         "container": "default",
@@ -199,7 +199,7 @@
         "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 0,
         "product_recently_viewed_layout": "slider",
-        "product_bg": "#ffffff",
+        "product_bg": "#000000",
         "product_bg_gradient": "",
         "style_block_header": "style1",
         "product_recently_viewed_title": "Recently Viewed Products",
@@ -228,7 +228,7 @@
         "scroll_thumb_color": "#000000",
         "scroll_thumb_hover_color": "#444444",
         "enable_layout_special": false,
-        "bg_card": "#ffffff",
+        "bg_card": "#000000",
         "padding_card": 15,
         "border_radius_card": 5,
         "border_layout_card": "full",
