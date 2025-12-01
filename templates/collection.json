@@ -39,21 +39,22 @@
         "8472dad8-3289-4746-8b7f-e6ebe3175dd5": {
           "type": "lookbook",
           "settings": {
-            "show_image": false,
+            "show_image": true,
+            "image": "shopify://shop_images/collection-banner-1.png",
             "link": "",
             "show_title": true,
             "page_title_alignment": "left",
             "page_title_text_transform": "none",
             "fontsize_title": 24,
             "margin_top_title": 30,
-            "title_color": "#232323",
+            "title_color": "#ffffff",
             "show_collection_description": true,
             "desc_alignment": "left",
             "desc_pos": "top",
             "fontsize_des": 12,
             "margin_top_des": 12,
             "margin_bottom": 25,
-            "des_color": "#3c3c3c"
+            "des_color": "#ffffff"
           }
         },
         "80b0a11c-fb01-4b89-8a29-1dbb2a1db16a": {
