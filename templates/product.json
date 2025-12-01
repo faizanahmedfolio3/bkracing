@@ -396,7 +396,7 @@
         "block_image_ratio": "adapt",
         "bundle_discount": true,
         "bundle_discount_text": "Get a [discount]% discount buying these products together",
-        "bundle_discount_text_color": "#232323",
+        "bundle_discount_text_color": "#ffffff",
         "total_btn_color": "#ffffff",
         "total_btn_border": "#232323",
         "total_btn_bg": "#232323",
