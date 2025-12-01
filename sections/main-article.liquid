@@ -1,6 +1,6 @@
 {% if article.metafields.custom.json_ld %}
   <script type="application/ld+json">
-    {{ article.metafields.custom.json_ld | json }}
+    {{ article.metafields.custom.json_ld }}
   </script>
 {% endif %}
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
