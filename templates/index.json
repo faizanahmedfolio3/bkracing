@@ -1555,6 +1555,7 @@
         "e88c11d8-b10c-4b36-b3c0-148f7e6a87ec",
         "d5fcae38-5ceb-4499-a62a-157b3eb532d4"
       ],
+      "disabled": true,
       "settings": {
         "container": "1770",
         "padding_full_width": 100,
@@ -1624,7 +1625,7 @@
         "icon_style": "style_1",
         "effects_bg": "",
         "effects_opacity": 0,
-        "mg_top_desktop": 15,
+        "mg_top_desktop": 25,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 65,
@@ -1645,6 +1646,9 @@
       "block_order": [
         "tiktok_video_ieCWyQ"
       ],
+      "custom_css": [
+        ".instagram-slide {padding-top: 50px;}"
+      ],
       "name": "t:sections.tiktok_embedder.name",
       "settings": {
         "container": "container",
@@ -1655,13 +1659,13 @@
         "column_per_row": "3",
         "videos_margin_top": 35,
         "swipe_on_mobile": "slider",
-        "section_title": "",
+        "section_title": "Our Social Media Presence",
         "section_title_font_size": 32,
         "section_title_font_size_mb": 18,
         "section_title_font_weight": "600",
-        "section_title_color": "#191919",
+        "section_title_color": "#ffffff",
         "section_title_margin_top": 0,
-        "section_title_font_style": "italic",
+        "section_title_font_style": "normal",
         "section_title_enable_underline": true,
         "section_title_underline_style": "2",
         "section_title_underline_color": "",
@@ -1673,7 +1677,7 @@
         "section_description_margin_top": 25,
         "section_description_max_width": 530,
         "button_type": "button",
-        "button_text": "Shop now",
+        "button_text": "",
         "button_link": "",
         "button_text_transform": "capitalize",
         "button_font_weight": "600",
