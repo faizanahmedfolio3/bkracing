@@ -122,6 +122,9 @@
         "34930b49-8499-46d3-bf41-2cbb334ca73d",
         "2f7f02ac-4072-40ea-844f-59943e256971"
       ],
+      "custom_css": [
+        ".page-sidebar.page-sidebar-left {background-color: #1A212A; padding: 10px 15px; color: #fff;}"
+      ],
       "settings": {
         "container": "default",
         "padding_full_width": 0,
