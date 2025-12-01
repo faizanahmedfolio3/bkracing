@@ -124,7 +124,10 @@
       ],
       "custom_css": [
         ".page-sidebar.page-sidebar-left {background-color: #1a212a; padding: 10px 15px; color: #fff;}",
-        ".page-sidebar.page-sidebar-left h2,.page-sidebar.page-sidebar-left a{color: #fff}"
+        ".page-sidebar.page-sidebar-left h2,.page-sidebar.page-sidebar-left a {color: #fff;}",
+        ".filter__price--apply {background: #fff !important; color: #000;}",
+        ".button--primary.filter__price--apply {color: #232830;}",
+        "label {color: #fff;}"
       ],
       "settings": {
         "container": "default",
