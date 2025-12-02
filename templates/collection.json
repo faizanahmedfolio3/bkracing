@@ -92,6 +92,7 @@
         },
         "dc4f771a-d1ea-42a7-8792-b895132fa9fe": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "heading": "",
             "link": ""
@@ -99,6 +100,7 @@
         },
         "34930b49-8499-46d3-bf41-2cbb334ca73d": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "heading": "",
             "link": ""
@@ -106,6 +108,7 @@
         },
         "2f7f02ac-4072-40ea-844f-59943e256971": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "heading": "Custom Block",
             "text": "<p>Custom CMS block displayed at the left sidebar on the Catalog Page. Put your own content here: text, html, images, media... or whatever you like.</p>\n\n<p>There are many similar sample content placeholders across the store. All editable from admin panel.</p>"
