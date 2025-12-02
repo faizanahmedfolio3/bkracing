@@ -14,3 +14,7 @@
 .productView-tab .tabs .tab-title {
     color: #fff;
 }
+
+input[type='text]{
+ color: #333;
+}
