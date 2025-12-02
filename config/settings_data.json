@@ -332,6 +332,7 @@
     "btn_3_bg_hover": "#e9514b",
     "banner_animation": "none",
     "animations_hover_elements": "none",
+    "use_custom_css": true,
     "use_custom_js": false,
     "enable_promotion": false,
     "enable_sticky_notification": false,
@@ -863,7 +864,9 @@
   },
   "platform_customizations": {
     "custom_css": [
-      "body {background-color: #000;}"
+      "body {background-color: #000;}",
+      ".productView-tab .tabs .tab-title, .tab-popup-content, .tab-popup-content p,.productView-tab .halo-text-format {color: #fff;}",
+      "input[type='text'], input[type='email'],input[type='number'] {color: #333;}"
     ]
   }
 }
