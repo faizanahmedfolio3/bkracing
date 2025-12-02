@@ -976,7 +976,7 @@
         "mg_bottom_view": 30,
         "mg_bottom_view_mb": 0,
         "enable_border_view_all": true,
-        "link_view_all": "shopify://collections/collection-home-03-new",
+        "link_view_all": "shopify://collections",
         "color_view_all": "#ffffff",
         "icon_view_all": "",
         "color_view_all_icon": "#eb492f",
