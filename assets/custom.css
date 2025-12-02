@@ -9,3 +9,8 @@
 // Please use only CSS to style the layout.
 //
 // =============================================================================*/
+
+
+.productView-tab .tabs .tab-title {
+    color: #fff;
+}
