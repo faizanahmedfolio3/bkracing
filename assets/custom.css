@@ -11,10 +11,14 @@
 // =============================================================================*/
 
 
-.productView-tab .tabs .tab-title {
+.productView-tab .tabs .tab-title, 
+.tab-popup-content, 
+.tab-popup-content p {
     color: #fff;
 }
 
-input[type='text], .tab-popup-content, .tab-popup-content p{
+input[type='text'], 
+input[type='email'],
+input[type='number'] {
  color: #333;
 }
