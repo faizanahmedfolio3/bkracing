@@ -144,7 +144,7 @@
 }
 
 .productView-tab .tabs .tab-title {
-    color: var(--bg-black);
+    color: #fff;
     font-size: calc(var(--font-body-size) + 4px);
     text-transform: capitalize;
     font-weight: var(--font-weight-semibold);
