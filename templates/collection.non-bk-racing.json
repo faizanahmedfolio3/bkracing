@@ -59,9 +59,10 @@
         },
         "80b0a11c-fb01-4b89-8a29-1dbb2a1db16a": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "heading": "Categories",
-            "type": "show_all",
+            "type": "1_level",
             "link_list": ""
           }
         },
