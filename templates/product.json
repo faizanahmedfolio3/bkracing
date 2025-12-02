@@ -12,21 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "2e8c7c14-a0ad-4930-a1d8-3def05310426": {
-          "type": "breadcrumb",
-          "settings": {
-            "breadcrumb_layout": "full",
-            "breadcrumb_alignment": "left",
-            "breadcrumb_bg": "rgba(0,0,0,0)",
-            "breadcrumb_gradient": "",
-            "breadcrumb_bg_mb": "#f6f6f6",
-            "breadcrumb_gradient_mb": "",
-            "breadcrumb_mg_top_desktop": 10,
-            "breadcrumb_mg_top_mobile": 0,
-            "breadcrumb_mg_bottom_desktop": 20,
-            "breadcrumb_mg_bottom_mobile": 10
-          }
-        },
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0": {
           "type": "title",
           "settings": {
@@ -81,6 +66,47 @@
             "fontsize_text": 18,
             "spacing_top": 0,
             "spacing_bottom": 17
+          }
+        },
+        "afterpay_on_site_messaging_payments_messaging_px4whw": {
+          "type": "shopify://apps/afterpay-on-site-messaging/blocks/payments-messaging/f45a5524-d177-4475-bf59-281efd2215a8",
+          "settings": {
+            "text_align": "inherit",
+            "margin_top": 16,
+            "margin_bottom": 16,
+            "color": "",
+            "size": "md",
+            "intro_text": "or",
+            "show_interest_free": true,
+            "payment_amount_is_bold": true,
+            "show_with": true,
+            "logo_type": "badge",
+            "logo_theme": "black-on-mint",
+            "modal_link_style": "circled-info-icon",
+            "modal_theme": "mint",
+            "breakpoint": 749,
+            "text_align_mobile": "inherit",
+            "margin_top_mobile": 16,
+            "margin_bottom_mobile": 16,
+            "show_lower_limit": true,
+            "show_upper_limit": true,
+            "show_if_outside_limits": true,
+            "product": "{{product}}"
+          }
+        },
+        "2e8c7c14-a0ad-4930-a1d8-3def05310426": {
+          "type": "breadcrumb",
+          "settings": {
+            "breadcrumb_layout": "full",
+            "breadcrumb_alignment": "left",
+            "breadcrumb_bg": "rgba(0,0,0,0)",
+            "breadcrumb_gradient": "",
+            "breadcrumb_bg_mb": "#f6f6f6",
+            "breadcrumb_gradient_mb": "",
+            "breadcrumb_mg_top_desktop": 10,
+            "breadcrumb_mg_top_mobile": 0,
+            "breadcrumb_mg_bottom_desktop": 20,
+            "breadcrumb_mg_bottom_mobile": 10
           }
         },
         "5d8b9ff9-6a1c-4850-a6c2-e6cdbb8b7f7c": {
@@ -310,12 +336,13 @@
         }
       },
       "block_order": [
-        "2e8c7c14-a0ad-4930-a1d8-3def05310426",
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
         "0e4ea696-4820-4c98-aaa6-806d41782a3d",
         "4036f89b-c2c5-49a4-9d6b-2fd29ce7c46c",
         "4e59f24a-8859-4579-a80a-d70e6f1bf66b",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
+        "afterpay_on_site_messaging_payments_messaging_px4whw",
+        "2e8c7c14-a0ad-4930-a1d8-3def05310426",
         "5d8b9ff9-6a1c-4850-a6c2-e6cdbb8b7f7c",
         "bd3a641e-98d0-4da1-ab57-d5e4b0391995",
         "d98e243b-3682-495a-965a-1c7f7d460880",
@@ -338,7 +365,7 @@
       ],
       "custom_css": [
         ".quantity__container input {color: #000;}",
-        ".product-form__buttons button{margin-top: 20px}"
+        ".product-form__buttons button {margin-top: 20px;}"
       ],
       "settings": {
         "container": "default",
