@@ -13,7 +13,8 @@
 
 .productView-tab .tabs .tab-title, 
 .tab-popup-content, 
-.tab-popup-content p {
+.tab-popup-content p,
+.productView-tab .halo-text-format {
     color: #fff;
 }
 
