@@ -140,7 +140,7 @@
           "type": "variant_description",
           "settings": {
             "spacing_top": 0,
-            "spacing_bottom": 12
+            "spacing_bottom": 0
           }
         },
         "faa2b3e6-c0a1-4269-baa6-d2605efe4c05": {
@@ -149,7 +149,7 @@
             "qty_style": "1",
             "qty_layout": "1",
             "spacing_top": 0,
-            "spacing_bottom": 15
+            "spacing_bottom": 5
           }
         },
         "04ea8843-f461-4f1d-8ea4-43f62fdfb21e": {
@@ -241,6 +241,7 @@
         },
         "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
           "type": "custom",
+          "disabled": true,
           "settings": {
             "open_tab_mobile": false,
             "title": "Shipping & Return",
@@ -254,6 +255,7 @@
         },
         "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a": {
           "type": "custom",
+          "disabled": true,
           "settings": {
             "open_tab_mobile": false,
             "title": "Custom Tab",
