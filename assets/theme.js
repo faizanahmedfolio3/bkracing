@@ -4252,9 +4252,14 @@
 
         formMessage: function() {
             const error = window.location.href.indexOf('form_type=contact') > -1;
-
+console.log("Here....");
             if (window.location.href.indexOf('contact_posted=true') > -1 || error) {
-                const formMessage = $(`[data-form-message="${$.cookie('contact_form')}"]`);
+                // Native cookie read function
+                const getCookie = (name) => {
+                    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                    return match ? decodeURIComponent(match[2]) : '';
+                };
+                const formMessage = $(`[data-form-message="${getCookie('contact_form')}"]`);
                 let delay = 400;
                 
                 if ($body.hasClass('template-product')) delay = 1600;
@@ -4279,10 +4284,11 @@
             }
 
             $(document).on('click', '[data-button-message]', (event) => {
-                $.cookie('contact_form', $(event.target).data('button-message'), {
-                    expires: 1,
-                    path: '/',
-                });
+                // Native cookie set
+                const value = $(event.target).data('button-message');
+                const date = new Date();
+                date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000)); // 1 day
+                document.cookie = 'contact_form=' + encodeURIComponent(value) + ';expires=' + date.toUTCString() + ';path=/';
             })
         },
 
