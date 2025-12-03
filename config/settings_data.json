@@ -322,7 +322,8 @@
     "btn_1_border_hover": "#232323",
     "btn_1_bg_hover": "#ffffff",
     "btn_2_color": "#ffffff",
-    "btn_2_border": "#727272",
+    "btn_2_border": "#ffffff",
+    "btn_2_bg": "#1a212a",
     "btn_2_border_hover": "#232323",
     "btn_2_bg_hover": "#232323",
     "btn_3_border": "#e9514b",
@@ -865,7 +866,7 @@
   "platform_customizations": {
     "custom_css": [
       "body {background-color: #000;}",
-      ".productView-tab .tabs .tab-title,.tab-popup-content,.tab-popup-content p,.productView-tab .halo-text-format,.productView-info-item .productView-info-name,.productView-info-item .productView-info-value{color: #fff;}",
+      ".productView-tab .tabs .tab-title,.tab-popup-content,.tab-popup-content p,.productView-tab .halo-text-format,.productView-info-item .productView-info-name,.productView-info-item .productView-info-value {color: #fff;}",
       "input[type=\"text\"],input[type=\"email\"],input[type=\"number\"] {color: #333;}"
     ]
   }
