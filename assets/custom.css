@@ -128,11 +128,11 @@ a.vendor-text {
 }
 
 .toolbar .toolbar-dropdown .label-tab {
-    background-color: #615f5f;
+    background-color: #615f5f !important;
 }
 
 .toolbar .toolbar-dropdown .dropdown-menu.hidden-on-mobile {
-    background-color: #333;
+    background-color: #333 !important;
 }
 
 span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.icon-mode-grid.grid-5  {
@@ -163,7 +163,8 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
 .halo-sidebar-header.text-left,
 .previewCartItem,
 .share-button__fallback,
-.previewCartItem  {
+.previewCartItem,
+.compareTable-heading  {
     background: #000 !important;
 }
 
@@ -172,6 +173,15 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
     fill: #232323 !important;
 }
 
-.previewCartCheckbox.global-checkbox label.global-checkbox--label {
+.previewCartCheckbox.global-checkbox label.global-checkbox--label
+.previewCartCheckbox input[type=checkbox]~button{
     color: #fff;
+}
+
+.halo-popup, .compareTable-removeProduct{
+        background-color: #161616;
+}
+
+.compareTable td, .compareTable th{
+    border: 1px solid #444444 !important;
 }
