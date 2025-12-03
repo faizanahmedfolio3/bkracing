@@ -154,3 +154,27 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
 .toolbar .toolbar-item .toolbar-icon.icon-mode-list.active:before{
     box-shadow: 0 7px 0 #333, 0 14px 0 #333;
 }
+
+.productView-wishlist a {
+    background-color: transparent;
+}
+
+.halo-sidebar.halo-sidebar-right.halo-cart-sidebar,
+.halo-sidebar-header.text-left,
+.previewCartItem,
+.share-button__fallback {
+    background: #000;
+}
+
+.slick-arrow svg{
+    color: #313131;
+    fill: #232323;
+}
+
+.previewCartItem {
+    background: #000;
+}
+
+.previewCartCheckbox.global-checkbox label.global-checkbox--label {
+    color: #fff;
+}
