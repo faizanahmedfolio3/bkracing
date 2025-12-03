@@ -4252,7 +4252,7 @@
 
         formMessage: function() {
             const error = window.location.href.indexOf('form_type=contact') > -1;
-console.log("Here....");
+
             if (window.location.href.indexOf('contact_posted=true') > -1 || error) {
                 // Native cookie read function
                 const getCookie = (name) => {
