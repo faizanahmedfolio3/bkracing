@@ -19,8 +19,66 @@
     color: #fff;
 }
 
-input[type='text'], 
-input[type='email'],
-input[type='number'] {
- color: #333;
+/* ================================
+   Global form fields: black text
+   ================================ */
+
+/* Text-like inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea {
+  color: #000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Dropdowns / selects */
+select {
+  color: #000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Shopify-ish field wrappers (Dawn & similar themes) */
+.field__input,
+.select__select {
+  color: #000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Product quantity input (covers most themes) */
+.quantity input[type="number"],
+.quantity__input,
+.product-form__input--quantity input[type="number"] {
+  color: #000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Collection / filter dropdowns */
+.facets__select,
+.facets__select select,
+.collection-filters select {
+  color: #000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Optional: placeholder text (so it’s readable on white) */
+input::placeholder,
+textarea::placeholder {
+  color: #555555 !important;
+}
+
+/* For older browsers (optional) */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #555555 !important;
+}
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: #555555 !important;
 }
