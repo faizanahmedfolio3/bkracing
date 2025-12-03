@@ -82,3 +82,9 @@ input::-ms-input-placeholder,
 textarea::-ms-input-placeholder {
   color: #555555 !important;
 }
+
+.productView-checkbox input[type=checkbox]+label,
+.productView-checkbox input[type=checkbox]~button,
+.productView-ViewingProduct .text {
+    color: #fff !important;
+}
