@@ -97,6 +97,60 @@ a.vendor-text {
     color: #fff !important;
 }
 
-.product.slick-slide {
+.product.slick-slide .card {
     max-width: 255px;
+    margin: 0 auto;
+}
+
+.product.slick-slide .card .card-media{
+   padding-bottom: 84%;
+}
+
+.product.slick-slide .card .card-media img{
+    right: 0;
+}
+
+.product.slick-slide .card span.badge.new-badge {
+    margin-left: 20px;
+}
+
+.product.slick-slide .card a.card-title.link-underline.card-title-ellipsis {
+    font-weight: bold;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;      /* Show max 2 lines */
+    overflow: hidden;           /* Hide the rest */
+    text-overflow: ellipsis;    /* Add "..." at the end */
+    line-height: 1.4;           /* adjust if needed */
+    max-height: calc(1.4em * 2);
+    min-height: 40px;
+}
+
+.toolbar .toolbar-dropdown .label-tab {
+    background-color: #615f5f;
+}
+
+.toolbar .toolbar-dropdown .dropdown-menu.hidden-on-mobile {
+    background-color: #333;
+}
+
+span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.icon-mode-grid.grid-5  {
+    display: none;
+}
+
+.toolbar .toolbar-item .toolbar-icon.icon-mode.active:before{
+    background-color: #333;
+}
+
+.toolbar .toolbar-item .toolbar-icon.grid-3.active:before{
+        box-shadow: 7px 0 0 #333, 14px 0 0 #333;
+}
+
+.toolbar .toolbar-item .toolbar-icon.grid-2.active:before {
+    box-shadow: 7px 0 0 #333;
+}
+
+.toolbar .toolbar-item .toolbar-icon.icon-mode-list.active:before{
+    box-shadow: 0 7px 0 #333, 0 14px 0 #333;
 }
