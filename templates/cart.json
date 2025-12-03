@@ -148,7 +148,7 @@
         "width_banner": 40,
         "enable_image_mb": true,
         "display_list_collection": false,
-        "collection_color": "#202020",
+        "collection_color": "#ffffff",
         "collection_color_hover": "#3e8cc4",
         "collection_bg_color": "#ffffff",
         "collection_bg_color_gradient": "",
