@@ -164,7 +164,8 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
 .previewCartItem,
 .share-button__fallback,
 .previewCartItem,
-.compareTable-heading  {
+.compareTable-heading,
+.popup-toolDown  {
     background: #000 !important;
 }
 
@@ -173,9 +174,10 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
     fill: #232323 !important;
 }
 
-.previewCartCheckbox.global-checkbox label.global-checkbox--label
-.previewCartCheckbox input[type=checkbox]~button{
-    color: #fff;
+.previewCartCheckbox.global-checkbox label.global-checkbox--label,
+.previewCartCheckbox input[type=checkbox]~button,
+.previewCartCheckbox input[type=checkbox]+label{
+    color: #fff !important;
 }
 
 .halo-popup, .compareTable-removeProduct{
