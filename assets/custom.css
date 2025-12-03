@@ -88,3 +88,15 @@ textarea::-ms-input-placeholder {
 .productView-ViewingProduct .text {
     color: #fff !important;
 }
+
+.productView-wishlist a {
+    background: transparent;
+}
+
+a.vendor-text {
+    color: #fff !important;
+}
+
+.product.slick-slide {
+    max-width: 255px;
+}
