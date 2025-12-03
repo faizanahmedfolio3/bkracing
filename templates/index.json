@@ -1005,7 +1005,7 @@
         "font_size_countdown_text": 14,
         "color_countdown": "#f42b23",
         "countdown_margin_left": 15,
-        "product_block_per_row": "5",
+        "product_block_per_row": "4",
         "product_block_infinite_scroll": true,
         "product_block_swipe_on_mobile": true,
         "enable_product_card_pd_bottom": false,
