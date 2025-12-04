@@ -1257,7 +1257,7 @@
       "custom_css": [
         "a.card-title {font-size: 16px !important; font-weight: bold; color: #fff;}",
         ".card-price .price {color: #fff;}",
-        ".card-summary.card-list__hidden {display: block !important; color: #e4e4e4;}"
+        ".card-summary.card-list__hidden {display: -webkit-box !important; /* instead of plain block */ -webkit-box-orient: vertical; -webkit-line-clamp: 2; /* show max 2 lines */ overflow: hidden; text-overflow: ellipsis; color: #e4e4e4; /* optional: keep height exactly 2 lines */ line-height: 1.4; max-height: calc(1.4em * 2);}"
       ],
       "settings": {
         "container": "container",
