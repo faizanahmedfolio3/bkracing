@@ -195,7 +195,7 @@
     "main_cart_gift_content": "DO YOU WANT A GIFT WRAP? <span style=\"font-weight: bold\">ONLY FOR $10.00<span></span></span>",
     "show_cart_shipping": true,
     "shipping_rate_calculator_default_country": "United States",
-    "show_quick_cart_popular_product": true,
+    "show_quick_cart_popular_product": false,
     "quick_cart_popular_product_title": "You May Also Like",
     "quick_cart_popular_product_collection": "suito",
     "quick_cart_popular_product_dots": false,
@@ -868,7 +868,7 @@
       "body {background-color: #000;}",
       ".productView-tab .tabs .tab-title,.tab-popup-content,.tab-popup-content p,.productView-tab .halo-text-format,.productView-info-item .productView-info-name,.productView-info-item .productView-info-value {color: #fff;}",
       "input[type=\"text\"],input[type=\"email\"],input[type=\"number\"] {color: #333;}",
-      ".show_image_loading .card-media.animated-loading{background-color: #000 !important;}"
+      ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}"
     ]
   }
 }
