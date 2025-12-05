@@ -279,6 +279,8 @@
     "product_wishlist_bg_added": "#000000",
     "product_compare_color": "#ffffff",
     "product_compare_bg": "#000000",
+    "product_quick_view_color": "#ffffff",
+    "product_quick_view_bg": "#000000",
     "product_action_color": "#232323",
     "product_action_bg": "#ffffff",
     "product_action_border_hover": "#232323",
