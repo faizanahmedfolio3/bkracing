@@ -1065,7 +1065,7 @@
         "product_price_compare_color": "#ffffff",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
+        "mg_top_mobile": 50,
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 40,
         "mg_bottom_mobile": 25
