@@ -191,3 +191,32 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
 .halo-popup .halo-productView-right h2 {
     color: #fff;
 }
+
+.site-nav-mobile.nav {
+    background-color: #363636;
+}
+
+.site-nav-mobile.nav .halo-sidebar-header {
+    background-color: #000;
+}
+
+@media(max-width: 1024px){
+    .halo-sidebar.halo-sidebar-left.halo-sidebar_menu .halo-sidebar-close svg {
+        fill: #fff;
+    }
+}
+
+.halo-sidebar-wrapper.custom-scrollbar {
+    background-color: #363636;
+}
+
+@media(max-width: 767px){
+    .template-index .spotlight-item.only-mobile .content {
+        position: absolute;
+        transform: translate(-50%,-50%);
+    }
+
+    .template-index .product-block-has__banner.enable_image_mb .product-block__banner .product-block__image{
+        display: none;
+    }
+}
