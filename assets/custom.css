@@ -124,7 +124,7 @@ a.vendor-text {
     text-overflow: ellipsis;    /* Add "..." at the end */
     line-height: 1.4;           /* adjust if needed */
     max-height: calc(1.4em * 2);
-    min-height: 40px;
+    min-height: 45px;
 }
 
 .toolbar .toolbar-dropdown .label-tab {
@@ -181,9 +181,13 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
 }
 
 .halo-popup, .compareTable-removeProduct{
-        background-color: #161616;
+        background-color: #161616 !important;
 }
 
 .compareTable td, .compareTable th{
     border: 1px solid #444444 !important;
+}
+
+.halo-popup .halo-productView-right h2 {
+    color: #fff;
 }
