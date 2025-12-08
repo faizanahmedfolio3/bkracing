@@ -884,7 +884,8 @@
       ".card-wishlist .wishlist-icon {display: none;}",
       ".recentlyViewed-row a.card-title {font-weight: bold; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; min-height: calc(1.4em * 2); max-height: calc(1.4em * 2);}",
       ".productView-wishlist.clearfix {display: none !important;}",
-      "a.tab-title.is-open {--border-color: #1a212a !important;}"
+      "a.tab-title.is-open {--border-color: #1a212a !important;}",
+      "@media(max-width: 767px){.policy-header {flex-direction: column;}.policy-header h1{line-height:40px;}}"
     ]
   }
 }
