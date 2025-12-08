@@ -44,6 +44,7 @@
     },
     "16497261635f6f948e": {
       "type": "product-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "padding_full_width": 0,
