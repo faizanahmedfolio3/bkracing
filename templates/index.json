@@ -214,8 +214,8 @@
         },
         "5ef9b78f-850e-4ec2-b05d-4232c9dae48c": {
           "type": "image",
-          "disabled": true,
           "settings": {
+            "image_slide": "shopify://shop_images/slider-3-bk-racing-opt.jpg",
             "alignment": "right",
             "enable_custom_position": false,
             "custom_horizontal": "",
@@ -493,7 +493,7 @@
         "slideshow_background_gradient": "",
         "border_radius": 0,
         "autoplay": true,
-        "slideshow_speed": "5000",
+        "slideshow_speed": "3000",
         "slideshow_transition": "true",
         "dots": "true",
         "dots_color": "#ffb204",
