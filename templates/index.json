@@ -23,7 +23,7 @@
             "custom_vertical_mb": "",
             "enable_position_outside_image": false,
             "enable_border_line": false,
-            "padding_vertical": 30,
+            "padding_vertical": 15,
             "content_width": 475,
             "text_alignment": "left",
             "text_alignment_mb": "center",
@@ -71,13 +71,13 @@
             "color_sub_heading_mb": "#ffffff",
             "heading_mb": "Performance Starts Here.",
             "font_style_heading_mb": "normal",
-            "font_size_heading_mb": 24,
-            "line_height_heading_mb": 24,
-            "heading_spacing_bottom_mb": 8,
+            "font_size_heading_mb": 20,
+            "line_height_heading_mb": 20,
+            "heading_spacing_bottom_mb": 5,
             "color_heading_mb": "#ffffff",
             "slide-des-mb": "Built for racers, by racers. Wear the attitude. Own the track.",
-            "font_size_des_mb": 14,
-            "des_spacing_bottom_mb": 35,
+            "font_size_des_mb": 12,
+            "des_spacing_bottom_mb": 0,
             "color_des_mb": "#ffffff",
             "enable_icon_button": false,
             "enable_button_link": false,
@@ -485,7 +485,7 @@
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 30
+        "mg_bottom_mobile": 0
       }
     },
     "16342924847ce35dfd": {
