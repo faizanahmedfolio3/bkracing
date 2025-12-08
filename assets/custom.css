@@ -237,10 +237,6 @@ p.alertBox-message {
     color: #126800 !important;
 }
 
-.card-wishlist .wishlist-icon {
-    display: none;
-}
-
 .recentlyViewed-row a.card-title {
   font-weight: bold;
   font-size: 14px;
@@ -283,4 +279,9 @@ a.tab-title.is-open {
 
 .cart-checkbox input[type="checkbox"] + label {
   color: #fff;
+}
+
+.card-product__group-item.card-wishlist,
+.card-wishlist .wishlist-icon {
+    display: none !important;
 }
