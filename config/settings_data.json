@@ -878,7 +878,8 @@
       "body {background-color: #000;}",
       ".productView-tab .tabs .tab-title,.tab-popup-content,.tab-popup-content p,.productView-tab .halo-text-format,.productView-info-item .productView-info-name,.productView-info-item .productView-info-value {color: #fff;}",
       "input[type=\"text\"],input[type=\"email\"],input[type=\"number\"] {color: #333;}",
-      ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}"
+      ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}",
+      ".card-product__group-item.card-wishlist {display: none !important;}"
     ]
   }
 }
