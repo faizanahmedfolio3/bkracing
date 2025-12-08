@@ -420,7 +420,7 @@
         "image_JV6PEb"
       ],
       "settings": {
-        "container": "fullwidth",
+        "container": "container",
         "padding_full_width": 0,
         "slideshow_background": "",
         "slideshow_background_gradient": "",
