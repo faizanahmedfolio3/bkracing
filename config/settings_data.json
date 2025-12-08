@@ -878,17 +878,7 @@
       "body {background-color: #000;}",
       ".productView-tab .tabs .tab-title,.tab-popup-content,.tab-popup-content p,.productView-tab .halo-text-format,.productView-info-item .productView-info-name,.productView-info-item .productView-info-value {color: #fff;}",
       "input[type=\"text\"],input[type=\"email\"],input[type=\"number\"] {color: #333;}",
-      ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}",
-      "@media (min-width: 1025px) {.template-index .product-block-has__banner .product-block__grid.pd--style2 .products-carousel .slick-next {right: 22px !important; } .page-sidebar .halo-sidebar-wrapper {padding-top: 20px !important; padding-right: 20px !important; padding-left: 20px !important; }}",
-      "p.alertBox-message {color: #126800 !important;}",
-      ".card-wishlist .wishlist-icon {display: none;}",
-      ".recentlyViewed-row a.card-title {font-weight: bold; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; min-height: calc(1.4em * 2); max-height: calc(1.4em * 2);}",
-      ".productView-wishlist.clearfix,.card-compare-wrapper,.halo-compareProduct.is-show {display: none !important;}",
-      "a.tab-title.is-open {--border-color: #1a212a !important;}",
-      "@media (max-width: 767px) {.policy-header {flex-direction: column; align-items: flex-start; } .policy-header h1 {line-height: 40px; }}",
-      ".text.alertBox-message {color: #333;}",
-      ".cart-header {background: #232323;}",
-      ".cart-checkbox input[type=\"checkbox\"] + label {color: #fff;}"
+      ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}"
     ]
   }
 }
