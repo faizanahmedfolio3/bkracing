@@ -15,7 +15,7 @@
         "16470678927dafedcc-0": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify://shop_images/about-slider.jpg",
+            "image_slide": "shopify://shop_images/slideshow-about_jpg.jpg",
             "alignment": "center",
             "enable_custom_position": false,
             "custom_horizontal": "",
