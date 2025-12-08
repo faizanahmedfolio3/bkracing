@@ -217,7 +217,7 @@
     "show_quick_view_short_description": false,
     "color_short_desc": "#ffffff",
     "show_customization_option": false,
-    "show_countdown": true,
+    "show_countdown": false,
     "countdown_type": "all_product",
     "countdown_time": "Dec 31, 2023 18:00:00",
     "countdown_collection": "",
