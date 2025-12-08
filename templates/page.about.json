@@ -522,7 +522,7 @@
           "settings": {
             "row_reverse": true,
             "image_width": "50",
-            "image": "shopify://shop_images/Slider_Banner_Mobile.png",
+            "image": "shopify://shop_images/about-us-why-choose-BK-racing.jpg",
             "flying_effect": false,
             "small_img_block_style": "style_1",
             "enable_divider": true,
@@ -564,7 +564,7 @@
             "align": "left",
             "enable_content_border": false,
             "content_border_color": "#232323",
-            "video_link": "https://www.youtube.com/watch?v=xyw4Nq0fsgY",
+            "video_link": "",
             "adaptive_height_video": "56",
             "icon_style": "style_2",
             "color_icon": "#ffffff",
