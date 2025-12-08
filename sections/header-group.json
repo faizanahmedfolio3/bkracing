@@ -86,6 +86,7 @@
         },
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-3": {
           "type": "wishlist",
+          "disabled": true,
           "settings": {
             "color": "#ffffff",
             "show_wishlist_number": false,
