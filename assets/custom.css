@@ -220,3 +220,23 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
         display: none;
     }
 }
+
+@media (min-width: 1025px) {
+    .template-index .product-block-has__banner .product-block__grid.pd--style2 .products-carousel .slick-next {
+        right: 22px !important;
+    }
+
+    .page-sidebar .halo-sidebar-wrapper {
+        padding-top: 20px !important;
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+    }
+}
+
+p.alertBox-message {
+    color: #126800 !important;
+}
+
+.card-wishlist .wishlist-icon {
+    display: none;
+}
