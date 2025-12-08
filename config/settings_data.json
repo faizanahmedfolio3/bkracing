@@ -888,7 +888,7 @@
       "@media (max-width: 767px) {.policy-header {flex-direction: column; align-items: flex-start; } .policy-header h1 {line-height: 40px; }}",
       ".text.alertBox-message {color: #333;}",
       ".cart-header {background: #232323;}",
-      ".cart-checkbox input[type=checkbox]+label {color: #fff;}"
+      ".cart-checkbox input[type=\"checkbox\"] + label {color: #fff;}"
     ]
   }
 }
