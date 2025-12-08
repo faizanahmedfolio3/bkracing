@@ -881,7 +881,8 @@
       ".show_image_loading .card-media.animated-loading {background-color: #000 !important;}",
       ".card-product__group-item.card-wishlist {display: none !important;}",
       ".cart .cart-header {background-color: #333;}",
-      ".cart-checkbox label.global-checkbox--label.form-label--checkbox {color: #fff !important;}"
+      ".cart-checkbox label.global-checkbox--label.form-label--checkbox {color: #fff !important;}",
+      "ul li.previewCartItem.clearfix {background-color: #363636 !important;}"
     ]
   }
 }
