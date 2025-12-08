@@ -571,7 +571,7 @@
             "bg_color_icon": "rgba(0,0,0,0)",
             "button_style": "style_1",
             "btn_text": "Explore shop",
-            "link": "shopify://collections",
+            "link": "shopify://collections/all",
             "button_1_width": 195,
             "enable_button_custom_border": false,
             "button_color": "#ffffff",
