@@ -45,7 +45,7 @@
         "image_NKaBbW": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify://shop_images/about-slider.jpg",
+            "image_slide": "shopify://shop_images/slideshow-about_jpg.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "",
@@ -219,7 +219,7 @@
     "main": {
       "type": "main-contact-us-1",
       "custom_css": [
-        "h2,h3,p,a,span,label,.contact-text {color: #fff; font-size: 16px}",
+        "h2,h3,p,a,span,label,.contact-text {color: #fff; font-size: 16px;}",
         "input[type=\"submit\"] {background-color: #f84248 !important;}"
       ],
       "settings": {
