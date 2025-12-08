@@ -115,7 +115,7 @@
         "eb881620-018e-4971-95e9-7e0a015dcd16": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify://shop_images/bk-racing-slider-2.jpg",
+            "image_slide": "shopify://shop_images/slider-2-bk-racing-opt.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
