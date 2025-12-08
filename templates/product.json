@@ -111,6 +111,7 @@
         },
         "5d8b9ff9-6a1c-4850-a6c2-e6cdbb8b7f7c": {
           "type": "hot_stock",
+          "disabled": true,
           "settings": {
             "hot_stock_style": "2",
             "spacing_top": 0,
@@ -119,6 +120,7 @@
         },
         "bd3a641e-98d0-4da1-ab57-d5e4b0391995": {
           "type": "countdown",
+          "disabled": true,
           "settings": {
             "spacing_top": 0,
             "spacing_bottom": 20
@@ -194,6 +196,7 @@
         },
         "683f2b15-db3b-4f63-8d0f-e688cc678581": {
           "type": "customer_viewing",
+          "disabled": true,
           "settings": {
             "customer_viewing_number": "283, 100, 59, 11, 14, 185, 193, 165, 50, 38, 99, 112, 46, 10, 125, 200, 250, 18",
             "customer_viewing_time": 5,
