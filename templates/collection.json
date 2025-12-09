@@ -61,8 +61,8 @@
           "type": "category",
           "settings": {
             "heading": "Categories",
-            "type": "1_level",
-            "link_list": ""
+            "type": "3_level",
+            "link_list": "categories-list"
           }
         },
         "ce351101-2c54-4627-b740-b2c592067b4a": {
