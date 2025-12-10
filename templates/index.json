@@ -78,7 +78,7 @@
             "color_heading_mb": "#ffffff",
             "slide-des-mb": "Built for racers, by racers. Wear the attitude. Own the track.",
             "font_size_des_mb": 14,
-            "des_spacing_bottom_mb": 0,
+            "des_spacing_bottom_mb": 15,
             "color_des_mb": "#ffffff",
             "enable_icon_button": false,
             "enable_button_link": false,
