@@ -319,6 +319,7 @@
           "type": "image",
           "settings": {
             "image_slide": "shopify://shop_images/bk-racing-slider-4-opt.jpg",
+            "image_slide_mb": "shopify://shop_images/m-slider-4.jpg",
             "alignment": "left",
             "enable_custom_position": true,
             "custom_horizontal": "17",
