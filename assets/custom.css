@@ -301,3 +301,7 @@ a.tab-title.is-open {
 ul.header__submenu.list-menu {
     background-color: #333;
 }
+
+.nav-title-mobile.text-center {
+    background-color: #000;
+}
