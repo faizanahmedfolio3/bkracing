@@ -119,6 +119,7 @@
     "customization_option_hidden": true,
     "customization_option_1": "Input Text",
     "customization_option_2": "Input File",
+    "show_wishlist": false,
     "show_wishlist_number_sidebar": false,
     "show_hot_stock": false,
     "enable_lazyload": true,
