@@ -305,5 +305,5 @@ ul.header__submenu.list-menu {
 }
 
 .nav-title-mobile.text-center {
-    background-color: #000;
+    background-color: #000 !important;
 }
