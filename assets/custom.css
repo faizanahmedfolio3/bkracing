@@ -250,7 +250,7 @@ p.alertBox-message {
   max-height: calc(1.4em * 2);
 }
 
-.productView-wishlist.clearfix,
+
 .card-compare-wrapper,
 .halo-compareProduct.is-show {
   display: none !important;
@@ -281,7 +281,7 @@ a.tab-title.is-open {
   color: #fff;
 }
 
-.card-product__group-item.card-wishlist,
+/*.card-product__group-item.card-wishlist,
 .card-wishlist .wishlist-icon {
     display: none !important;
-}
+}*/
