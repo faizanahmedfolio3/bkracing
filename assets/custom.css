@@ -297,3 +297,7 @@ a.tab-title.is-open {
 .menu-lv-item.menu-lv-1 .icon-dropdown svg {
     top: 27%;
 }
+
+ul.header__submenu.list-menu {
+    background-color: #333;
+}
