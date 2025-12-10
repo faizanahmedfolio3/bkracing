@@ -289,3 +289,11 @@ a.tab-title.is-open {
 .card-quickview.card-quickviewIcon {
     padding-top: 10px;
 }
+
+.menu-lv-item.menu-lv-1 .icon-dropdown {
+    display: block;
+}
+
+.menu-lv-item.menu-lv-1 .icon-dropdown svg {
+    top: 27%;
+}
