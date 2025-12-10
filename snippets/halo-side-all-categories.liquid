@@ -63,7 +63,7 @@
           {%- liquid
             assign show_link = true
             if link.type == 'collection_link' and link.object.all_products_count == 0
-              assign show_link = true
+              assign show_link = false
             endif
           -%}
           {%- if show_link -%}
