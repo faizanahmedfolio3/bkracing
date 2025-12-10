@@ -231,6 +231,10 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
         padding-right: 20px !important;
         padding-left: 20px !important;
     }
+
+    .menu-lv-item.menu-lv-1 .icon-dropdown svg {
+        top: 27%;
+    }
 }
 
 p.alertBox-message {
@@ -294,9 +298,7 @@ a.tab-title.is-open {
     display: block;
 }
 
-.menu-lv-item.menu-lv-1 .icon-dropdown svg {
-    top: 27%;
-}
+
 
 ul.header__submenu.list-menu {
     background-color: #333;
