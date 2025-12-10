@@ -285,3 +285,7 @@ a.tab-title.is-open {
 .card-wishlist .wishlist-icon {
     display: none !important;
 }*/
+
+.card-quickview.card-quickviewIcon {
+    padding-top: 10px;
+}
