@@ -330,6 +330,7 @@
     "border_colors_dots_active": "#b4b4b4",
     "colors_dots_active": "#737373",
     "pagination_item_color": "#ffffff",
+    "pagination_item_bg_color": "#000000",
     "pagination_item_border_color_active": "#ffffff",
     "pagination_arrow_color": "#bcbcbc",
     "swatch_border": "#cbcbcb",
