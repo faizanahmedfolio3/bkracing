@@ -359,3 +359,17 @@ background-repeat: no-repeat !important;
 
 }
 
+a.card-title.link-underline.card-title-ellipsis {
+  font-weight: bold;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  line-height: 1.4;
+  min-height: calc(1.4em * 2);
+  max-height: calc(1.4em * 2);
+}
+
