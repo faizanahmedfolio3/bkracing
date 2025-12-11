@@ -327,7 +327,7 @@ a.tab-title.is-open {
 
 ul.header__submenu.list-menu,
 .slick-counter {
-    background-color: #333;
+    background-color: #333 !important;
 }
 
 .nav-title-mobile.text-center {
