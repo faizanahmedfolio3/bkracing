@@ -213,6 +213,16 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
     .toolbar .toolbar-dropdown .label-tab.hidden-on-desktop .icon-dropdown{
         right: 10px !important;
     }
+
+    .toolbar .dropdown-menu.hidden-on-desktop .dropdown-menu-body li.is-active {
+        background-color: #616161;
+    }
+
+    .icon-wrapper svg g {
+        fill: #fff;
+        stroke: #fff;
+        color: #fff;
+    }
 }
 
 .halo-sidebar-wrapper.custom-scrollbar {
