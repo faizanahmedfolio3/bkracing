@@ -294,7 +294,7 @@ a.tab-title.is-open {
     .breadcrumb.breadcrumb-left,
     nav.breadcrumb.breadcrumb-,
     .toolbar .dropdown-menu.hidden-on-desktop{
-        background-color: #333;
+        background-color: #333 !important;
     }
 }
 
