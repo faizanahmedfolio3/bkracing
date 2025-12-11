@@ -209,6 +209,10 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
         padding-left: 10px !important;
         text-align: left !important;
     }
+
+    .toolbar .toolbar-dropdown .label-tab.hidden-on-desktop .icon-dropdown{
+        right: 10px !important;
+    }
 }
 
 .halo-sidebar-wrapper.custom-scrollbar {
