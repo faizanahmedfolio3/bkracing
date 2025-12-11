@@ -210,7 +210,7 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
         text-align: left !important;
     }
 
-    .toolbar .toolbar-dropdown .label-tab.hidden-on-desktop .icon-dropdown{
+    .toolbar .toolbar-wrapper .toolbar-dropdown .label-tab.hidden-on-desktop .icon-dropdown{
         right: 10px !important;
     }
 
