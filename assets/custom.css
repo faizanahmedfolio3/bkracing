@@ -308,3 +308,47 @@ ul.header__submenu.list-menu,
 .nav-title-mobile.text-center {
     background-color: #000 !important;
 }
+
+.card--text-only .placeholder-svg {
+
+display: none !important;
+
+}
+
+.card--text-only .card-media {
+
+padding-bottom: 100%;
+
+background-image: url("https://cdn.shopify.com/s/files/1/0686/9997/9864/files/placeholder-img.jpg") !important;
+
+background-size: contain !important;
+
+background-position: center !important;
+
+background-repeat: no-repeat !important;
+
+}
+
+.productView-images-wrapper:empty,
+
+.productView-images-wrapper:not(:has(img)) {
+
+    background-image: url("IMAGE LINK") !important;
+
+    background-size: contain !important;
+
+    background-position: center !important;
+
+    background-repeat: no-repeat !important;
+
+    padding-bottom: 100% !important;
+
+}
+
+.productView-images-wrapper:empty > *,
+
+.productView-images-wrapper:not(:has(img)) > * {
+
+    display: none !important;
+
+}
