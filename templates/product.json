@@ -378,7 +378,7 @@
         "container": "default",
         "padding_full_width": 0,
         "show_sticky_info": true,
-        "media_fit": "cover",
+        "media_fit": "unset",
         "product_image_ratio": "portrait",
         "portrait_aspect_ratio": 148,
         "video_layout": "popup",
