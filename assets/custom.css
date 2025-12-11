@@ -339,7 +339,7 @@ background-repeat: no-repeat !important;
 
 .productView-images-wrapper:not(:has(img)) {
 
-    background-image: url("IMAGE LINK") !important;
+    background-image: url("https://cdn.shopify.com/s/files/1/0686/9997/9864/files/placeholder-img.jpg") !important;
 
     background-size: contain !important;
 
