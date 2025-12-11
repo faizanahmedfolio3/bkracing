@@ -215,7 +215,7 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
     }
 
     .toolbar .dropdown-menu.hidden-on-desktop .dropdown-menu-body li.is-active {
-        background-color: #616161;
+        background-color: #616161 !important;
     }
 
     .icon-wrapper svg g {
