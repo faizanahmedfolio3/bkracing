@@ -204,6 +204,10 @@ span.toolbar-icon.icon-mode.icon-mode-grid.grid-4, span.toolbar-icon.icon-mode.i
     .halo-sidebar.halo-sidebar-left.halo-sidebar_menu .halo-sidebar-close svg {
         fill: #fff;
     }
+
+    .toolbar .toolbar-dropdown.filter-sortby .label-tab.hidden-on-desktop{
+        padding-left: 10px !important;
+    }
 }
 
 .halo-sidebar-wrapper.custom-scrollbar {
