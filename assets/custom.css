@@ -272,7 +272,8 @@ a.tab-title.is-open {
     line-height: 40px;
   }
 
-    .breadcrumb.breadcrumb-left{
+    .breadcrumb.breadcrumb-left,
+    nav.breadcrumb.breadcrumb-{
         background-color: #333;
     }
 }
