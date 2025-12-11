@@ -300,7 +300,8 @@ a.tab-title.is-open {
 
 
 
-ul.header__submenu.list-menu {
+ul.header__submenu.list-menu,
+.breadcrumb.breadcrumb-left {
     background-color: #333;
 }
 
