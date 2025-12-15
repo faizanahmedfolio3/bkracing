@@ -220,6 +220,7 @@
     "show_quick_view_sku": false,
     "show_quick_view_product_type": false,
     "show_customization_option": false,
+    "show_quick_view_customer_viewing": false,
     "show_countdown": false,
     "countdown_type": "all_product",
     "countdown_time": "Dec 31, 2023 18:00:00",
