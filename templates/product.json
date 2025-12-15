@@ -290,7 +290,7 @@
             "text_description": "Learn more",
             "color_des": "#e8e8e8",
             "fontsize_text": 12,
-            "content_popup": "We take pride in offering fast and reliable shipping to ensure you receive your order as quickly as possible. All items are carefully packed and dispatched within a short time, and our trusted delivery partners make sure your package arrives safely and on schedule. With real-time tracking and smooth handling every step of the way, we make your shopping experience convenient, efficient, and worry-free.",
+            "content_popup": "We ship all products with tracking. Orders will be shipped within 2 to 3 business days of order being placed.",
             "spacing_top": 0,
             "spacing_bottom": 12
           }
@@ -305,7 +305,7 @@
             "text_description": "Learn More.",
             "color_des": "#e8e8e8",
             "fontsize_text": 12,
-            "content_popup": "<div class=\"halo-text-format\">\n\t\t\t\t\t\t\n<p>You may return most new, unopened items within 30 days of delivery for a full refund. We'll also pay the return shipping costs if the return is a result of our error (you received an incorrect or defective item, etc.).</p>\n<p>You should expect to receive your refund within four weeks of giving your package to the return shipper, however, in many cases you will receive a refund more quickly. This time period includes the transit time for us to receive your return from the shipper (5 to 10 business days), the time it takes us to process your return once we receive it (3 to 5 business days), and the time it takes your bank to process our refund request (5 to 10 business days).</p>\n<p>If you need to return an item, simply login to your account, view the order using the \"Complete Orders\" link under the My Account menu and click the Return Item(s) button. We'll notify you via e-mail of your refund once we've received and processed the returned item.</p>\n\t\t\t\t\t\t\t</div>",
+            "content_popup": "<div class=\"halo-text-format\">\n\t\t\t\t\t\t\n<p>There is no return policy.\n\n\n\nOur new items have a 30 day warranty against manufacturer defects. It will require customer to cover return shipping and we will ship a replacement item once defective item is received.\n\n\n\nReturns will be subjected to a 25% restocking fee.</p>\n\t\t\t\t\t\t\t</div>",
             "spacing_top": 0,
             "spacing_bottom": 14
           }
