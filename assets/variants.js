@@ -154,9 +154,12 @@ class VariantSelects extends HTMLElement {
         const productForms = document.querySelectorAll(`#product-form-${this.dataset.product}, #product-form-installment-${this.dataset.product}`);
 
         productForms.forEach((productForm) => {
-            const input = productForm.querySelector('input[name="id"]');
-            input.value = this.currentVariant.id;
-            input.dispatchEvent(new Event('change', { bubbles: true }));
+            // Try both possible input names: 'id' (no addons) or 'items[0][id]' (with addons)
+            const input = productForm.querySelector('input[name="id"]') || productForm.querySelector('input[name="items[0][id]"]');
+            if (input) {
+                input.value = this.currentVariant.id;
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
         });
     }
 
