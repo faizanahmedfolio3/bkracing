@@ -65,6 +65,73 @@ class ProductAddons extends HTMLElement {
         }
     }
 
+    checkInitialAvailability() {
+        // Check availability of the initially selected variant
+        const variantSelect = this.productForm?.querySelector('[name="id"]');
+        if (variantSelect) {
+            this.checkMainProductAvailability(variantSelect);
+        }
+    }
+
+    checkMainProductAvailability(selectElement) {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const isAvailable = selectedOption?.dataset.available === 'true';
+        const inventoryQuantity = parseInt(selectedOption?.dataset.inventoryQuantity || '0');
+        const inventoryManagement = selectedOption?.dataset.inventoryManagement;
+        
+        // Check if variant is sold out or doesn't have enough quantity
+        const isSoldOut = !isAvailable || 
+                         (inventoryManagement && inventoryQuantity <= 0);
+        
+        this.toggleAddonsAvailability(!isSoldOut);
+    }
+
+    handleVariantChange(variant) {
+        // Handle variant changes from custom events
+        const isAvailable = variant.available;
+        const inventoryQuantity = variant.inventory_quantity || 0;
+        const inventoryManagement = variant.inventory_management;
+        
+        const isSoldOut = !isAvailable || 
+                         (inventoryManagement && inventoryQuantity <= 0);
+        
+        this.toggleAddonsAvailability(!isSoldOut);
+    }
+
+    toggleAddonsAvailability(enable) {
+        const addonsContainer = this.querySelector('.product-addons-list') || this;
+        
+        this.checkboxes.forEach(checkbox => {
+            const addonItem = checkbox.closest('[data-addon-item]');
+            
+            if (enable) {
+                // Enable addons
+                checkbox.disabled = false;
+                checkbox.removeAttribute('disabled');
+                addonItem?.classList.remove('is-disabled');
+            } else {
+                // Disable addons and uncheck them
+                checkbox.disabled = true;
+                checkbox.setAttribute('disabled', 'disabled');
+                checkbox.checked = false;
+                addonItem?.classList.remove('is-selected');
+                addonItem?.classList.add('is-disabled');
+            }
+        });
+        
+        // Update the container state
+        if (enable) {
+            addonsContainer.classList.remove('addons-disabled');
+        } else {
+            addonsContainer.classList.add('addons-disabled');
+        }
+        
+        // Update the total price after disabling
+        if (!enable) {
+            this.updateTotalPrice();
+        }
+    }
+
     getSelectedAddons() {
         const selectedAddons = [];
         
