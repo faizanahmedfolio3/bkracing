@@ -287,6 +287,11 @@
   opacity: 0.95;
 }
 
+/* Hide remove button from addon items */
+.previewCartItem--addon .previewCartItem-remove {
+  display: none !important;
+}
+
 .addon-badge {
   display: inline-block;
   margin-bottom: 0.5rem;
