@@ -10,7 +10,6 @@
     >
     <noscript>{{ 'component-product-addons.css' | asset_url | stylesheet_tag }}</noscript>
 
-
     <product-addons
       class="product-addons-wrapper"
       data-product-addons
@@ -19,7 +18,7 @@
       <div class="product-addons-container">
         <div class="product-addons-header">
           <h3 class="product-addons-title">
-            {{ product.metafields.custom.addon_products_text.value | default: "Add Extra Products" }}
+            {{ product.metafields.custom.addon_products_text.value | default: 'Add Extra Products' }}
             (Optional)
           </h3>
         </div>
