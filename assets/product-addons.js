@@ -20,78 +20,17 @@ class ProductAddons extends HTMLElement {
             checkbox.addEventListener('change', this.handleCheckboxChange.bind(this));
         });
 
-        // Find the variant input field - could be select or hidden input
-        this.variantInput = this.productForm?.querySelector('[name="id"]');
-        
-        // Listen for variant changes on main product - use input event for immediate updates
-        if (this.variantInput) {
-            // Listen for both change and input events
-            ['change', 'input'].forEach(eventType => {
-                this.variantInput.addEventListener(eventType, (event) => {
-                    console.log('Variant input changed:', event.target.value);
-                    this.updateMainProductPrice(event.target);
-                    this.checkMainProductAvailability(event.target);
-                });
-            });
-        }
-
-        // Also listen at form level for bubbled events
+        // Listen for variant changes on main product
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
-                if (event.target.name === 'id' && event.target !== this.variantInput) {
-                    console.log('Form level variant change:', event.target.value);
+                if (event.target.name === 'id') {
                     this.updateMainProductPrice(event.target);
-                    this.checkMainProductAvailability(event.target);
                 }
             });
         }
 
-        // Subscribe to pubsub variant change event (theme's native event system)
-        // Use a slight delay to ensure global.js has loaded
-        setTimeout(() => {
-            if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
-                console.log('Subscribing to variant change events via PubSub');
-                this.unsubscribeVariantChange = "";
-                 subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-                    console.log("PubSub variant change event received:", event);
-                    if (event.data && event.data.variant) {
-                        console.log("Variant data:", event.data.variant);
-                        this.handleVariantChange(event.data.variant);
-                    }
-                });
-                 subscribe(PUB_SUB_EVENTS.optionValueSelectionChange, (event) => {
-                     console.log("PubSub option change event received:", event.data);
-                 })
-            } else {
-                console.warn('PubSub system not available yet. Subscribe:', typeof subscribe, 'PUB_SUB_EVENTS:', typeof PUB_SUB_EVENTS);
-            }
-        }, 100);
-
-        // Watch for add to cart button state changes as a fallback
-        // if (this.addToCartButton) {
-        //     console.log('Setting up button observer');
-        //     const buttonObserver = new MutationObserver(() => {
-        //         console.log('Button state changed');
-        //         this.checkAddToCartButtonState();
-        //     });
-        //
-        //     buttonObserver.observe(this.addToCartButton, {
-        //         attributes: true,
-        //         attributeFilter: ['disabled', 'class']
-        //     });
-        // }
-
         // Update initial state
-        console.log('Initializing addon component');
         this.updateTotalPrice();
-        this.checkInitialAvailability();
-    }
-
-    disconnectedCallback() {
-        // Cleanup subscription when element is removed
-        if (this.unsubscribeVariantChange) {
-            this.unsubscribeVariantChange();
-        }
     }
 
     handleCheckboxChange(event) {
@@ -107,164 +46,12 @@ class ProductAddons extends HTMLElement {
         this.updateTotalPrice();
     }
 
-    updateMainProductPrice(inputOrSelectElement) {
-        let variantPrice;
-        
-        // Handle both SELECT and INPUT elements
-        if (inputOrSelectElement.tagName === 'SELECT') {
-            const selectedOption = inputOrSelectElement.options[inputOrSelectElement.selectedIndex];
-            variantPrice = selectedOption?.dataset.price;
-        } else if (inputOrSelectElement.tagName === 'INPUT') {
-            // For hidden inputs, try to get price from data attribute or variant data
-            variantPrice = inputOrSelectElement.dataset.price;
-            
-            // If no price on input, try to get from variant data
-            if (!variantPrice) {
-                const variantId = inputOrSelectElement.value;
-                const variantData = this.getVariantData(variantId);
-                if (variantData) {
-                    variantPrice = variantData.price;
-                }
-            }
-        }
+    updateMainProductPrice(selectElement) {
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const variantPrice = selectedOption?.dataset.price;
         
         if (variantPrice) {
             this.mainProductPrice = parseFloat(variantPrice);
-            this.updateTotalPrice();
-        }
-    }
-
-    checkInitialAvailability() {
-        // Check availability of the initially selected variant
-        const variantInput = this.productForm?.querySelector('[name="id"]');
-        if (variantInput) {
-            this.checkMainProductAvailability(variantInput);
-        }
-    }
-
-    checkMainProductAvailability(inputOrSelectElement) {
-        let variantId;
-        let isAvailable = true;
-        let inventoryQuantity = 0;
-        
-        // Handle both select elements and hidden inputs
-        if (inputOrSelectElement.tagName === 'SELECT') {
-            const selectedOption = inputOrSelectElement.options[inputOrSelectElement.selectedIndex];
-            variantId = selectedOption?.value;
-            isAvailable = selectedOption?.dataset.available === 'true';
-            inventoryQuantity = parseInt(selectedOption?.dataset.inventoryQuantity || '0');
-        } else {
-            // For hidden inputs, get the variant ID directly
-            variantId = inputOrSelectElement.value;
-        }
-        
-        // If we have a variant ID but couldn't get availability from data attributes,
-        // try to get it from the global product data
-        if (variantId && isAvailable === true) {
-            const variantData = this.getVariantData(variantId);
-            if (variantData) {
-                isAvailable = variantData.available;
-                inventoryQuantity = variantData.inventory_quantity || 0;
-            }
-        }
-        
-        // Check if variant is sold out or doesn't have enough quantity
-        const isSoldOut = !isAvailable;
-        
-        this.toggleAddonsAvailability(!isSoldOut);
-    }
-
-    getVariantData(variantId) {
-        // Try to find variant data from Shopify's product JSON
-        try {
-            // Look for product data in the window object
-            const productData = window.ShopifyAnalytics?.meta?.product;
-            if (productData && productData.variants) {
-                const variant = productData.variants.find(v => v.id == variantId);
-                if (variant) return variant;
-            }
-            
-            // Try alternate data source - check for variant data in data attributes
-            const productElement = document.querySelector('[data-product-json]');
-            if (productElement) {
-                const product = JSON.parse(productElement.dataset.productJson);
-                const variant = product.variants.find(v => v.id == variantId);
-                if (variant) return variant;
-            }
-            
-            // Check the add to cart button state
-            const addToCartBtn = this.productForm?.querySelector('[data-btn-addToCart]');
-            if (addToCartBtn) {
-                const isDisabled = addToCartBtn.disabled || 
-                                 addToCartBtn.classList.contains('disabled') ||
-                                 addToCartBtn.classList.contains('sold-out');
-                
-                return {
-                    available: !isDisabled,
-                    inventory_quantity: isDisabled ? 0 : 1
-                };
-            }
-        } catch (error) {
-            console.log('Could not parse variant data:', error);
-        }
-        
-        return null;
-    }
-
-    handleVariantChange(variant) {
-        // Handle variant changes from custom events
-        const isAvailable = variant.available;
-        const inventoryQuantity = variant.inventory_quantity || 0;
-        const inventoryManagement = variant.inventory_management;
-        
-        const isSoldOut = !isAvailable || 
-                         (inventoryManagement && inventoryQuantity <= 0);
-        
-        this.toggleAddonsAvailability(!isSoldOut);
-    }
-
-    checkAddToCartButtonState() {
-        // Check if the add to cart button is disabled or has sold-out class
-        if (!this.addToCartButton) return;
-        
-        const isDisabled = this.addToCartButton.disabled || 
-                          this.addToCartButton.classList.contains('disabled') ||
-                          this.addToCartButton.classList.contains('sold-out') ||
-                          this.addToCartButton.classList.contains('is-disable');
-        
-        this.toggleAddonsAvailability(!isDisabled);
-    }
-
-    toggleAddonsAvailability(enable) {
-        const addonsContainer = this.querySelector('.product-addons-list') || this;
-        
-        this.checkboxes.forEach(checkbox => {
-            const addonItem = checkbox.closest('[data-addon-item]');
-            
-            if (enable) {
-                // Enable addons
-                checkbox.disabled = false;
-                checkbox.removeAttribute('disabled');
-                addonItem?.classList.remove('is-disabled');
-            } else {
-                // Disable addons and uncheck them
-                checkbox.disabled = true;
-                checkbox.setAttribute('disabled', 'disabled');
-                checkbox.checked = false;
-                addonItem?.classList.remove('is-selected');
-                addonItem?.classList.add('is-disabled');
-            }
-        });
-        
-        // Update the container state
-        if (enable) {
-            addonsContainer.classList.remove('addons-disabled');
-        } else {
-            addonsContainer.classList.add('addons-disabled');
-        }
-        
-        // Update the total price after disabling
-        if (!enable) {
             this.updateTotalPrice();
         }
     }
