@@ -23,8 +23,15 @@ class ProductAddons extends HTMLElement {
         // Listen for variant changes on main product
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
-                if (event.target.name === 'id') {
-                    this.updateMainProductPrice(event.target);
+                if (event.target.name === 'id' || event.target.name === 'items[0][id]') {
+                    // Wait a bit for the theme to update the button text first
+                    setTimeout(() => {
+                        // Capture the current button text (might be "Sold Out", "Add to Cart", etc.)
+                        if (this.addToCartButton) {
+                            this.originalButtonText = this.addToCartButton.textContent;
+                        }
+                        this.updateMainProductPrice(event.target);
+                    }, 100);
                 }
             });
         }
@@ -94,21 +101,36 @@ class ProductAddons extends HTMLElement {
         const selectedAddons = this.getSelectedAddons();
         const totalPrice = this.calculateTotalPrice();
 
-        // Update button text with total price if addons are selected
-        if (selectedAddons.length > 0) {
-            const formattedPrice = Shopify.formatMoney(totalPrice, window.money_format);
-            const buttonText = this.originalButtonText.includes('$')
-                ? this.originalButtonText.replace(/\$[\d,\.]+/, formattedPrice)
-                : `${this.originalButtonText} - ${formattedPrice}`;
+        // Check if the button is disabled or shows sold out status
+        const isButtonDisabled = this.addToCartButton.disabled || 
+                                 this.addToCartButton.classList.contains('disabled') ||
+                                 this.addToCartButton.hasAttribute('disabled');
+        
+        const buttonText = this.addToCartButton.textContent.toLowerCase();
+        const isSoldOut = buttonText.includes('sold out') || 
+                         buttonText.includes('unavailable') || 
+                         buttonText.includes('out of stock');
 
-            this.addToCartButton.textContent = buttonText;
-            this.addToCartButton.dataset.totalPrice = totalPrice;
-            this.addToCartButton.dataset.hasAddons = 'true';
-        } else {
-            // Reset to original text if no addons selected
-            this.addToCartButton.textContent = this.originalButtonText;
-            this.addToCartButton.dataset.totalPrice = this.mainProductPrice;
-            delete this.addToCartButton.dataset.hasAddons;
+
+                         
+        // Don't update button text if variant is unavailable/sold out
+        if (!isButtonDisabled && !isSoldOut) {
+            // Update button text with total price if addons are selected
+            if (selectedAddons.length > 0) {
+                const formattedPrice = Shopify.formatMoney(totalPrice, window.money_format);
+                const buttonTextToUse = this.originalButtonText.includes('$')
+                    ? this.originalButtonText.replace(/\$[\d,\.]+/, formattedPrice)
+                    : `${this.originalButtonText} - ${formattedPrice}`;
+
+                this.addToCartButton.textContent = buttonTextToUse;
+                this.addToCartButton.dataset.totalPrice = totalPrice;
+                this.addToCartButton.dataset.hasAddons = 'true';
+            } else {
+                // Reset to original text if no addons selected
+                this.addToCartButton.textContent = this.originalButtonText;
+                this.addToCartButton.dataset.totalPrice = this.mainProductPrice;
+                delete this.addToCartButton.dataset.hasAddons;
+            }
         }
 
         // Trigger custom event for other scripts that might need to know about price changes
@@ -188,8 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 originalQuantityField.setAttribute('data-addon-modified', 'true');
                 console.log('Converted main product quantity field');
             }
-
-
+            
             // Generate a unique group ID for this addon bundle
             const addonGroupId = `addon_bundle_${Date.now()}_${mainVariantId}`;
 
