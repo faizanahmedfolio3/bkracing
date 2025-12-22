@@ -33,6 +33,7 @@ class ProductAddons extends HTMLElement {
         // Subscribe to pubsub variant change event (theme's native event system)
         if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
             this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+                console.log("variant change event", event);
                 if (event.data && event.data.variant) {
                     console.log("variant change", event.data);
                     this.handleVariantChange(event.data.variant);
