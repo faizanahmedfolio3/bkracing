@@ -236,7 +236,7 @@
   }
 }
 .previewCartItem--addon .previewCartItem-image img {
-  width: 54px;
+  width: 60px;
 }
 @media (max-width: 480px) {
   .product-addons-wrapper {
