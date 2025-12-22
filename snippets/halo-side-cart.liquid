@@ -701,9 +701,11 @@
         {% if additional_checkout_buttons and settings.show_additional_checkout_buttons %}
           {{ content_for_additional_checkout_buttons }}
         {% endif %}
-        <a class="button button-2 button-view-cart" href="{{ routes.cart_url }}">
-          {{ 'sections.cart.view_cart' | t }}
-        </a>
+        {% comment %}
+          <a class="button button-2 button-view-cart" href="{{ routes.cart_url }}">
+            {{ 'sections.cart.view_cart' | t }}
+          </a>
+        {% endcomment %}
       </div>
     </div>
   </div>
