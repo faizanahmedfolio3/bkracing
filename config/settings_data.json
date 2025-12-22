@@ -210,7 +210,7 @@
     "quick_cart_popular_product_collection": "suito",
     "quick_cart_popular_product_dots": false,
     "quick_cart_popular_product_arrows": true,
-    "show_quick_edit_cart": true,
+    "show_quick_edit_cart": false,
     "quick_edit_cart_picker_type": "button",
     "quick_view_layout": "3",
     "quick_view_product_image_ratio": "adapt",
