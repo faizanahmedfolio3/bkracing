@@ -250,7 +250,8 @@
 
 /* Last addon item - add bottom border */
 .previewCartItem--addon[data-last-addon="true"] {
-  border-bottom: var(--cart-item-border-width) var(--cart-item-border-style) var(--cart-item-border) !important;
+  border-bottom: var(--cart-item-border-width) var(--cart-item-border-style)
+    var(--cart-item-border) !important;
   padding-bottom: 20px !important;
 }
 
