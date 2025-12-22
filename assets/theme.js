@@ -3948,16 +3948,49 @@
                   }
                 }
 
-                Shopify.changeItem(productLine, quantity, index, (cart) => {
-                    if($body.hasClass('template-cart')){
-                        halo.updateCart(cart);
-                    } else if($body.hasClass('cart-modal-show')){
-                        // halo.updateDropdownCart(cart);
-                    } else if($body.hasClass('cart-sidebar-show')) {
-                        halo.updateSidebarCart(cart);
+                // Check if this is a parent product with addons
+                const $itemRow = $target.closest('[data-item-row]');
+                const variantId = $itemRow.attr('data-variant-id');
+                const hasAddons = $itemRow.attr('data-has-addons') === 'true';
+
+                let itemsToUpdate = [{ line: productLine, quantity: quantity, index: index }];
+
+                if (hasAddons && variantId) {
+                    // Find all addon items for this parent
+                    const $addonItems = $(`[data-addon-item][data-parent-variant="${variantId}"]`);
+                    $addonItems.each(function() {
+                        const $addonQuantityInput = $(this).find('[data-cart-quantity]');
+                        const addonLine = $addonQuantityInput.data('line');
+                        const addonIndex = $addonQuantityInput.data('index');
+                        itemsToUpdate.push({ line: addonLine, quantity: quantity, index: addonIndex });
+                    });
+                }
+
+                let updatedCount = 0;
+                const totalItemsToUpdate = itemsToUpdate.length;
+
+                const updateNextItem = () => {
+                    if (itemsToUpdate.length > 0) {
+                        const item = itemsToUpdate.shift();
+                        Shopify.changeItem(item.line, item.quantity, item.index, (cart) => {
+                            updatedCount++;
+                            if (updatedCount === totalItemsToUpdate) {
+                                // All items updated, now update the cart UI
+                                if($body.hasClass('template-cart')){
+                                    halo.updateCart(cart);
+                                } else if($body.hasClass('cart-modal-show')){
+                                    // halo.updateDropdownCart(cart);
+                                } else if($body.hasClass('cart-sidebar-show')) {
+                                    halo.updateSidebarCart(cart);
+                                }
+                                if (!enoughInStock) halo.showWarning(`${ window.cartStrings.addProductOutQuantity.replace('[maxQuantity]', quantity) }`)
+                            } else {
+                                updateNextItem(); // Update the next item in the list
+                            }
+                        });
                     }
-                    if (!enoughInStock) halo.showWarning(`${ window.cartStrings.addProductOutQuantity.replace('[maxQuantity]', quantity) }`)
-                });
+                };
+                updateNextItem();
             });
         },
 
