@@ -350,6 +350,7 @@
         "total_price": "Price total:"
       },
       "view_full_details": "View full details",
+      "addon_label": "Add-on",
       "step_by_step": {
         "next": "Next step",
         "previous": "Previous step"
