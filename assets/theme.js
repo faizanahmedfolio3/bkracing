@@ -3760,13 +3760,62 @@
 
                 $('#cart-gift-wrapping').text(text);
 
+                // Check if this item is a parent with addons
+                const $itemRow = $target.closest('[data-item-row]');
+                const variantId = $itemRow.attr('data-variant-id');
+                const hasAddons = $itemRow.attr('data-has-addons') === 'true';
+
+                // First remove the parent item
                 Shopify.removeItem(productLine, index, (cart) => {
-                    if($body.hasClass('template-cart')){
-                        halo.updateCart(cart);
-                    } else if($body.hasClass('cart-modal-show')){
-                        // halo.updateDropdownCart(cart);
-                    } else if($body.hasClass('cart-sidebar-show')) {
-                        halo.updateSidebarCart(cart);
+                    // If parent had addons, also remove all addon items
+                    if (hasAddons && variantId) {
+                        // Find all addon items for this parent
+                        const $addonItems = $(`[data-addon-item][data-parent-variant="${variantId}"]`);
+                        
+                        if ($addonItems.length > 0) {
+                            // Create array of removal promises
+                            let removalCount = 0;
+                            const totalAddons = $addonItems.length;
+                            
+                            $addonItems.each(function() {
+                                const $addonItem = $(this);
+                                const addonLine = $addonItem.find('[data-cart-remove]').data('line');
+                                const addonIndex = $addonItem.find('[data-cart-remove]').data('index');
+                                
+                                // Remove each addon
+                                Shopify.removeItem(addonLine, addonIndex, (updatedCart) => {
+                                    removalCount++;
+                                    // Update cart only after all addons are removed
+                                    if (removalCount === totalAddons) {
+                                        if($body.hasClass('template-cart')){
+                                            halo.updateCart(updatedCart);
+                                        } else if($body.hasClass('cart-modal-show')){
+                                            // halo.updateDropdownCart(updatedCart);
+                                        } else if($body.hasClass('cart-sidebar-show')) {
+                                            halo.updateSidebarCart(updatedCart);
+                                        }
+                                    }
+                                });
+                            });
+                        } else {
+                            // No addons found, just update cart normally
+                            if($body.hasClass('template-cart')){
+                                halo.updateCart(cart);
+                            } else if($body.hasClass('cart-modal-show')){
+                                // halo.updateDropdownCart(cart);
+                            } else if($body.hasClass('cart-sidebar-show')) {
+                                halo.updateSidebarCart(cart);
+                            }
+                        }
+                    } else {
+                        // Not a parent item, update cart normally
+                        if($body.hasClass('template-cart')){
+                            halo.updateCart(cart);
+                        } else if($body.hasClass('cart-modal-show')){
+                            // halo.updateDropdownCart(cart);
+                        } else if($body.hasClass('cart-sidebar-show')) {
+                            halo.updateSidebarCart(cart);
+                        }
                     }
                 });
             });
@@ -4252,7 +4301,6 @@
 
         formMessage: function() {
             const error = window.location.href.indexOf('form_type=contact') > -1;
-
             if (window.location.href.indexOf('contact_posted=true') > -1 || error) {
                 // Native cookie read function
                 const getCookie = (name) => {
