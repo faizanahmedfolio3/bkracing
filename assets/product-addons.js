@@ -57,6 +57,26 @@ class ProductAddons extends HTMLElement {
         }
     }
 
+    updateMainProductPriceFromVariantChange(inputElement) {
+        // Get the variant ID from the input
+        const variantId = inputElement.value;
+        
+        // Get the price from the productView-price element which is updated by variants.js
+        const priceElement = document.querySelector('#product-price-' + inputElement.closest('form').dataset.productId + ' .price-item--regular');
+        
+        if (priceElement) {
+            const priceText = priceElement.textContent.trim();
+            // Extract numeric value from price string (remove currency symbols, commas, etc.)
+            const priceMatch = priceText.match(/[\d,]+\.?\d*/);
+            if (priceMatch) {
+                const numericPrice = parseFloat(priceMatch[0].replace(/,/g, '')) * 100; // Convert to cents
+                this.mainProductPrice = numericPrice;
+                this.dataset.mainProductPrice = numericPrice;
+                this.updateTotalPrice();
+            }
+        }
+    }
+
     getSelectedAddons() {
         const selectedAddons = [];
         
