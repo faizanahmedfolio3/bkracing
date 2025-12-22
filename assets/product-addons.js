@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonIndexField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonIndexField);
 
-                console.log(`Added addon field ${itemIndex}: ${addonProductName} for ${mainProductName}, Group: ${addonGroupId}`);
+                //console.log(`Added addon field ${itemIndex}: ${addonProductName} for ${mainProductName}, Group: ${addonGroupId}`);
             });
         } else {
             // No addons selected, restore original field names
