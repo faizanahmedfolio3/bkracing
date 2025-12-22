@@ -232,9 +232,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('[data-product-title]')?.textContent?.trim() ||
             'Main Product';
 
-        console.log('Main variant ID:', mainVariantId);
+        /*console.log('Main variant ID:', mainVariantId);
         console.log('Main product name:', mainProductName);
-        console.log('Selected addons:', selectedAddons.length);
+        console.log('Selected addons:', selectedAddons.length);*/
 
         if (!mainVariantId) {
             console.error('No variant ID found');
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // If addons are selected, convert to items[] format
         if (selectedAddons.length > 0) {
-            console.log('Converting form to items[] format');
+            // console.log('Converting form to items[] format');
 
             // Convert original fields to items[0] format
             const originalIdField = productForm.querySelector('[name="id"]');
@@ -252,12 +252,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (originalIdField && !originalIdField.hasAttribute('data-addon-modified')) {
                 originalIdField.setAttribute('name', 'items[0][id]');
                 originalIdField.setAttribute('data-addon-modified', 'true');
-                console.log('Converted main product ID field');
+                // console.log('Converted main product ID field');
             }
             if (originalQuantityField && !originalQuantityField.hasAttribute('data-addon-modified')) {
                 originalQuantityField.setAttribute('name', 'items[0][quantity]');
                 originalQuantityField.setAttribute('data-addon-modified', 'true');
-                console.log('Converted main product quantity field');
+                // console.log('Converted main product quantity field');
             }
             
             // Generate a unique group ID for this addon bundle
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             // No addons selected, restore original field names
-            console.log('No addons selected, restoring original format');
+            //console.log('No addons selected, restoring original format');
 
             const idField = productForm.querySelector('[name="items[0][id]"]');
             const qtyField = productForm.querySelector('[name="items[0][quantity]"]');
@@ -339,23 +339,23 @@ document.addEventListener('DOMContentLoaded', function() {
             if (idField && idField.hasAttribute('data-addon-modified')) {
                 idField.setAttribute('name', 'id');
                 idField.removeAttribute('data-addon-modified');
-                console.log('Restored main product ID field');
+                //console.log('Restored main product ID field');
             }
             if (qtyField && qtyField.hasAttribute('data-addon-modified')) {
                 qtyField.setAttribute('name', 'quantity');
                 qtyField.removeAttribute('data-addon-modified');
-                console.log('Restored main product quantity field');
+                //console.log('Restored main product quantity field');
             }
         }
 
-        console.log('Form fields updated');
+        //console.log('Form fields updated');
     }
 
     // Listen for addon checkbox changes
     const addonCheckboxes = addonsElement.querySelectorAll('[data-addon-checkbox]');
     addonCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-            console.log('Addon checkbox changed:', checkbox.value, checkbox.checked);
+            //console.log('Addon checkbox changed:', checkbox.value, checkbox.checked);
             updateFormFields();
         });
     });
