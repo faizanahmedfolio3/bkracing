@@ -314,24 +314,26 @@
         </li>
 
         {%- comment -%} Display addon products grouped with this parent {%- endcomment -%}
-        {%- comment -%} First, collect all addons for this parent to find the last one {%- endcomment -%}
-        {%- assign addons_for_parent = '' | split: ',' -%}
+        {%- comment -%} First, count total addons for this parent {%- endcomment -%}
+        {%- assign addon_count = 0 -%}
         {%- for check_item in cart.items -%}
           {%- assign check_addon_for = check_item.properties._addon_for | append: '' -%}
           {%- assign check_variant_id = item.variant_id | append: '' -%}
           {%- if check_item.properties._is_addon == 'true' and check_addon_for == check_variant_id -%}
-            {%- assign addons_for_parent = addons_for_parent | push: check_item.id -%}
+            {%- assign addon_count = addon_count | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
-        {%- assign last_addon_id = addons_for_parent | last -%}
 
+        {%- comment -%} Now loop through and render addons {%- endcomment -%}
+        {%- assign current_addon_index = 0 -%}
         {%- for addon_item in cart.items -%}
           {%- assign addon_for = addon_item.properties._addon_for | append: '' -%}
           {%- assign variant_id = item.variant_id | append: '' -%}
 
           {%- if addon_item.properties._is_addon == 'true' and addon_for == variant_id -%}
+            {%- assign current_addon_index = current_addon_index | plus: 1 -%}
             {%- assign is_last_addon = false -%}
-            {%- if addon_item.id == last_addon_id -%}
+            {%- if current_addon_index == addon_count -%}
               {%- assign is_last_addon = true -%}
             {%- endif -%}
             <li
