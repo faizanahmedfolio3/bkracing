@@ -68,23 +68,79 @@ class ProductAddons extends HTMLElement {
 
     checkInitialAvailability() {
         // Check availability of the initially selected variant
-        const variantSelect = this.productForm?.querySelector('[name="id"]');
-        if (variantSelect) {
-            this.checkMainProductAvailability(variantSelect);
+        const variantInput = this.productForm?.querySelector('[name="id"]');
+        if (variantInput) {
+            this.checkMainProductAvailability(variantInput);
         }
     }
 
-    checkMainProductAvailability(selectElement) {
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-        const isAvailable = selectedOption?.dataset.available === 'true';
-        const inventoryQuantity = parseInt(selectedOption?.dataset.inventoryQuantity || '0');
-        const inventoryManagement = selectedOption?.dataset.inventoryManagement;
+    checkMainProductAvailability(inputOrSelectElement) {
+        let variantId;
+        let isAvailable = true;
+        let inventoryQuantity = 0;
+        
+        // Handle both select elements and hidden inputs
+        if (inputOrSelectElement.tagName === 'SELECT') {
+            const selectedOption = inputOrSelectElement.options[inputOrSelectElement.selectedIndex];
+            variantId = selectedOption?.value;
+            isAvailable = selectedOption?.dataset.available === 'true';
+            inventoryQuantity = parseInt(selectedOption?.dataset.inventoryQuantity || '0');
+        } else {
+            // For hidden inputs, get the variant ID directly
+            variantId = inputOrSelectElement.value;
+        }
+        
+        // If we have a variant ID but couldn't get availability from data attributes,
+        // try to get it from the global product data
+        if (variantId && isAvailable === true) {
+            const variantData = this.getVariantData(variantId);
+            if (variantData) {
+                isAvailable = variantData.available;
+                inventoryQuantity = variantData.inventory_quantity || 0;
+            }
+        }
         
         // Check if variant is sold out or doesn't have enough quantity
-        const isSoldOut = !isAvailable || 
-                         (inventoryManagement && inventoryQuantity <= 0);
+        const isSoldOut = !isAvailable;
         
         this.toggleAddonsAvailability(!isSoldOut);
+    }
+
+    getVariantData(variantId) {
+        // Try to find variant data from Shopify's product JSON
+        try {
+            // Look for product data in the window object
+            const productData = window.ShopifyAnalytics?.meta?.product;
+            if (productData && productData.variants) {
+                const variant = productData.variants.find(v => v.id == variantId);
+                if (variant) return variant;
+            }
+            
+            // Try alternate data source - check for variant data in data attributes
+            const productElement = document.querySelector('[data-product-json]');
+            if (productElement) {
+                const product = JSON.parse(productElement.dataset.productJson);
+                const variant = product.variants.find(v => v.id == variantId);
+                if (variant) return variant;
+            }
+            
+            // Check the add to cart button state
+            const addToCartBtn = this.productForm?.querySelector('[data-btn-addToCart]');
+            if (addToCartBtn) {
+                const isDisabled = addToCartBtn.disabled || 
+                                 addToCartBtn.classList.contains('disabled') ||
+                                 addToCartBtn.classList.contains('sold-out');
+                
+                return {
+                    available: !isDisabled,
+                    inventory_quantity: isDisabled ? 0 : 1
+                };
+            }
+        } catch (error) {
+            console.log('Could not parse variant data:', error);
+        }
+        
+        return null;
     }
 
     handleVariantChange(variant) {
