@@ -287,8 +287,9 @@
   opacity: 0.95;
 }
 
-/* Hide remove button from addon items */
-.previewCartItem--addon .previewCartItem-remove {
+/* Hide remove button and quantity from addon items */
+.previewCartItem--addon .previewCartItem-remove,
+.previewCartItem--addon .previewCartItem-qty {
   display: none !important;
 }
 
@@ -361,9 +362,11 @@
   padding-left: 10px;
 }
 
-/* Hide remove button from addon items in main cart */
+/* Hide remove button and quantity from addon items in main cart */
 .cart-list .cart-item--addon .cart-remove,
-.cart-list .cart-item--addon .cart-item-remove {
+.cart-list .cart-item--addon .cart-item-remove,
+.cart-list .cart-item--addon .cart-item-qty,
+.cart-list .cart-item--addon .cart-item-quantity {
   display: none !important;
 }
 
