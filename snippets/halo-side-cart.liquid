@@ -44,10 +44,21 @@
             endif
           endif
         -%}
+        {%- comment -%} Check if this item has addons {%- endcomment -%}
+        {%- assign has_addons = false -%}
+        {%- for check_addon in cart.items -%}
+          {%- assign check_addon_for = check_addon.properties._addon_for | append: '' -%}
+          {%- assign check_variant_id = item.variant_id | append: '' -%}
+          {%- if check_addon.properties._is_addon == 'true' and check_addon_for == check_variant_id -%}
+            {%- assign has_addons = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
         <li
           class="previewCartItem clearfix{% if item.properties._has_addons %} has-addons{% endif %}"
           data-item-row
           data-variant-id="{{ item.variant_id }}"
+          {% if has_addons %}data-has-addons="true"{% endif %}
           {% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %}
             data-price-gift-card="{{ price_gift_card | times: item.quantity }}"
           {% endif %}
