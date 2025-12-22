@@ -19,7 +19,7 @@
       <div class="product-addons-container">
         <div class="product-addons-header">
           <h3 class="product-addons-title">
-            {{ 'products.product.addon_products.title' | t | default: 'Add Extra Products' }}
+            {{ product.metafields.custom.addon_products_text.value | default: "Add Extra Products" }}
           </h3>
         </div>
         <div class="product-addons-content">
