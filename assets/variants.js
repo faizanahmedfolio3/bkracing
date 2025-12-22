@@ -526,8 +526,9 @@ class VariantSelects extends HTMLElement {
             const sticky = this.item.find('.productView-stickyCart');
             const itemImage = sticky.find('.sticky-image');
             const option = sticky.find('.select__select');
-            const input = document.getElementById(`product-form-sticky-${this.dataset.product}`)?.querySelector('input[name="id"]');
-            const button = document.getElementById(`product-form-sticky-${this.dataset.product}`)?.querySelector('[name="add"]');
+            const stickyForm = document.getElementById(`product-form-sticky-${this.dataset.product}`);
+            const input = stickyForm?.querySelector('input[name="id"]') || stickyForm?.querySelector('input[name="items[0][id]"]');
+            const button = stickyForm?.querySelector('[name="add"]');
             var quantityInput = this.item.find('input[name="quantity"]');
             var submitBtn = $('.product-form__submit');
             var maxValue;
