@@ -1,13 +1,13 @@
 class ProductAddons extends HTMLElement {
     constructor() {
         super();
-        
+
         this.mainProductPrice = parseFloat(this.dataset.mainProductPrice || 0);
         this.checkboxes = this.querySelectorAll('[data-addon-checkbox]');
         this.productForm = document.querySelector('.product-form');
         this.addToCartButton = this.productForm?.querySelector('[data-btn-addToCart]');
         this.originalButtonText = this.addToCartButton?.textContent || '';
-        
+
         // Initialize event listeners
         this.init();
     }
@@ -23,9 +23,8 @@ class ProductAddons extends HTMLElement {
         // Listen for variant changes on main product
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
-                // Check for both possible input names
-                if (event.target.name === 'id' || event.target.name === 'items[0][id]') {
-                    this.updateMainProductPriceFromVariantChange(event.target);
+                if (event.target.name === 'id') {
+                    this.updateMainProductPrice(event.target);
                 }
             });
         }
@@ -37,7 +36,7 @@ class ProductAddons extends HTMLElement {
     handleCheckboxChange(event) {
         const checkbox = event.target;
         const addonItem = checkbox.closest('[data-addon-item]');
-        
+
         if (checkbox.checked) {
             addonItem?.classList.add('is-selected');
         } else {
@@ -50,42 +49,22 @@ class ProductAddons extends HTMLElement {
     updateMainProductPrice(selectElement) {
         const selectedOption = selectElement.options[selectElement.selectedIndex];
         const variantPrice = selectedOption?.dataset.price;
-        
+
         if (variantPrice) {
             this.mainProductPrice = parseFloat(variantPrice);
             this.updateTotalPrice();
         }
     }
 
-    updateMainProductPriceFromVariantChange(inputElement) {
-        // Get the variant ID from the input
-        const variantId = inputElement.value;
-        
-        // Get the price from the productView-price element which is updated by variants.js
-        const priceElement = document.querySelector('#product-price-' + inputElement.closest('form').dataset.productId + ' .price-item--regular');
-        
-        if (priceElement) {
-            const priceText = priceElement.textContent.trim();
-            // Extract numeric value from price string (remove currency symbols, commas, etc.)
-            const priceMatch = priceText.match(/[\d,]+\.?\d*/);
-            if (priceMatch) {
-                const numericPrice = parseFloat(priceMatch[0].replace(/,/g, '')) * 100; // Convert to cents
-                this.mainProductPrice = numericPrice;
-                this.dataset.mainProductPrice = numericPrice;
-                this.updateTotalPrice();
-            }
-        }
-    }
-
     getSelectedAddons() {
         const selectedAddons = [];
-        
+
         this.checkboxes.forEach(checkbox => {
             if (checkbox.checked) {
                 const addonItem = checkbox.closest('[data-addon-item]');
                 const addonPrice = parseFloat(addonItem?.dataset.addonPrice || 0);
                 const addonId = addonItem?.dataset.addonId;
-                
+
                 if (addonId) {
                     selectedAddons.push({
                         id: addonId,
@@ -94,18 +73,18 @@ class ProductAddons extends HTMLElement {
                 }
             }
         });
-        
+
         return selectedAddons;
     }
 
     calculateTotalPrice() {
         const selectedAddons = this.getSelectedAddons();
         let totalAddonsPrice = 0;
-        
+
         selectedAddons.forEach(addon => {
             totalAddonsPrice += addon.price;
         });
-        
+
         return this.mainProductPrice + totalAddonsPrice;
     }
 
@@ -114,14 +93,14 @@ class ProductAddons extends HTMLElement {
 
         const selectedAddons = this.getSelectedAddons();
         const totalPrice = this.calculateTotalPrice();
-        
+
         // Update button text with total price if addons are selected
         if (selectedAddons.length > 0) {
             const formattedPrice = Shopify.formatMoney(totalPrice, window.money_format);
-            const buttonText = this.originalButtonText.includes('$') 
+            const buttonText = this.originalButtonText.includes('$')
                 ? this.originalButtonText.replace(/\$[\d,\.]+/, formattedPrice)
                 : `${this.originalButtonText} - ${formattedPrice}`;
-            
+
             this.addToCartButton.textContent = buttonText;
             this.addToCartButton.dataset.totalPrice = totalPrice;
             this.addToCartButton.dataset.hasAddons = 'true';
@@ -152,54 +131,53 @@ class ProductAddons extends HTMLElement {
 // Register the custom element
 customElements.define('product-addons', ProductAddons);
 
-
 // Enhance the main add to cart functionality to include addons
 document.addEventListener('DOMContentLoaded', function() {
     const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
     const addonsElement = document.querySelector('product-addons');
-    
+
     if (!productForm || !addonsElement) {
         console.log('Product form or addons element not found');
         return;
     }
-    
+
     console.log('Initializing addon form integration');
-    
+
     // Function to update form fields based on selected addons
     function updateFormFields() {
         console.log('Updating form fields...');
-        
+
         // Remove any previously added addon fields
         const existingAddonFields = productForm.querySelectorAll('[data-addon-field]');
         existingAddonFields.forEach(field => field.remove());
-        
-        const mainVariantId = productForm.querySelector('[name="id"]')?.value || 
-                            productForm.querySelector('[name="items[0][id]"]')?.value;
+
+        const mainVariantId = productForm.querySelector('[name="id"]')?.value ||
+            productForm.querySelector('[name="items[0][id]"]')?.value;
         const selectedAddons = addonsElement.getSelectedAddons();
-        
+
         // Get main product name from the page
-        const mainProductName = document.querySelector('.productView-title')?.textContent?.trim() || 
-                               document.querySelector('h1')?.textContent?.trim() ||
-                               document.querySelector('[data-product-title]')?.textContent?.trim() ||
-                               'Main Product';
-        
+        const mainProductName = document.querySelector('.productView-title')?.textContent?.trim() ||
+            document.querySelector('h1')?.textContent?.trim() ||
+            document.querySelector('[data-product-title]')?.textContent?.trim() ||
+            'Main Product';
+
         console.log('Main variant ID:', mainVariantId);
         console.log('Main product name:', mainProductName);
         console.log('Selected addons:', selectedAddons.length);
-        
+
         if (!mainVariantId) {
             console.error('No variant ID found');
             return;
         }
-        
+
         // If addons are selected, convert to items[] format
         if (selectedAddons.length > 0) {
             console.log('Converting form to items[] format');
-            
+
             // Convert original fields to items[0] format
             const originalIdField = productForm.querySelector('[name="id"]');
             const originalQuantityField = productForm.querySelector('[name="quantity"]');
-            
+
             if (originalIdField && !originalIdField.hasAttribute('data-addon-modified')) {
                 originalIdField.setAttribute('name', 'items[0][id]');
                 originalIdField.setAttribute('data-addon-modified', 'true');
@@ -210,19 +188,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 originalQuantityField.setAttribute('data-addon-modified', 'true');
                 console.log('Converted main product quantity field');
             }
-            
-            
+
+
             // Generate a unique group ID for this addon bundle
             const addonGroupId = `addon_bundle_${Date.now()}_${mainVariantId}`;
-            
+
             // Add hidden fields for each addon product
             selectedAddons.forEach((addon, index) => {
                 const itemIndex = index + 1; // Start from 1 since 0 is the main product
-                
+
                 // Get addon product name from the DOM
                 const addonItem = document.querySelector(`[data-addon-item][data-addon-id="${addon.id}"]`);
                 const addonProductName = addonItem?.querySelector('.addon-item-title')?.textContent?.trim() || 'Addon Product';
-                
+
                 // Create hidden input for addon variant ID
                 const addonIdField = document.createElement('input');
                 addonIdField.type = 'hidden';
@@ -230,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonIdField.value = addon.id;
                 addonIdField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonIdField);
-                
+
                 // Create hidden input for addon quantity
                 const addonQtyField = document.createElement('input');
                 addonQtyField.type = 'hidden';
@@ -238,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonQtyField.value = '1';
                 addonQtyField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonQtyField);
-                
+
                 // Add VISIBLE property for checkout (shows "Addon - Parent Product Name")
                 const visiblePropertyField = document.createElement('input');
                 visiblePropertyField.type = 'hidden';
@@ -246,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 visiblePropertyField.value = mainProductName;
                 visiblePropertyField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(visiblePropertyField);
-                
+
                 // Add property to identify it as an addon (hidden, for internal use)
                 const addonPropertyField = document.createElement('input');
                 addonPropertyField.type = 'hidden';
@@ -254,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonPropertyField.value = mainVariantId;
                 addonPropertyField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonPropertyField);
-                
+
                 // Add property to mark this as an addon product (hidden)
                 const addonTypeField = document.createElement('input');
                 addonTypeField.type = 'hidden';
@@ -262,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonTypeField.value = 'true';
                 addonTypeField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonTypeField);
-                
+
                 // Add property with unique group ID for cart transform (hidden)
                 const addonGroupField = document.createElement('input');
                 addonGroupField.type = 'hidden';
@@ -270,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonGroupField.value = addonGroupId;
                 addonGroupField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonGroupField);
-                
+
                 // Add property with addon index in the bundle (hidden)
                 const addonIndexField = document.createElement('input');
                 addonIndexField.type = 'hidden';
@@ -278,16 +256,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 addonIndexField.value = index.toString();
                 addonIndexField.setAttribute('data-addon-field', 'true');
                 productForm.appendChild(addonIndexField);
-                
+
                 console.log(`Added addon field ${itemIndex}: ${addonProductName} for ${mainProductName}, Group: ${addonGroupId}`);
             });
         } else {
             // No addons selected, restore original field names
             console.log('No addons selected, restoring original format');
-            
+
             const idField = productForm.querySelector('[name="items[0][id]"]');
             const qtyField = productForm.querySelector('[name="items[0][quantity]"]');
-            
+
             if (idField && idField.hasAttribute('data-addon-modified')) {
                 idField.setAttribute('name', 'id');
                 idField.removeAttribute('data-addon-modified');
@@ -299,10 +277,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Restored main product quantity field');
             }
         }
-        
+
         console.log('Form fields updated');
     }
-    
+
     // Listen for addon checkbox changes
     const addonCheckboxes = addonsElement.querySelectorAll('[data-addon-checkbox]');
     addonCheckboxes.forEach(checkbox => {
@@ -311,9 +289,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateFormFields();
         });
     });
-    
+
     // Initial update
     updateFormFields();
 });
-
 
