@@ -273,6 +273,9 @@
   position: relative;
   border-bottom: none;
 }
+.previewCartItem--addon .previewCartItem-content{
+ padding 
+}
 
 .previewCartItem--addon::before {
   content: "";
