@@ -59,6 +59,9 @@ class ProductAddons extends HTMLElement {
                         this.handleVariantChange(event.data.variant);
                     }
                 });
+                 subscribe(PUB_SUB_EVENTS.optionValueSelectionChange, (event) => {
+                     console.log("PubSub option change event received:", event.data);
+                 })
             } else {
                 console.warn('PubSub system not available yet. Subscribe:', typeof subscribe, 'PUB_SUB_EVENTS:', typeof PUB_SUB_EVENTS);
             }
