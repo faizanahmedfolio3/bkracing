@@ -1467,6 +1467,7 @@
                       %}
                     </div>
                   {% endunless %}
+                  {% render 'product-addons' %}
                 {%- when 'customer_viewing' -%}
                   <div
                     class="productView-moreItem{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"
@@ -1759,7 +1760,7 @@
     </div>
   </div>
 
-  {% render 'product-addons' %}
+
   {% unless has_product_combo %}
     {% render 'product-bundle' %}
   {% endunless %}
