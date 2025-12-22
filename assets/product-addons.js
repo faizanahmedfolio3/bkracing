@@ -24,6 +24,9 @@ class ProductAddons extends HTMLElement {
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
                 if (event.target.name === 'id' || event.target.name === 'items[0][id]') {
+                    // Clear all addon selections when variant changes
+                    this.clearAddonSelections();
+                    
                     // Wait a bit for the theme to update the button text first
                     setTimeout(() => {
                         // Capture the current button text (might be "Sold Out", "Add to Cart", etc.)
@@ -61,6 +64,24 @@ class ProductAddons extends HTMLElement {
             this.mainProductPrice = parseFloat(variantPrice);
             this.updateTotalPrice();
         }
+    }
+
+    clearAddonSelections() {
+        // Uncheck all addon checkboxes
+        this.checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checkbox.checked = false;
+                const addonItem = checkbox.closest('[data-addon-item]');
+                addonItem?.classList.remove('is-selected');
+            }
+        });
+        
+        // Update the total price and form fields
+        this.updateTotalPrice();
+        
+        // Trigger the updateFormFields function if it exists
+        const updateEvent = new Event('change', { bubbles: true });
+        this.checkboxes[0]?.dispatchEvent(updateEvent);
     }
 
     getSelectedAddons() {
@@ -112,7 +133,7 @@ class ProductAddons extends HTMLElement {
                          buttonText.includes('out of stock');
 
 
-                         
+
         // Don't update button text if variant is unavailable/sold out
         if (!isButtonDisabled && !isSoldOut) {
             // Update button text with total price if addons are selected
