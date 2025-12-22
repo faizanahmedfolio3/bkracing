@@ -1,0 +1,84 @@
+{%- if product.metafields.custom.addon_products != blank -%}
+  {%- assign addon_products = product.metafields.custom.addon_products.value -%}
+  {%- assign addon_count = addon_products.count -%}
+  {%- if addon_count > 0 -%}
+    <link
+      rel="stylesheet"
+      href="{{ 'component-product-addons.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+    <noscript>{{ 'component-product-addons.css' | asset_url | stylesheet_tag }}</noscript>
+
+    
+    <product-addons
+      class="product-addons-wrapper"
+      data-product-addons
+      data-main-product-price="{{ product.selected_or_first_available_variant.price }}"
+    >
+      <div class="product-addons-container">
+        <div class="product-addons-header">
+          <h3 class="product-addons-title">
+            {{ 'products.product.addon_products.title' | t | default: 'Add Extra Products' }}
+          </h3>
+        </div>
+        <div class="product-addons-content">
+          <div class="product-addons-list">
+            {%- for addon_product in addon_products -%}
+              {%- if addon_product.available -%}
+                {%- assign addon_variant = addon_product.selected_or_first_available_variant -%}
+                <div
+                  class="product-addon-item"
+                  data-addon-item
+                  data-addon-id="{{ addon_variant.id }}"
+                  data-addon-price="{{ addon_variant.price }}"
+                >
+                  <div class="addon-item-checkbox">
+                    <input
+                      type="checkbox"
+                      id="addon-{{ addon_variant.id }}"
+                      class="addon-checkbox"
+                      data-addon-checkbox
+                      value="{{ addon_variant.id }}"
+                      autocomplete="off"
+                    >
+                    <label
+                      for="addon-{{ addon_variant.id }}"
+                      class="global-checkbox--label form-label--checkbox addon-checkbox-label"
+                    ></label>
+                  </div>
+                  <div class="addon-item-image">
+                    {%- if addon_product.featured_image -%}
+                      {{
+                        addon_product.featured_image
+                        | image_url: width: 80
+                        | image_tag: loading: 'lazy', alt: addon_product.title
+                      }}
+                    {%- endif -%}
+                  </div>
+                  <div class="addon-item-details">
+                    <div class="addon-item-info">
+                      <a href="{{ addon_product.url }}" class="addon-item-title">{{ addon_product.title }}</a>
+                      {%- if addon_product.variants.size > 1 -%}
+                        <div class="addon-item-variant">{{ addon_variant.title }}</div>
+                      {%- endif -%}
+                    </div>
+                    <div class="addon-item-price">
+                      {%- if addon_variant.compare_at_price > addon_variant.price -%}
+                        <span class="addon-price-sale">{{ addon_variant.price | money }}</span>
+                        <span class="addon-price-compare">{{ addon_variant.compare_at_price | money }}</span>
+                      {%- else -%}
+                        <span class="addon-price">{{ addon_variant.price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </product-addons>
+    <script src="{{ 'product-addons.js' | asset_url }}" defer></script>
+  {%- endif -%}
+{%- endif -%}
