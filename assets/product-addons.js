@@ -56,9 +56,37 @@ class ProductAddons extends HTMLElement {
         this.updateTotalPrice();
     }
 
-    updateMainProductPrice(selectElement) {
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-        const variantPrice = selectedOption?.dataset.price;
+    updateMainProductPrice(inputElement) {
+        // Get the variant ID from the input (could be select, radio, or hidden input)
+        const variantId = inputElement.value;
+        
+        if (!variantId) return;
+
+        // Try to get price from the input's data attribute first
+        let variantPrice = inputElement.dataset?.price;
+
+        // If it's a select element, get price from the selected option
+        if (!variantPrice && inputElement.tagName === 'SELECT') {
+            const selectedOption = inputElement.options[inputElement.selectedIndex];
+            variantPrice = selectedOption?.dataset?.price;
+        }
+
+        // If still no price, try to find it from the product price display on the page
+        if (!variantPrice) {
+            const priceElement = document.querySelector('.price-item--regular .price') ||
+                                document.querySelector('[data-product-price] .price') ||
+                                document.querySelector('.product-price .price');
+            
+            if (priceElement) {
+                const priceText = priceElement.textContent.trim();
+                const priceMatch = priceText.match(/[\d,]+\.?\d*/);
+                if (priceMatch) {
+                    const numericPrice = parseFloat(priceMatch[0].replace(/,/g, ''));
+                    // Convert to cents (Shopify uses cents)
+                    variantPrice = (numericPrice * 100).toString();
+                }
+            }
+        }
 
         if (variantPrice) {
             this.mainProductPrice = parseFloat(variantPrice);
