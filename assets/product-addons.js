@@ -68,18 +68,18 @@ class ProductAddons extends HTMLElement {
         }, 100);
 
         // Watch for add to cart button state changes as a fallback
-        if (this.addToCartButton) {
-            console.log('Setting up button observer');
-            const buttonObserver = new MutationObserver(() => {
-                console.log('Button state changed');
-                this.checkAddToCartButtonState();
-            });
-            
-            buttonObserver.observe(this.addToCartButton, {
-                attributes: true,
-                attributeFilter: ['disabled', 'class']
-            });
-        }
+        // if (this.addToCartButton) {
+        //     console.log('Setting up button observer');
+        //     const buttonObserver = new MutationObserver(() => {
+        //         console.log('Button state changed');
+        //         this.checkAddToCartButtonState();
+        //     });
+        //
+        //     buttonObserver.observe(this.addToCartButton, {
+        //         attributes: true,
+        //         attributeFilter: ['disabled', 'class']
+        //     });
+        // }
 
         // Update initial state
         console.log('Initializing addon component');
