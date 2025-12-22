@@ -25,12 +25,21 @@ class ProductAddons extends HTMLElement {
             this.productForm.addEventListener('change', (event) => {
                 if (event.target.name === 'id') {
                     this.updateMainProductPrice(event.target);
+                    this.checkMainProductAvailability(event.target);
                 }
             });
         }
 
+        // Listen for custom variant change events (some themes use this)
+        document.addEventListener('variant:change', (event) => {
+            if (event.detail && event.detail.variant) {
+                this.handleVariantChange(event.detail.variant);
+            }
+        });
+
         // Update initial state
         this.updateTotalPrice();
+        this.checkInitialAvailability();
     }
 
     handleCheckboxChange(event) {
