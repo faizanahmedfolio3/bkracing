@@ -8,6 +8,8 @@ class ProductBundle extends HTMLElement {
         this.updateBundleTotalPrice();
         this.updateBundleText();
 
+
+        
         this.form.addEventListener('change', this.onVariantChange.bind(this));
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
 
