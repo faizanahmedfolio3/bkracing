@@ -24,7 +24,7 @@ class ProductAddons extends HTMLElement {
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
                 if (event.target.name === 'id') {
-                    this.updateMainProductPrice(event.target);
+                    //this.updateMainProductPrice(event.target);
                     this.checkMainProductAvailability(event.target);
                 }
             });
