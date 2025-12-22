@@ -31,15 +31,21 @@ class ProductAddons extends HTMLElement {
         }
 
         // Subscribe to pubsub variant change event (theme's native event system)
-        if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
-            this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-                console.log("variant change event", event);
-                if (event.data && event.data.variant) {
-                    console.log("variant change", event.data);
-                    this.handleVariantChange(event.data.variant);
-                }
-            });
-        }
+        // Use a slight delay to ensure global.js has loaded
+        setTimeout(() => {
+            if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+                console.log('Subscribing to variant change events');
+                this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+                    console.log("variant change event", event);
+                    if (event.data && event.data.variant) {
+                        console.log("variant change", event.data);
+                        this.handleVariantChange(event.data.variant);
+                    }
+                });
+            } else {
+                console.warn('PubSub system not available. Subscribe:', typeof subscribe, 'PUB_SUB_EVENTS:', typeof PUB_SUB_EVENTS);
+            }
+        }, 100);
 
         // Watch for add to cart button state changes as a fallback
         if (this.addToCartButton) {
