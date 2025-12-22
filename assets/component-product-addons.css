@@ -273,8 +273,8 @@
   position: relative;
   border-bottom: none;
 }
-.previewCartItem--addon .previewCartItem-content{
- padding 
+.previewCartItem--addon .previewCartItem-content {
+  padding: 0 20px 0 0;
 }
 
 .previewCartItem--addon::before {
@@ -372,8 +372,8 @@
 .cart-list .cart-item--addon .cart-item-quantity {
   display: none !important;
 }
-.previewCartItem--addon .previewCartItem-name{
-  margin-top:20px;
+.previewCartItem--addon .previewCartItem-name {
+  margin-top: 20px;
 }
 @media (max-width: 768px) {
   .previewCartItem--addon {
