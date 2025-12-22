@@ -20,10 +20,26 @@ class ProductAddons extends HTMLElement {
             checkbox.addEventListener('change', this.handleCheckboxChange.bind(this));
         });
 
-        // Listen for variant changes on main product
+        // Find the variant input field - could be select or hidden input
+        this.variantInput = this.productForm?.querySelector('[name="id"]');
+        
+        // Listen for variant changes on main product - use input event for immediate updates
+        if (this.variantInput) {
+            // Listen for both change and input events
+            ['change', 'input'].forEach(eventType => {
+                this.variantInput.addEventListener(eventType, (event) => {
+                    console.log('Variant input changed:', event.target.value);
+                    this.updateMainProductPrice(event.target);
+                    this.checkMainProductAvailability(event.target);
+                });
+            });
+        }
+
+        // Also listen at form level for bubbled events
         if (this.productForm) {
             this.productForm.addEventListener('change', (event) => {
-                if (event.target.name === 'id') {
+                if (event.target.name === 'id' && event.target !== this.variantInput) {
+                    console.log('Form level variant change:', event.target.value);
                     this.updateMainProductPrice(event.target);
                     this.checkMainProductAvailability(event.target);
                 }
@@ -34,22 +50,24 @@ class ProductAddons extends HTMLElement {
         // Use a slight delay to ensure global.js has loaded
         setTimeout(() => {
             if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
-                console.log('Subscribing to variant change events');
+                console.log('Subscribing to variant change events via PubSub');
                 this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-                    console.log("variant change event", event);
+                    console.log("PubSub variant change event received:", event);
                     if (event.data && event.data.variant) {
-                        console.log("variant change", event.data);
+                        console.log("Variant data:", event.data.variant);
                         this.handleVariantChange(event.data.variant);
                     }
                 });
             } else {
-                console.warn('PubSub system not available. Subscribe:', typeof subscribe, 'PUB_SUB_EVENTS:', typeof PUB_SUB_EVENTS);
+                console.warn('PubSub system not available yet. Subscribe:', typeof subscribe, 'PUB_SUB_EVENTS:', typeof PUB_SUB_EVENTS);
             }
         }, 100);
 
         // Watch for add to cart button state changes as a fallback
         if (this.addToCartButton) {
+            console.log('Setting up button observer');
             const buttonObserver = new MutationObserver(() => {
+                console.log('Button state changed');
                 this.checkAddToCartButtonState();
             });
             
@@ -60,6 +78,7 @@ class ProductAddons extends HTMLElement {
         }
 
         // Update initial state
+        console.log('Initializing addon component');
         this.updateTotalPrice();
         this.checkInitialAvailability();
     }
