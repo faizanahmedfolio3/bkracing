@@ -1446,6 +1446,7 @@
 
                   {%- when 'buy_buttons' -%}
                   {% unless has_product_combo %}
+                      {% render 'product-addons' %}
                     <div
                       class="productView-moreItem"
                       style="
@@ -1453,6 +1454,7 @@
                         --spacing-bottom: {{ spacing_bottom | append: 'px' }}
                       "
                     >
+
                       {% render 'product-button',
                         block: block,
                         product: product,
@@ -1468,7 +1470,7 @@
                       %}
                     </div>
                   {% endunless %}
-                {% render 'product-addons' %}
+
                 {%- when 'customer_viewing' -%}
                   <div
                     class="productView-moreItem{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"
