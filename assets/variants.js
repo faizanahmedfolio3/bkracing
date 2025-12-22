@@ -575,8 +575,10 @@ class VariantSelects extends HTMLElement {
                     button.textContent = text;
                 }
 
-                input.value = this.currentVariant.id;
-                input.dispatchEvent(new Event('change', { bubbles: true }));
+                if (input) {
+                    input.value = this.currentVariant.id;
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
             }
         }
     }
