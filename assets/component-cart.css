@@ -39,32 +39,6 @@
   width: 80%;
 }
 
-/* Mini cart (preview cart) addon grouping styles */
-/* Remove bottom border from parent items that have addons */
-.previewCartItem:has(+ .previewCartItem--addon) {
-  border-bottom: none !important;
-}
-
-/* Remove border from addon items except the last one */
-.previewCartItem--addon {
-  border-bottom: none !important;
-}
-
-/* Add bottom border only to the last addon in a group */
-.previewCartItem--addon:not(:has(+ .previewCartItem--addon)) {
-  border-bottom: 1px solid var(--border-color, #e6e6e6) !important;
-}
-
-/* Alternative: Last addon before a regular item or end of list */
-.previewCartItem--addon:last-child,
-.previewCartItem--addon + .previewCartItem:not(.previewCartItem--addon) {
-  border-bottom: 1px solid var(--border-color, #e6e6e6) !important;
-}
-
-.previewCartItem--addon + .previewCartItem:not(.previewCartItem--addon) {
-  border-top: 1px solid var(--border-color, #e6e6e6);
-}
-
 .cart-content-item[data-cart-total] {
   margin: 20px 0 0 0;
   max-width: 340px;
