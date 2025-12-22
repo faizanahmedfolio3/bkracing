@@ -78,9 +78,26 @@ class ProductAddons extends HTMLElement {
         this.updateTotalPrice();
     }
 
-    updateMainProductPrice(selectElement) {
-        const selectedOption = selectElement.options[selectElement.selectedIndex];
-        const variantPrice = selectedOption?.dataset.price;
+    updateMainProductPrice(inputOrSelectElement) {
+        let variantPrice;
+        
+        // Handle both SELECT and INPUT elements
+        if (inputOrSelectElement.tagName === 'SELECT') {
+            const selectedOption = inputOrSelectElement.options[inputOrSelectElement.selectedIndex];
+            variantPrice = selectedOption?.dataset.price;
+        } else if (inputOrSelectElement.tagName === 'INPUT') {
+            // For hidden inputs, try to get price from data attribute or variant data
+            variantPrice = inputOrSelectElement.dataset.price;
+            
+            // If no price on input, try to get from variant data
+            if (!variantPrice) {
+                const variantId = inputOrSelectElement.value;
+                const variantData = this.getVariantData(variantId);
+                if (variantData) {
+                    variantPrice = variantData.price;
+                }
+            }
+        }
         
         if (variantPrice) {
             this.mainProductPrice = parseFloat(variantPrice);
