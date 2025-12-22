@@ -349,8 +349,11 @@
         "select_options": "Select option",
         "total_price": "Price total:"
       },
+      "addon_products": {
+        "title": "Add Extra Products"
+      },
+      "addon_label": "Add-on ",
       "view_full_details": "View full details",
-      "addon_label": "Add-on",
       "step_by_step": {
         "next": "Next step",
         "previous": "Previous step"
@@ -802,7 +805,7 @@
       "label": "Notify me",
       "title": "Leave your email and we will notify as soon as the product/variant is back in stock",
       "placeholder": "Insert your email",
-      "submit": "Reserve Now!",
+      "submit": "Subscribe",
       "success": "Thanks! We've received your request and will respond shortly when this product/variant becomes available!",
       "error": "Please use a valid email address, such as john@example.com."
     }
@@ -887,8 +890,8 @@
       "send_on_label": "Send on (optional)"
     }
   },
-  "popup": {
-    "promotion": {
+  "popup":{
+    "promotion":{
       "copy": "Copy",
       "success_message_copy": "Copied"
     }
