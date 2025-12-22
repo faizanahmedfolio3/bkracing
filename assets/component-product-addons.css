@@ -1,0 +1,369 @@
+/* Product Addons Styles */
+.product-addons-wrapper {
+  display: block;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+}
+
+
+.product-addons-container {
+  width: 100%;
+}
+
+
+.product-addons-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 1rem;
+}
+
+.product-addons-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.product-addons-content {
+  width: 100%;
+}
+
+.product-addons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Addon Item */
+.product-addon-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 2px solid #e5e5e5;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.product-addon-item:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.product-addon-item.is-selected {
+  border-color: #4a90e2;
+  background: #f0f7ff;
+}
+
+/* Checkbox */
+.addon-item-checkbox {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.addon-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  margin: 0;
+}
+
+.addon-checkbox:hover {
+  border-color: #4a90e2;
+}
+
+.addon-checkbox:checked {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+}
+
+.addon-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.addon-checkbox-label {
+  display: none;
+}
+
+/* Image */
+.addon-item-image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f5f5f5;
+}
+
+.addon-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details */
+.addon-item-details {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.addon-item-info {
+  flex: 1;
+}
+
+.addon-item-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.addon-item-title:hover {
+  color: #4a90e2;
+}
+
+.addon-item-variant {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Price */
+.addon-item-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.addon-price {
+  font-size: 1.125rem;
+  color: #333;
+}
+
+.addon-price-sale {
+  font-size: 1.125rem;
+  color: #e74c3c;
+}
+
+.addon-price-compare {
+  font-size: 0.875rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Loading state for add to cart button */
+.product-form__submit.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.product-form__submit.loading::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: button-loading-spinner 0.6s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-addons-wrapper {
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+
+  .product-addons-title {
+    font-size: 1.25rem;
+  }
+
+  .product-addon-item {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .addon-item-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .addon-item-details {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .addon-item-price {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+.previewCartItem--addon .previewCartItem-image img {
+  width: 54px;
+}
+@media (max-width: 480px) {
+  .product-addons-wrapper {
+    margin: 1rem 0;
+    padding: 0.75rem;
+  }
+
+  .product-addons-title {
+    font-size: 1.125rem;
+  }
+
+  .addon-item-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .addon-item-title {
+    font-size: 0.9rem;
+  }
+
+  .addon-price,
+  .addon-price-sale {
+    font-size: 1rem;
+  }
+}
+
+/* Cart & Mini Cart Addon Styles */
+.previewCartItem--addon {
+  background-color: #f8f9fa;
+  border-left: none;
+  margin-top: 0 !important;
+  margin-left: 20px;
+  padding-left: 0;
+  position: relative;
+  border-bottom: none;
+}
+
+.previewCartItem--addon::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 17px;
+  height: 100%;
+}
+
+.previewCartItem--addon .previewCartItem-image {
+  opacity: 0.95;
+}
+
+.addon-badge {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.addon-label {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #4a90e2;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.previewCartItem.has-addons {
+  margin-bottom: 0.5rem;
+}
+
+/* Main Cart Page Addon Styles */
+.cart-item--addon {
+  background-color: #f8f9fa;
+  border-left: 3px solid #4a90e2 !important;
+  position: relative;
+}
+
+.cart-item--addon td:first-child {
+  padding-left: 2rem;
+  position: relative;
+}
+
+.cart-item--addon td:first-child::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 27px;
+  height: 100%;
+  border-left: 2px solid #e0e0e0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.cart-item--addon .cart-item-block-left {
+  padding-left: 10px;
+}
+
+.cart-item--addon .addon-badge {
+  margin-bottom: 0.5rem;
+}
+
+.cart-item--addon .cart-item-name {
+  font-size: 0.95em;
+}
+
+.cart-item.has-addons {
+  margin-bottom: 0 !important;
+}
+
+/* Main cart list specific styles */
+.cart-list .cart-item--addon {
+  padding: 15px 10px 15px 25px;
+}
+
+.cart-list .cart-item--addon .cart-item-wrapper {
+  padding-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .previewCartItem--addon {
+    margin-left: 10px;
+  }
+
+  .cart-item--addon td:first-child {
+    padding-left: 1.5rem;
+  }
+}
