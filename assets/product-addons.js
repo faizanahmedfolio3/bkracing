@@ -30,12 +30,14 @@ class ProductAddons extends HTMLElement {
             });
         }
 
-        // Listen for custom variant change events (some themes use this)
-        document.addEventListener('variant:change', (event) => {
-            if (event.detail && event.detail.variant) {
-                this.handleVariantChange(event.detail.variant);
-            }
-        });
+        // Subscribe to pubsub variant change event (theme's native event system)
+        if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+            this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+                if (event.data && event.data.variant) {
+                    this.handleVariantChange(event.data.variant);
+                }
+            });
+        }
 
         // Watch for add to cart button state changes as a fallback
         if (this.addToCartButton) {
@@ -52,6 +54,13 @@ class ProductAddons extends HTMLElement {
         // Update initial state
         this.updateTotalPrice();
         this.checkInitialAvailability();
+    }
+
+    disconnectedCallback() {
+        // Cleanup subscription when element is removed
+        if (this.unsubscribeVariantChange) {
+            this.unsubscribeVariantChange();
+        }
     }
 
     handleCheckboxChange(event) {
