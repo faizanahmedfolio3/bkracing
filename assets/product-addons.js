@@ -242,12 +242,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 productForm.appendChild(addonTypeField);
 
                 // Add property with unique group ID for cart transform (hidden)
-                const addonGroupField = document.createElement('input');
-                addonGroupField.type = 'hidden';
-                addonGroupField.name = `items[${itemIndex}][properties][_addon_group_id]`;
-                addonGroupField.value = addonGroupId;
-                addonGroupField.setAttribute('data-addon-field', 'true');
-                productForm.appendChild(addonGroupField);
+                // const addonGroupField = document.createElement('input');
+                // addonGroupField.type = 'hidden';
+                // addonGroupField.name = `items[${itemIndex}][properties][_addon_group_id]`;
+                // addonGroupField.value = addonGroupId;
+                // addonGroupField.setAttribute('data-addon-field', 'true');
+                // productForm.appendChild(addonGroupField);
 
                 // Add property with addon index in the bundle (hidden)
                 const addonIndexField = document.createElement('input');
