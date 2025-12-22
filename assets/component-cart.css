@@ -39,8 +39,10 @@
   width: 80%;
 }
 
-/* Hide remove button from addon items in main cart */
-.cart-item--addon .cart-remove {
+/* Hide remove button and quantity from addon items in main cart */
+.cart-item--addon .cart-remove,
+.cart-item--addon .cart-item-qty,
+.cart-item--addon .cart-item-quantity {
   display: none !important;
 }
 

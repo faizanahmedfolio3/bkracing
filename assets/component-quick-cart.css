@@ -255,8 +255,9 @@
   padding-bottom: 20px !important;
 }
 
-/* Hide remove button from addon items */
-.previewCartItem--addon .previewCartItem-remove {
+/* Hide remove button and quantity from addon items */
+.previewCartItem--addon .previewCartItem-remove,
+.previewCartItem--addon .previewCartItem-qty {
   display: none !important;
 }
 
