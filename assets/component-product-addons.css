@@ -361,6 +361,12 @@
   padding-left: 10px;
 }
 
+/* Hide remove button from addon items in main cart */
+.cart-list .cart-item--addon .cart-remove,
+.cart-list .cart-item--addon .cart-item-remove {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   .previewCartItem--addon {
     margin-left: 10px;
