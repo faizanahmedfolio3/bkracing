@@ -255,6 +255,11 @@
   padding-bottom: 20px !important;
 }
 
+/* Hide remove button from addon items */
+.previewCartItem--addon .previewCartItem-remove {
+  display: none !important;
+}
+
 .previewCart-emptyBody .empty {
   font-size: var(--font-body-size);
   font-weight: var(--font-weight-normal);
