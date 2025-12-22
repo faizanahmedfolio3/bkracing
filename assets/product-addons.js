@@ -33,6 +33,7 @@ class ProductAddons extends HTMLElement {
         // Listen for custom variant change events (some themes use this)
         document.addEventListener('variant:change', (event) => {
             if (event.detail && event.detail.variant) {
+                console.log("variant change");
                 this.handleVariantChange(event.detail.variant);
             }
         });
