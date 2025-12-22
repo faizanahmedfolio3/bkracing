@@ -33,10 +33,21 @@ class ProductAddons extends HTMLElement {
         // Listen for custom variant change events (some themes use this)
         document.addEventListener('variant:change', (event) => {
             if (event.detail && event.detail.variant) {
-                console.log("variant change");
                 this.handleVariantChange(event.detail.variant);
             }
         });
+
+        // Watch for add to cart button state changes as a fallback
+        if (this.addToCartButton) {
+            const buttonObserver = new MutationObserver(() => {
+                this.checkAddToCartButtonState();
+            });
+            
+            buttonObserver.observe(this.addToCartButton, {
+                attributes: true,
+                attributeFilter: ['disabled', 'class']
+            });
+        }
 
         // Update initial state
         this.updateTotalPrice();
@@ -153,6 +164,18 @@ class ProductAddons extends HTMLElement {
                          (inventoryManagement && inventoryQuantity <= 0);
         
         this.toggleAddonsAvailability(!isSoldOut);
+    }
+
+    checkAddToCartButtonState() {
+        // Check if the add to cart button is disabled or has sold-out class
+        if (!this.addToCartButton) return;
+        
+        const isDisabled = this.addToCartButton.disabled || 
+                          this.addToCartButton.classList.contains('disabled') ||
+                          this.addToCartButton.classList.contains('sold-out') ||
+                          this.addToCartButton.classList.contains('is-disable');
+        
+        this.toggleAddonsAvailability(!isDisabled);
     }
 
     toggleAddonsAvailability(enable) {
