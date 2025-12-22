@@ -51,7 +51,8 @@ class ProductAddons extends HTMLElement {
         setTimeout(() => {
             if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
                 console.log('Subscribing to variant change events via PubSub');
-                this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+                this.unsubscribeVariantChange = "";
+                 subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
                     console.log("PubSub variant change event received:", event);
                     if (event.data && event.data.variant) {
                         console.log("Variant data:", event.data.variant);
