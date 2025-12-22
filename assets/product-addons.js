@@ -34,6 +34,7 @@ class ProductAddons extends HTMLElement {
         if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
             this.unsubscribeVariantChange = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
                 if (event.data && event.data.variant) {
+                    console.log("variant change", event.data);
                     this.handleVariantChange(event.data.variant);
                 }
             });
