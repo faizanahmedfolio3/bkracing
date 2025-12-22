@@ -21,13 +21,14 @@ class ProductAddons extends HTMLElement {
         });
 
         // Listen for variant changes on main product
-        // if (this.productForm) {
-        //     this.productForm.addEventListener('change', (event) => {
-        //         if (event.target.name === 'id') {
-        //             this.updateMainProductPrice(event.target);
-        //         }
-        //     });
-        // }
+        if (this.productForm) {
+            this.productForm.addEventListener('change', (event) => {
+                // Check for both possible input names
+                if (event.target.name === 'id' || event.target.name === 'items[0][id]') {
+                    this.updateMainProductPriceFromVariantChange(event.target);
+                }
+            });
+        }
 
         // Update initial state
         this.updateTotalPrice();
