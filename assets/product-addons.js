@@ -212,11 +212,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    console.log('Initializing addon form integration');
+    // console.log('Initializing addon form integration');
 
     // Function to update form fields based on selected addons
     function updateFormFields() {
-        console.log('Updating form fields...');
+        // console.log('Updating form fields...');
 
         // Remove any previously added addon fields
         const existingAddonFields = productForm.querySelectorAll('[data-addon-field]');
