@@ -131,6 +131,7 @@
           "disabled": true,
           "settings": {
             "logo_position": "sticky_menu",
+            "logo": "shopify://shop_images/bkracing-high-res.png",
             "logo_width": 100,
             "logo_width_fixed": 55,
             "logo_text": "",
