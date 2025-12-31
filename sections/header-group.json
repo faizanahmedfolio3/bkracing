@@ -111,7 +111,8 @@
       ],
       "custom_css": [
         ".wishlist-text,.customer-links,.cart-text {display: none !important;}",
-        ".header-single-line__content {justify-content: flex-start;}"
+        ".header-single-line__content {justify-content: flex-start;}",
+        "@media (min-width: 768px) {.header-single-line__item--search {flex: 1; } .header__search.clearfix {max-width: 80%; margin: 0 auto; } .header-single-line__item .header__logo img {width: 300px; position: relative; margin-bottom: -50px; height: auto; }}"
       ],
       "settings": {
         "container": "1370",
