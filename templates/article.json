@@ -111,7 +111,7 @@
         "sidebar_heading_font_weight": "700",
         "sidebar_heading_text_transform": "uppercase",
         "show_main_img": true,
-        "show_author": true,
+        "show_author": false,
         "show_date": true,
         "show_tags": true,
         "show_share": true,
