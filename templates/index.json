@@ -555,7 +555,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/img-1-bkracing.jpg",
+            "image": "shopify://shop_images/unnamed_1.webp",
             "title_align": "left",
             "enable_absolute": true,
             "enable_absolute_mobile": true,
