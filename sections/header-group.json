@@ -75,15 +75,6 @@
             "search_border_radius": 5
           }
         },
-        "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-2": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "customer_service_text": "<p>Customer Service</p><p><strong>(090) 123-ELLA</strong></p>",
-            "text_size": 14,
-            "color": "#ffffff"
-          }
-        },
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-3": {
           "type": "wishlist",
           "disabled": true,
@@ -114,7 +105,6 @@
       "block_order": [
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-0",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-1",
-        "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-2",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-3",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-4",
         "sections--14682829619277__cd70f884-a33f-44c2-a411-3439d3dfe9f4-16808527258e4b918f-5"
@@ -363,7 +353,6 @@
         "3fdc6ffb-3b99-4b30-a126-35d5595fce4e",
         "e21cdbf5-7b9f-42e1-a323-93afeb82239a"
       ],
-      "disabled": true,
       "settings": {
         "container": "1370",
         "padding_full_width": 0,
