@@ -23,6 +23,7 @@
         },
         "55c8959f-8115-4017-bf9e-6937d51df687": {
           "type": "recent_post",
+          "disabled": true,
           "settings": {
             "heading": "RECENT ARTICLES",
             "number": 5
@@ -30,6 +31,7 @@
         },
         "6543713f-63f0-4882-ad34-5a2cdf3308dd": {
           "type": "product_block",
+          "disabled": true,
           "settings": {
             "heading": "Featured Products",
             "product_block_collection": "collection-home-1-2",
