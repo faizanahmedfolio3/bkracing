@@ -14,6 +14,7 @@
       "blocks": {
         "275addbb-56b4-4828-a499-03e58376b7c4": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "heading": "Categories",
             "type": "1_level",
