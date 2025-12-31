@@ -1392,7 +1392,7 @@
           "type": "ProductTabs",
           "settings": {
             "title": "Dickinson Fabrication Products",
-            "collection": "dickinson-fabrication-collection"
+            "collection": "dickinson-fabrication"
           }
         }
       },
