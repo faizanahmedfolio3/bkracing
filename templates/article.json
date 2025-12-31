@@ -23,6 +23,7 @@
         },
         "96861bf3-10df-4b31-82bd-61aee2e9bc30": {
           "type": "recent_post",
+          "disabled": true,
           "settings": {
             "heading": "Recent Post",
             "number": 3
@@ -30,6 +31,7 @@
         },
         "441f2329-1d0c-4d63-bcff-c7281f41bf54": {
           "type": "product_block",
+          "disabled": true,
           "settings": {
             "heading": "Featured Products",
             "position": "sidebar",
