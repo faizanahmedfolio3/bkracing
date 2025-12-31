@@ -64,7 +64,7 @@
         "74038a9b-b77e-4134-88bb-bcd7f06fdda1"
       ],
       "settings": {
-        "container": "fullwidth",
+        "container": "container",
         "padding_full_width": 0,
         "show_breadcrumb": true,
         "breadcrumb_alignment": "left",
