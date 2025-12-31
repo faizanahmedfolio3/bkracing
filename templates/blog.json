@@ -64,7 +64,7 @@
         "74038a9b-b77e-4134-88bb-bcd7f06fdda1"
       ],
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "padding_full_width": 0,
         "show_breadcrumb": true,
         "breadcrumb_alignment": "left",
@@ -86,8 +86,8 @@
         "image_ratio": "adapt",
         "portrait_aspect_ratio": 70,
         "limit": 7,
-        "item_per_row": "1",
-        "show_placeholder": false,
+        "item_per_row": "2",
+        "show_placeholder": true,
         "show_date": true,
         "show_author": true,
         "show_comment": true,
