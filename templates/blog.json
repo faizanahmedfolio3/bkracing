@@ -98,7 +98,7 @@
         "title_color": "#ffffff",
         "text_color": "#ffffff",
         "info_color": "#999999",
-        "title_font_size": 20,
+        "title_font_size": 24,
         "title_mobile_font_size": 18,
         "title_font_weight": "600",
         "title_text_transform": "capitalize",
