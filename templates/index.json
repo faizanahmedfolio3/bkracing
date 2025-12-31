@@ -1392,8 +1392,8 @@
         "cfb937fa-68e0-4ca6-aeb2-67c18f7685c6": {
           "type": "ProductTabs",
           "settings": {
-            "title": "Dickinson Fabrication Products",
-            "collection": "bottom-end-engine"
+            "title": "Popular Products",
+            "collection": "an-fittings"
           }
         }
       },
