@@ -1446,7 +1446,7 @@
 
                   {%- when 'buy_buttons' -%}
                   {% unless has_product_combo %}
-                      {% render 'product-addons' %}
+                      {% comment %} {% render 'product-addons' %} {% endcomment %}
                     <div
                       class="productView-moreItem"
                       style="
