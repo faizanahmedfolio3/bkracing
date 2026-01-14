@@ -1446,7 +1446,6 @@
 
                   {%- when 'buy_buttons' -%}
                   {% unless has_product_combo %}
-                      {% comment %} {% render 'product-addons' %} {% endcomment %}
                     <div
                       class="productView-moreItem"
                       style="
@@ -1470,7 +1469,7 @@
                       %}
                     </div>
                   {% endunless %}
-
+  {% render 'product-addons' %}
                 {%- when 'customer_viewing' -%}
                   <div
                     class="productView-moreItem{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"
