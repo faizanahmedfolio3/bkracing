@@ -415,7 +415,7 @@
         "subtotal_style": "1",
         "show_sticky_add_to_cart": true,
         "sticky_atc_layout": "1",
-        "enable_sticky_add_to_cart_always_mobile": false,
+        "enable_sticky_add_to_cart_always_mobile": true,
         "show_sticky_vendor": false,
         "show_quick_order_list": false,
         "show_image": false,
