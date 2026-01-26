@@ -402,8 +402,7 @@ a.card-title.link-underline.card-title-ellipsis {
         visibility: visible;
         background: none;
     }
-    #tab-description-mobile .icon-dropdown,
-    #tab-description-mobile .tab-popup-header {
+    #tab-description .toggle-title {
         display: none;
     }
 
