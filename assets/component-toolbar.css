@@ -371,6 +371,7 @@ body.toolbar-modal-open {
         animation-fill-mode: both;
     }
 
+    .toolbar.show-sticky .toolbar-icon.icon-filter svg,
     .toolbar.show-sticky .toolbar-icon.icon-filter {
         color: #333;
     }
