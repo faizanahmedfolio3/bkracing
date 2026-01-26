@@ -118,6 +118,12 @@
     text-transform: uppercase;
 }
 
+@media (max-width: 550px) {
+   .cart-total-grandtotal .cart-total-label {
+        color:#333;
+    } 
+}
+
 .cart-total-grandtotal .cart-total-value {
     font-size: calc(var(--font-body-size) + 4px);
     font-weight: var(--font-weight-bold);
