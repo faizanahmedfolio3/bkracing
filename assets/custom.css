@@ -407,7 +407,7 @@ a.card-title.link-underline.card-title-ellipsis {
         display: none;
     }
 
-    .toggle-content.popup-mobile .tab-popup-content{
+    html .toggle-content.popup-mobile .tab-popup-content{
         padding: 0;
         max-height: inherit;
         overflow: visible;
