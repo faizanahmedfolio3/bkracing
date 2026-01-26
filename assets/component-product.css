@@ -535,6 +535,12 @@
         fill: #fff;
         stroke: #fff;
     }
+    #tab-description-mobile h5 {
+        color: #323232;
+    }
+    .tab-popup-content p{
+        color: #323232;
+    }
 }
 
 .productView-tab .tab-content .toggleLink.is-open svg {
