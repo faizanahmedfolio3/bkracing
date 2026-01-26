@@ -406,6 +406,12 @@ a.card-title.link-underline.card-title-ellipsis {
     #tab-description-mobile .tab-popup-header {
         display: none;
     }
+
+    .toggle-content.popup-mobile .tab-popup-content{
+        padding: 0;
+        max-height: inherit;
+        overflow: visible;
+    }
 }
 /** @media (max-width: 550px) {
     .productView-tab .tab-content svg{
