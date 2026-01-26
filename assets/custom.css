@@ -398,5 +398,8 @@ a.card-title.link-underline.card-title-ellipsis {
 @media (max-width: 550px) {
     #tab-description-mobile {
         position: static;
+        opacity: 1;
+        visibility: visible;
+        background: none;
     }
 }
