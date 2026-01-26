@@ -126,7 +126,7 @@ a.vendor-text {
     text-overflow: ellipsis;    /* Add "..." at the end */
     line-height: 1.4;           /* adjust if needed */
     max-height: calc(1.4em * 2);
-    min-height: 45px;
+    min-height: 40px;
 }
 
 .toolbar .toolbar-dropdown .label-tab {
