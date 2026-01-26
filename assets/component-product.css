@@ -535,6 +535,7 @@
         fill: #fff;
         stroke: #fff;
     }
+    .productView-tab .halo-text-format ul li,
     #tab-description-mobile h5,
     .tab-popup-content p{
         color: #323232!important;
