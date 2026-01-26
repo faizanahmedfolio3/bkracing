@@ -406,6 +406,10 @@ a.card-title.link-underline.card-title-ellipsis {
         display: none;
     }
 
+    html .toggle-content.popup-mobile .tab-popup-header{
+        padding:0;
+    }
+
     html .toggle-content.popup-mobile .tab-popup-content{
         padding: 0;
         max-height: inherit;
