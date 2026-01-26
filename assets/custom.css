@@ -406,3 +406,18 @@ a.card-title.link-underline.card-title-ellipsis {
         display: none;
     }
 }
+/** @media (max-width: 550px) {
+    .productView-tab .tab-content svg{
+        fill: #fff;
+        stroke: #fff;
+    }
+    .productView-tab .halo-text-format ul li,
+    #tab-description-mobile h5,
+    .tab-popup-content p{
+        color: #323232!important;
+    }
+    .pdViewTab-close:before,
+    .pdViewTab-close:after{
+        background-color: #323232!important;
+    }
+}**/
