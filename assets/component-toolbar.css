@@ -371,6 +371,10 @@ body.toolbar-modal-open {
         animation-fill-mode: both;
     }
 
+    .toolbar.show-sticky .toolbar-icon.icon-filter {
+        color: #333;
+    }
+
     body.toolbar-modal-open .toolbar.show-sticky.animate {
         z-index: 101;
     }
