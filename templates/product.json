@@ -413,7 +413,7 @@
         "show_badge": true,
         "show_subtotal": true,
         "subtotal_style": "1",
-        "show_sticky_add_to_cart": false,
+        "show_sticky_add_to_cart": true,
         "sticky_atc_layout": "1",
         "enable_sticky_add_to_cart_always_mobile": false,
         "show_sticky_vendor": false,
