@@ -394,3 +394,9 @@ a.card-title.link-underline.card-title-ellipsis {
   max-height: calc(1.4em * 2);
 }
 
+
+@media (max-width: 550px) {
+    #tab-description-mobile {
+        position: static;
+    }
+}
