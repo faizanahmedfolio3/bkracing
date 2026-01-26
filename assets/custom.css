@@ -402,4 +402,7 @@ a.card-title.link-underline.card-title-ellipsis {
         visibility: visible;
         background: none;
     }
+    #tab-description-mobile .tab-popup-header {
+        display: none;
+    }
 }
