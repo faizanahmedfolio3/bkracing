@@ -119,7 +119,8 @@
 }
 
 @media (max-width: 550px) {
-   .cart-total-label, .cart-total-value {
+   .cart-actions.sticky_button_checkout_mb .cart-total-label, 
+   .cart-actions.sticky_button_checkout_mb .cart-total-value {
         color:#333;
     } 
 }
