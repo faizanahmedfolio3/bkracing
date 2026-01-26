@@ -540,6 +540,10 @@
     .tab-popup-content p{
         color: #323232!important;
     }
+    .pdViewTab-close:before,
+    .pdViewTab-close:after{
+        background-color: #323232!important;
+    }
 }
 
 .productView-tab .tab-content .toggleLink.is-open svg {
