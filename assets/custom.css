@@ -14,8 +14,8 @@
 .productView-tab .tabs .tab-title, 
 .tab-popup-content, 
 .tab-popup-content p,
-.tab-popup-content ul li,
-.tab-popup-content ol li,
+.halo-text-format .tab-popup-content ul li,
+.halo-text-format .tab-popup-content ol li,
 .productView-tab .halo-text-format 
 {
     color: #fff;
