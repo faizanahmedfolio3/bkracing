@@ -530,21 +530,6 @@
     -o-transition: transform 0.3s ease;
     transition: transform 0.3s ease
 }
-@media (max-width: 550px) {
-    .productView-tab .tab-content svg{
-        fill: #fff;
-        stroke: #fff;
-    }
-    .productView-tab .halo-text-format ul li,
-    #tab-description-mobile h5,
-    .tab-popup-content p{
-        color: #323232!important;
-    }
-    .pdViewTab-close:before,
-    .pdViewTab-close:after{
-        background-color: #323232!important;
-    }
-}
 
 .productView-tab .tab-content .toggleLink.is-open svg {
     -moz-transform: rotate(-180deg);
