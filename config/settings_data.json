@@ -917,6 +917,11 @@
         "type": "shopify://apps/epa-easy-product-addons/blocks/speedup_link/0099190e-a0cb-49e7-8d26-026c9d26f337",
         "disabled": false,
         "settings": {}
+      },
+      "7924418359578431505": {
+        "type": "shopify://apps/seowill-seoant-ai-seo/blocks/seoant-core/8e57283b-dcb0-4f7b-a947-fb5c57a0d59d",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
