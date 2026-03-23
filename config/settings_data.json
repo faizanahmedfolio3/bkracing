@@ -930,7 +930,7 @@
       },
       "11432920177897217407": {
         "type": "shopify://apps/epa-easy-product-addons/blocks/speedup_link/0099190e-a0cb-49e7-8d26-026c9d26f337",
-        "disabled": true,
+        "disabled": false,
         "settings": {}
       }
     }
