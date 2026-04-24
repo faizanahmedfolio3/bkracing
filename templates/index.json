@@ -853,7 +853,7 @@
             "enable_des_hover": false,
             "button_style": "button_1",
             "button": "",
-            "link": "shopify://collections/an-fittings",
+            "link": "shopify://collections/premium-high-flow-fueling",
             "fontsize_btn": 16,
             "button_width": 190,
             "bg_opacity_button": 1,
@@ -1393,7 +1393,7 @@
           "type": "ProductTabs",
           "settings": {
             "title": "Popular Products",
-            "collection": "an-fittings"
+            "collection": "premium-high-flow-fueling"
           }
         }
       },
