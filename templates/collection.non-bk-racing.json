@@ -84,7 +84,7 @@
           "type": "product_block",
           "settings": {
             "heading": "Featured Products",
-            "product_block_collection": "home-products",
+            "product_block_collection": "bk-racing-gm-ecotec-performance-parts",
             "product_block_layout": "slider",
             "product_block_limit": 3,
             "product_block_dots": false,
