@@ -691,13 +691,7 @@
               >
                 {% if media.media_type == 'image' %}
                   <drag-zoom-wrapper class="product-media__drag-zoom-wrapper">
-                    {%- render 'product-media',
-                      media: media,
-                      sizes: '100vw',
-                      loading: 'lazy',
-                      is_main_product_media: forloop.first,
-                      data_max_resolution: media | image_url: width: media.width
-                    -%}
+                    {%- render 'product-media', media: media, sizes: '100vw', loading: 'lazy', is_main_product_media: forloop.first, data_max_resolution: media, image_url: width -%}
                   </drag-zoom-wrapper>
                 {% else %}
                   {%- render 'product-media',
@@ -728,13 +722,7 @@
                 >
                   {% if media.media_type == 'image' %}
                     <drag-zoom-wrapper class="product-media__drag-zoom-wrapper">
-                      {%- render 'product-media',
-                        media: media,
-                        sizes: '100vw',
-                        loading: 'lazy',
-                        is_main_product_media: index_first,
-                        data_max_resolution: media | image_url: width: media.width
-                      -%}
+                      {%- render 'product-media', media: media, sizes: '100vw', loading: 'lazy', is_main_product_media: index_first, data_max_resolution: media, image_url: width -%}
                     </drag-zoom-wrapper>
                   {% else %}
                     {%- render 'product-media',
@@ -1399,4 +1387,26 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'product-media',\r\n                      media: media,\r\n                      sizes:
+    '100vw',\r\n                      loading: 'lazy',\r\n                      is_main_product_media:
+    forloop.first,\r\n                      data_max_resolution: media | image_url:
+    width: media.width\r\n                    -%}"
+  to: "{%- render 'product-media', media: media, sizes: '100vw', loading: 'lazy',
+    is_main_product_media: forloop.first, data_max_resolution: media, image_url: width
+    -%}"
+  position: 29835..29996
+- from: "{%- render 'product-media',\r\n                        media: media,\r\n
+    \                       sizes: '100vw',\r\n                        loading: 'lazy',\r\n
+    \                       is_main_product_media: index_first,\r\n                        data_max_resolution:
+    media | image_url: width: media.width\r\n                      -%}"
+  to: "{%- render 'product-media', media: media, sizes: '100vw', loading: 'lazy',
+    is_main_product_media: index_first, data_max_resolution: media, image_url: width
+    -%}"
+  position: 31535..31694
+{%- endcomment -%}

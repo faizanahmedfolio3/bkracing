@@ -16,7 +16,7 @@
         {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
           <div>
             <h2 class="caption-large text-body" id="FooterLanguageLabel">{{ 'content.language_label' | t }}</h2>
-            {%- render 'language-localization', loca lPosition: 'FooterLanguage' -%}
+            {%- render 'language-localization', lPosition: 'FooterLanguage' -%}
           </div>
         {%- endform -%}
       </localization-form>
@@ -60,3 +60,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'language-localization', loca lPosition: 'FooterLanguage' -%}"
+  to: "{%- render 'language-localization', lPosition: 'FooterLanguage' -%}"
+  position: 1015..1082
+{% endcomment %}
