@@ -18,7 +18,7 @@
     endif
     for block in section.blocks
         case block.type
-            when 'filter' 'category', 'product_block', 'image', 'text'
+            when 'filter'
                 assign has_sidebar = true
         endcase
     endfor
@@ -268,4 +268,13 @@
     }
     document.addEventListener("DOMContentLoaded", resizeAllGridItems);
     window.addEventListener('resize', resizeAllGridItems);
-</script>
+</script>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "            when 'filter' 'category', 'product_block', 'image', 'text'\r"
+  to: "            when 'filter'"
+  position: 1079..1104
+{%- endcomment -%}
